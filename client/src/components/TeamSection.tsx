@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Building2 } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 
@@ -10,6 +10,7 @@ const team = [
     initials: "KP",
     org: "New York Genome Center",
     description: "Senior Research Engineer and author of PySeq2500 open-source control software for Illumina HiSeq 2500 systems.",
+    image: "https://images.squarespace-cdn.com/content/v1/627e96178e8a965a2a04b415/1654954748529-MO49MWUTEGCT6O7ZEJ48/20201026_153623.jpg",
   },
   {
     name: "Dr. Maros Pleska",
@@ -17,6 +18,7 @@ const team = [
     initials: "MP",
     org: "New York Genome Center",
     description: "Research Scientist applying PySeq to spatial transcriptomics and proteomics with expertise in image processing.",
+    image: "https://images.squarespace-cdn.com/content/v1/627e96178e8a965a2a04b415/73655136-cdf7-4826-a2fb-3780555fefd2/Maros+Pleska.jpg",
   },
   {
     name: "Dr. Daniel Domovic",
@@ -81,6 +83,7 @@ export function TeamSection() {
               data-testid={`card-team-${index}`}
             >
               <Avatar className="w-20 h-20 mx-auto mb-4 bg-primary/10">
+                {member.image && <AvatarImage src={member.image} alt={member.name} />}
                 <AvatarFallback className="text-xl font-semibold text-primary">
                   {member.initials}
                 </AvatarFallback>
