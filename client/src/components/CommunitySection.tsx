@@ -22,7 +22,7 @@ const ways = [
   {
     icon: Heart,
     title: "Spread the Word",
-    description: "Help grow the ecosystem by sharing PySeq with colleagues and institutions",
+    description: "Help grow the ecosystem by sharing RegenSeq with colleagues and institutions",
   },
 ];
 
@@ -61,7 +61,7 @@ export function CommunitySection() {
             Join the Community
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            PySeq is a community-driven project. Your contributions, questions, and feedback 
+            RegenSeq is a community-driven project. Your contributions, questions, and feedback 
             help build a more accessible future for biological research
           </p>
         </div>
@@ -95,7 +95,7 @@ export function CommunitySection() {
               data-testid="button-get-started"
               onClick={() => window.open('https://github.com/nygctech/PySeq2500', '_blank')}
             >
-              Get Started with PySeq
+              Get Started with RegenSeq
               <Code2 className="h-5 w-5" />
             </Button>
           </Card>

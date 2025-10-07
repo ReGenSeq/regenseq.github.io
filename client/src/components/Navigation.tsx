@@ -45,7 +45,7 @@ export function Navigation() {
               className="font-bold text-xl text-foreground hover-elevate px-2 py-1 rounded-lg"
               data-testid="button-logo"
             >
-              PySeq
+              RegenSeq
             </button>
           </div>
           

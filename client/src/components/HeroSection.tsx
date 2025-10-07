@@ -44,7 +44,7 @@ export function HeroSection() {
         </Badge>
         
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight">
-          PySeq Open Source
+          RegenSeq Open Source
           <br />
           Community
         </h1>

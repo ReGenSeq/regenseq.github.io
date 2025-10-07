@@ -9,7 +9,7 @@ const team = [
     role: "Technical Lead",
     initials: "KP",
     org: "New York Genome Center",
-    description: "Senior Research Engineer and author of PySeq2500 open-source control software for Illumina HiSeq 2500 systems.",
+    description: "Senior Research Engineer and author of RegenSeq open-source control software for Illumina HiSeq 2500 systems.",
     image: "https://images.squarespace-cdn.com/content/v1/627e96178e8a965a2a04b415/1654954748529-MO49MWUTEGCT6O7ZEJ48/20201026_153623.jpg",
   },
   {
@@ -17,7 +17,7 @@ const team = [
     role: "Co-Technical Lead",
     initials: "MP",
     org: "New York Genome Center",
-    description: "Research Scientist applying PySeq to spatial transcriptomics and proteomics with expertise in image processing.",
+    description: "Research Scientist applying RegenSeq to spatial transcriptomics and proteomics with expertise in image processing.",
     image: "https://images.squarespace-cdn.com/content/v1/627e96178e8a965a2a04b415/73655136-cdf7-4826-a2fb-3780555fefd2/Maros+Pleska.jpg",
   },
   {

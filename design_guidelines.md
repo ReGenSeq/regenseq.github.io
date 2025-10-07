@@ -1,4 +1,4 @@
-# PySeq Open Source Community - Design Guidelines
+# RegenSeq Open Source Community - Design Guidelines
 
 ## Design Approach: Open Source Science Aesthetic
 
@@ -76,7 +76,7 @@
 ### 1. Hero Section (80vh)
 Large hero image showing microscopy/sequencer imagery or abstract DNA/cellular visualization with gradient overlay (from primary blue with 70% opacity to transparent). Centered content with project title, tagline, NSF badge, and prominent CTAs (GitHub + Paper).
 
-### 2. About PySeq Section
+### 2. About RegenSeq Section
 Two-column layout (text + visual): Left explains repurposing DNA sequencers, right shows sequencer/workflow diagram. Background: subtle surface color.
 
 ### 3. Technical Capabilities Section

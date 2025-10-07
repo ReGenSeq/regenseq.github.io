@@ -70,7 +70,7 @@ export function FeaturesSection() {
             Technical Capabilities
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            PySeq2500 provides comprehensive control of all sequencer components for 
+            RegenSeq provides comprehensive control of all sequencer components for 
             sophisticated automated workflows
           </p>
         </div>

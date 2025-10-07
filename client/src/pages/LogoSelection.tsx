@@ -65,10 +65,10 @@ export default function LogoSelection() {
         
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-foreground mb-4">
-            Choose Your PySeq Logo
+            Choose Your RegenSeq Logo
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Select the logo design that best represents the PySeq open source community
+            Select the logo design that best represents the RegenSeq open source community
           </p>
           {selectedLogo && (
             <Badge className="mt-4" data-testid="badge-selected">
@@ -131,7 +131,7 @@ export default function LogoSelection() {
                 You've selected: {logos.find(l => l.id === selectedLogo)?.name}
               </h3>
               <p className="text-muted-foreground mb-4">
-                This logo will represent the PySeq open source community across the website and materials.
+                This logo will represent the RegenSeq open source community across the website and materials.
               </p>
               <div className="flex gap-4 justify-center flex-wrap">
                 <Button

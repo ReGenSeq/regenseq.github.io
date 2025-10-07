@@ -7,7 +7,7 @@ const resources = [
   {
     icon: Github,
     title: "GitHub Repository",
-    description: "PySeq2500 control software and documentation",
+    description: "RegenSeq control software and documentation",
     link: "https://github.com/nygctech/PySeq2500",
     buttonText: "View Repository",
     highlight: true,
@@ -39,7 +39,7 @@ const resources = [
   {
     icon: Book,
     title: "RegenSeq Protocols",
-    description: "Step-by-step protocols and methods for PySeq workflows",
+    description: "Step-by-step protocols and methods for RegenSeq workflows",
     link: "https://www.protocols.io/workspaces/regenseq",
     buttonText: "View Protocols",
     highlight: false,
@@ -81,7 +81,7 @@ export function ResourcesSection() {
             Resources
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Everything you need to get started with PySeq
+            Everything you need to get started with RegenSeq
           </p>
         </div>
         

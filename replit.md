@@ -1,10 +1,10 @@
-# PySeq Open Source Community
+# RegenSeq Open Source Community
 
 ## Overview
 
-PySeq is an NSF-funded open source ecosystem that repurposes decommissioned Illumina HiSeq 2500 DNA sequencers into flexible automation platforms for spatial biology research. The project provides Python-based control software and custom flow cell designs to transform obsolete scientific instruments into affordable, accessible tools for advanced single-cell assays and spatial transcriptomics/proteomics applications.
+RegenSeq is an NSF-funded open source ecosystem that repurposes decommissioned Illumina HiSeq 2500 DNA sequencers into flexible automation platforms for spatial biology research. The project provides Python-based control software and custom flow cell designs to transform obsolete scientific instruments into affordable, accessible tools for advanced single-cell assays and spatial transcriptomics/proteomics applications.
 
-This is a full-stack web application serving as the community hub and documentation portal for the PySeq project, featuring information about the technology, team, resources, and community engagement opportunities.
+This is a full-stack web application serving as the community hub and documentation portal for the RegenSeq project, featuring information about the technology, team, resources, and community engagement opportunities.
 
 ## User Preferences
 

@@ -32,7 +32,7 @@ export function Footer() {
       >
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h3 className="font-semibold text-lg mb-4">PySeq</h3>
+            <h3 className="font-semibold text-lg mb-4">RegenSeq</h3>
             <p className="text-sm text-muted-foreground">
               Open source ecosystem for repurposing DNA sequencers as automation platforms 
               for spatial biology research.
@@ -91,7 +91,7 @@ export function Footer() {
         
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} PySeq Open Source Community. Open source under permissive license.
+            © {new Date().getFullYear()} RegenSeq Open Source Community. Open source under permissive license.
           </p>
           <a 
             href="https://github.com/nygctech/PySeq2500" 
