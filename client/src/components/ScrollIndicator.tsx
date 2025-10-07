@@ -16,7 +16,7 @@ export function ScrollIndicator() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
+      const scrollPosition = window.scrollY + 100; // Offset from top
       
       const sectionElements = sections.map(section => {
         if (section.id === "hero") {
@@ -28,19 +28,21 @@ export function ScrollIndicator() {
         }
       });
 
-      // Find which section the scroll position is currently in
+      // Find which section we're currently viewing
       let currentIndex = 0;
       
-      sectionElements.forEach((element, index) => {
-        if (!element) return;
+      for (let i = sectionElements.length - 1; i >= 0; i--) {
+        const element = sectionElements[i];
+        if (!element) continue;
+        
         const rect = element.getBoundingClientRect();
         const elementTop = rect.top + window.scrollY;
-        const elementBottom = elementTop + rect.height;
         
-        if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
-          currentIndex = index;
+        if (scrollPosition >= elementTop) {
+          currentIndex = i;
+          break;
         }
-      });
+      }
 
       setActiveSection(currentIndex);
     };
