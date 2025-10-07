@@ -48,7 +48,7 @@ export function CommunitySection() {
     <section 
       ref={sectionRef}
       id="community" 
-      className="h-screen flex items-center bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 backdrop-blur-sm snap-start snap-always overflow-hidden"
+      className="h-screen flex items-center bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 snap-start snap-always overflow-hidden"
     >
       <div 
         className="max-w-7xl mx-auto px-4 md:px-8 w-full"

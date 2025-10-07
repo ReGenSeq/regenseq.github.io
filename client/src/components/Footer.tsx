@@ -22,7 +22,7 @@ export function Footer() {
   return (
     <footer 
       ref={sectionRef}
-      className="bg-card/60 backdrop-blur-sm border-t border-border snap-start snap-always h-screen flex items-center overflow-hidden"
+      className="bg-card border-t border-border snap-start snap-always h-screen flex items-center overflow-hidden"
     >
       <div 
         className="max-w-7xl mx-auto px-4 md:px-8 py-12 w-full"

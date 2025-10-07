@@ -23,10 +23,10 @@ export function HeroSection() {
           backgroundImage: `url(${heroImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          transform: `translateY(${scrollY * 0.5}px) scale(1.1)`,
+          transform: `translateY(${scrollY * 0.5}px)`,
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/85 via-primary/70 to-primary/55" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/75 to-primary/60" />
       </div>
       
       <div 
