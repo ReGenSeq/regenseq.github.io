@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/Home";
 import HiSeqOutline from "@/pages/HiSeqOutline";
+import LogoSelection from "@/pages/LogoSelection";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -12,6 +13,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/hiseq-outline" component={HiSeqOutline} />
+      <Route path="/logo-selection" component={LogoSelection} />
       <Route component={NotFound} />
     </Switch>
   );
