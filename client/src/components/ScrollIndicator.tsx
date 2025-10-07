@@ -16,8 +16,6 @@ export function ScrollIndicator() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100; // Offset from top
-      
       const sectionElements = sections.map(section => {
         if (section.id === "hero") {
           return document.querySelector('section:first-of-type');
@@ -28,28 +26,45 @@ export function ScrollIndicator() {
         }
       });
 
-      // Find which section we're currently viewing
-      let currentIndex = 0;
-      
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const element = sectionElements[i];
-        if (!element) continue;
+      // Find which section has the most visible area in viewport
+      let maxVisibleIndex = 0;
+      let maxVisibleArea = 0;
+
+      sectionElements.forEach((element, index) => {
+        if (!element) return;
         
         const rect = element.getBoundingClientRect();
-        const elementTop = rect.top + window.scrollY;
+        const viewportHeight = window.innerHeight;
         
-        if (scrollPosition >= elementTop) {
-          currentIndex = i;
-          break;
+        // Calculate visible area of this section
+        const visibleTop = Math.max(0, rect.top);
+        const visibleBottom = Math.min(viewportHeight, rect.bottom);
+        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+        
+        if (visibleHeight > maxVisibleArea) {
+          maxVisibleArea = visibleHeight;
+          maxVisibleIndex = index;
         }
-      }
+      });
 
-      setActiveSection(currentIndex);
+      setActiveSection(maxVisibleIndex);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Check on scroll and after a short delay for snap-scroll
+    let timeoutId: number;
+    const scrollHandler = () => {
+      handleScroll();
+      clearTimeout(timeoutId);
+      timeoutId = window.setTimeout(handleScroll, 150);
+    };
+
+    window.addEventListener("scroll", scrollHandler, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    return () => {
+      window.removeEventListener("scroll", scrollHandler);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   const scrollToSection = (index: number) => {
