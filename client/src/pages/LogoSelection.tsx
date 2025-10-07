@@ -9,6 +9,7 @@ import logo2 from "@assets/generated_images/Minimal_circle_sequencing_lanes_32e4
 import logo3 from "@assets/generated_images/Clean_PySeq_wordmark_typography_87be8c39.png";
 import logo4 from "@assets/generated_images/Three_dots_connected_P_shape_1f632a34.png";
 import logo5 from "@assets/generated_images/Overlapping_rectangles_P_minimal_b92e811d.png";
+import logo6 from "@assets/generated_images/Modern_recycling_repurposing_logo_minimal_c92ed17b.png";
 
 const logos = [
   {
@@ -45,6 +46,13 @@ const logos = [
     description: "Letter P made from two overlapping rounded rectangles",
     image: logo5,
     style: "Geometric Minimal"
+  },
+  {
+    id: 6,
+    name: "Repurposing Cycle",
+    description: "Modern circular arrows with scientific equipment icons representing the repurposing process",
+    image: logo6,
+    style: "Concept Driven"
   }
 ];
 
