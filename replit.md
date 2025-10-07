@@ -33,6 +33,7 @@ Preferred communication style: Simple, everyday language.
 - Component-based architecture with reusable UI components in `/client/src/components/ui`
 - Feature components for major page sections (Hero, About, Features, Team, etc.)
 - Parallax scrolling effects with snap-scrolling sections for enhanced UX
+- Global scrolling background (BackgroundLayer component) with DNA sequencer image that shifts 150px per section using IntersectionObserver
 - Mobile-responsive design with accessibility-first approach
 
 ### Backend Architecture
