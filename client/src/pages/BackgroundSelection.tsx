@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Check } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import bg1 from "@assets/generated_images/Technical_blueprint_HiSeq_2500_e13e3779.png";
 import bg2 from "@assets/generated_images/Monochrome_photo_HiSeq_2500_83e19cb6.png";
 import bg3 from "@assets/generated_images/Ink_sketch_HiSeq_2500_6e3311bb.png";
@@ -89,7 +89,11 @@ const backgrounds = [
 ];
 
 export default function BackgroundSelection() {
-  const [selectedBg, setSelectedBg] = useState<number | null>(null);
+  const [, setLocation] = useLocation();
+  const [selectedBg, setSelectedBg] = useState<number | null>(() => {
+    const saved = localStorage.getItem('selectedBackground');
+    return saved ? parseInt(saved) : null;
+  });
 
   return (
     <div className="min-h-screen bg-background p-8">
@@ -177,8 +181,10 @@ export default function BackgroundSelection() {
                 <Button
                   size="lg"
                   onClick={() => {
-                    const selected = backgrounds.find(b => b.id === selectedBg);
-                    alert(`Background ${selectedBg} confirmed! The ${selected?.name} style has been selected.`);
+                    if (selectedBg) {
+                      localStorage.setItem('selectedBackground', selectedBg.toString());
+                      setLocation('/');
+                    }
                   }}
                   data-testid="button-confirm"
                 >
