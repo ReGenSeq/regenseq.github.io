@@ -1,6 +1,6 @@
 import { Navigation } from "@/components/Navigation";
 import { ScrollIndicator } from "@/components/ScrollIndicator";
-import { HeroSection } from "@/components/HeroSection";
+import { ExplosionHero } from "@/components/ExplosionHero";
 import { AboutSection } from "@/components/AboutSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
 import { GrantSection } from "@/components/GrantSection";
@@ -14,7 +14,7 @@ export default function Home() {
     <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth">
       <Navigation />
       <ScrollIndicator />
-      <HeroSection />
+      <ExplosionHero />
       <AboutSection />
       <FeaturesSection />
       <GrantSection />
