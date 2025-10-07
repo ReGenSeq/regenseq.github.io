@@ -1,7 +1,6 @@
 import { Navigation } from "@/components/Navigation";
 import { ScrollIndicator } from "@/components/ScrollIndicator";
 import { HeroSection } from "@/components/HeroSection";
-import { SequencerExplodedView } from "@/components/SequencerExplodedView";
 import { AboutSection } from "@/components/AboutSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
 import { GrantSection } from "@/components/GrantSection";
@@ -16,7 +15,6 @@ export default function Home() {
       <Navigation />
       <ScrollIndicator />
       <HeroSection />
-      <SequencerExplodedView />
       <AboutSection />
       <FeaturesSection />
       <GrantSection />
