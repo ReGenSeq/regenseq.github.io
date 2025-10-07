@@ -5,9 +5,9 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Check } from "lucide-react";
 import { Link } from "wouter";
 import logo1 from "@assets/generated_images/Simple_curved_arrow_P_logo_6b9c102b.png";
-import logo2 from "@assets/generated_images/Bold_P_overlapping_strokes_logo_1de3c928.png";
-import logo3 from "@assets/generated_images/Three_waves_flow_mark_a9897f30.png";
-import logo4 from "@assets/generated_images/Continuous_spiral_helix_mark_7a783a08.png";
+import logo2 from "@assets/generated_images/RS_monogram_embroidery_logo_ec5a7515.png";
+import logo3 from "@assets/generated_images/RegenSeq_bold_wordmark_embroidery_c5dd6b68.png";
+import logo4 from "@assets/generated_images/Letter_R_arrow_cycle_embroidery_6d28ce9a.png";
 import logo5 from "@assets/generated_images/Elegant_P_loop_brand_mark_e9e5734f.png";
 
 const logos = [
@@ -20,24 +20,24 @@ const logos = [
   },
   {
     id: 2,
-    name: "Overlapping P",
-    description: "Bold letter P formed by two thick overlapping curved strokes",
+    name: "RS Monogram",
+    description: "Letters R and S combined into single geometric monogram with thick lines",
     image: logo2,
-    style: "Strong & Modern"
+    style: "Strong & Unified"
   },
   {
     id: 3,
-    name: "Flow Waves",
-    description: "Three parallel curved lines forming a wave or flow pattern",
+    name: "RegenSeq Wordmark",
+    description: "Bold modern typography with thick letterforms, clean and professional",
     image: logo3,
-    style: "Dynamic & Clean"
+    style: "Typography Bold"
   },
   {
     id: 4,
-    name: "Spiral Helix",
-    description: "Continuous curved line forming an abstract spiral or helix shape",
+    name: "R with Arrow",
+    description: "Letter R combined with circular arrow element, thick strokes",
     image: logo4,
-    style: "Elegant & Scientific"
+    style: "Abstract & Dynamic"
   },
   {
     id: 5,
