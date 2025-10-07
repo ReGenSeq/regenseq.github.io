@@ -1,0 +1,74 @@
+import { Card } from "@/components/ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Building2 } from "lucide-react";
+
+const team = [
+  {
+    name: "Dr. Kunal Pandit",
+    role: "Technical Lead",
+    initials: "KP",
+    org: "New York Genome Center",
+    description: "Senior Research Engineer and author of PySeq2500 open-source control software for Illumina HiSeq 2500 systems.",
+  },
+  {
+    name: "Dr. Maros Pleska",
+    role: "Co-Technical Lead",
+    initials: "MP",
+    org: "New York Genome Center",
+    description: "Research Scientist applying PySeq to spatial transcriptomics and proteomics with expertise in image processing.",
+  },
+  {
+    name: "Dr. Daniel Domovic",
+    role: "Entrepreneurial Lead",
+    initials: "DD",
+    org: "New York Genome Center",
+    description: "Scientific Program Manager with computer science background and expertise in project management and stakeholder coordination.",
+  },
+  {
+    name: "Kaspar Bumke",
+    role: "Industry Mentor",
+    initials: "KB",
+    org: "Kitspace",
+    description: "Electronic engineer and software developer running Kitspace open source platform with major contributions to OpenFlexure.",
+  },
+];
+
+export function TeamSection() {
+  return (
+    <section id="team" className="py-16 md:py-24 lg:py-32 bg-card">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Leadership Team
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Combining expertise in engineering, biology, software development, and open source community building
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {team.map((member, index) => (
+            <Card 
+              key={index} 
+              className="p-6 text-center hover-elevate bg-background"
+              data-testid={`card-team-${index}`}
+            >
+              <Avatar className="w-20 h-20 mx-auto mb-4 bg-primary/10">
+                <AvatarFallback className="text-xl font-semibold text-primary">
+                  {member.initials}
+                </AvatarFallback>
+              </Avatar>
+              <h3 className="font-semibold text-lg mb-1">{member.name}</h3>
+              <p className="text-sm text-primary font-medium mb-2">{member.role}</p>
+              <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground mb-3">
+                <Building2 className="h-3 w-3" />
+                {member.org}
+              </div>
+              <p className="text-sm text-muted-foreground">{member.description}</p>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
