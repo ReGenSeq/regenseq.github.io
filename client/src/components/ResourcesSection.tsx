@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Github, FileText, Book, MessageSquare, ExternalLink } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
 
 const resources = [
   {
@@ -38,10 +39,36 @@ const resources = [
 ];
 
 export function ResourcesSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        setOffset(rect.top);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const parallaxOffset = offset < 0 ? Math.abs(offset) * 0.25 : 0;
+
   return (
-    <section id="resources" className="py-16 md:py-24 lg:py-32 bg-background">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="text-center mb-16">
+    <section 
+      ref={sectionRef}
+      id="resources" 
+      className="h-screen flex items-center bg-background snap-start snap-always overflow-hidden"
+    >
+      <div 
+        className="max-w-7xl mx-auto px-4 md:px-8 w-full"
+        style={{
+          transform: `translateY(${-parallaxOffset}px)`,
+        }}
+      >
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Resources & Links
           </h2>

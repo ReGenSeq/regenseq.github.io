@@ -1,9 +1,35 @@
 import { Github, ExternalLink } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
 
 export function Footer() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        setOffset(rect.top);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const parallaxOffset = offset < 0 ? Math.abs(offset) * 0.15 : 0;
+
   return (
-    <footer className="bg-card border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
+    <footer 
+      ref={sectionRef}
+      className="bg-card border-t border-border snap-start snap-always h-screen flex items-center overflow-hidden"
+    >
+      <div 
+        className="max-w-7xl mx-auto px-4 md:px-8 py-12 w-full"
+        style={{
+          transform: `translateY(${-parallaxOffset}px)`,
+        }}
+      >
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
             <h3 className="font-semibold text-lg mb-4">PySeq</h3>

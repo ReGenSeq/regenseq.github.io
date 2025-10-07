@@ -27,7 +27,7 @@ export function Navigation() {
     setIsMobileMenuOpen(false);
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 

@@ -1,23 +1,41 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Github, FileText, ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import heroImage from "@assets/generated_images/DNA_sequencing_microscopy_hero_image_61613447.png";
 
 export function HeroSection() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden snap-start snap-always">
       <div 
         className="absolute inset-0 z-0"
         style={{
           backgroundImage: `url(${heroImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
+          transform: `translateY(${scrollY * 0.5}px)`,
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/75 to-primary/60" />
       </div>
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 py-24 md:py-32 text-center">
+      <div 
+        className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 py-24 md:py-32 text-center"
+        style={{
+          transform: `translateY(${scrollY * 0.2}px)`,
+          opacity: Math.max(0, 1 - scrollY / 500),
+        }}
+      >
         <Badge 
           className="mb-6 bg-accent/20 text-accent-foreground border-accent/30 backdrop-blur-sm"
           data-testid="badge-nsf-grant"

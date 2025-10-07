@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Building2 } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
 
 const team = [
   {
@@ -34,10 +35,36 @@ const team = [
 ];
 
 export function TeamSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        setOffset(rect.top);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const parallaxOffset = offset < 0 ? Math.abs(offset) * 0.2 : 0;
+
   return (
-    <section id="team" className="py-16 md:py-24 lg:py-32 bg-card">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="text-center mb-16">
+    <section 
+      ref={sectionRef}
+      id="team" 
+      className="h-screen flex items-center bg-card snap-start snap-always overflow-hidden"
+    >
+      <div 
+        className="max-w-7xl mx-auto px-4 md:px-8 w-full"
+        style={{
+          transform: `translateY(${-parallaxOffset}px)`,
+        }}
+      >
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Leadership Team
           </h2>
