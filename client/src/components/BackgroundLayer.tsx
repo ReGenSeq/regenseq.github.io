@@ -30,14 +30,13 @@ interface BackgroundLayerProps {
 
 export function BackgroundLayer({ sectionIndex }: BackgroundLayerProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedBgId, setSelectedBgId] = useState<number | null>(null);
+  const [selectedBgId, setSelectedBgId] = useState<number>(() => {
+    const saved = localStorage.getItem('selectedBackground');
+    return saved ? parseInt(saved) : 3; // Default to Ink Sketch (background 3)
+  });
 
   useEffect(() => {
     setIsVisible(true);
-    const saved = localStorage.getItem('selectedBackground');
-    if (saved) {
-      setSelectedBgId(parseInt(saved));
-    }
   }, []);
 
   const totalSections = 8;

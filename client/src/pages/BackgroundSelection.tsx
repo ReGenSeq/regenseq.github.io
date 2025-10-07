@@ -92,7 +92,7 @@ export default function BackgroundSelection() {
   const [, setLocation] = useLocation();
   const [selectedBg, setSelectedBg] = useState<number | null>(() => {
     const saved = localStorage.getItem('selectedBackground');
-    return saved ? parseInt(saved) : null;
+    return saved ? parseInt(saved) : 3; // Default to Ink Sketch
   });
 
   return (
