@@ -18,22 +18,15 @@ const coverImages = [
 ];
 
 export function ExplosionHero() {
-  const [exploded, setExploded] = useState(false);
   const [currentImageSet, setCurrentImageSet] = useState(0);
 
   useEffect(() => {
-    // Trigger explosion after a short delay
-    const explosionTimer = setTimeout(() => {
-      setExploded(true);
-    }, 500);
-
     // Rotate through image sets
     const imageRotation = setInterval(() => {
       setCurrentImageSet((prev) => (prev + 1) % coverImages.length);
     }, 8000);
 
     return () => {
-      clearTimeout(explosionTimer);
       clearInterval(imageRotation);
     };
   }, []);
@@ -42,43 +35,33 @@ export function ExplosionHero() {
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden snap-start snap-always bg-background">
-      {/* Left image panel - slides to the left */}
+      {/* Left image panel */}
       <div
-        className={`absolute inset-y-0 left-0 w-1/2 transition-all ease-out ${
-          exploded ? "-translate-x-full opacity-70" : "translate-x-0"
-        }`}
+        className="absolute inset-y-0 left-0 w-1/2 transition-opacity duration-1000"
         style={{
           backgroundImage: `url(${currentImages.left})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          transitionDuration: "1500ms",
-          transitionTimingFunction: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/30 to-primary/60" />
       </div>
 
-      {/* Right image panel - slides to the right */}
+      {/* Right image panel */}
       <div
-        className={`absolute inset-y-0 right-0 w-1/2 transition-all ease-out ${
-          exploded ? "translate-x-full opacity-70" : "translate-x-0"
-        }`}
+        className="absolute inset-y-0 right-0 w-1/2 transition-opacity duration-1000"
         style={{
           backgroundImage: `url(${currentImages.right})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          transitionDuration: "1500ms",
-          transitionTimingFunction: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-l from-transparent via-secondary/30 to-secondary/60" />
       </div>
 
-      {/* Center content - fades in after explosion */}
+      {/* Center content */}
       <div
-        className={`relative z-10 max-w-7xl mx-auto px-4 md:px-8 py-24 md:py-32 text-center transition-all duration-1000 delay-500 ${
-          exploded ? "opacity-100 scale-100" : "opacity-0 scale-95"
-        }`}
+        className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 py-24 md:py-32 text-center"
       >
         <Badge 
           className="mb-6 bg-accent/20 text-accent-foreground border-accent/30 backdrop-blur-sm"
