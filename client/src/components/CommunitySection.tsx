@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Code2, Heart, GitPullRequest, MessageCircle } from "lucide-react";
-import { ScrollRevealSection } from "./ScrollRevealSection";
+import { useEffect, useState, useRef } from "react";
 
 const ways = [
   {
@@ -27,12 +27,35 @@ const ways = [
 ];
 
 export function CommunitySection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        setOffset(rect.top);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const parallaxOffset = offset < 0 ? Math.abs(offset) * 0.2 : 0;
+
   return (
-    <ScrollRevealSection 
+    <section 
+      ref={sectionRef}
       id="community" 
       className="h-screen flex items-center bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 snap-start snap-always overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
+      <div 
+        className="max-w-7xl mx-auto px-4 md:px-8 w-full"
+        style={{
+          transform: `translateY(${-parallaxOffset}px)`,
+        }}
+      >
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Join the Community
@@ -78,6 +101,6 @@ export function CommunitySection() {
           </Card>
         </div>
       </div>
-    </ScrollRevealSection>
+    </section>
   );
 }

@@ -1,14 +1,39 @@
 import { Card } from "@/components/ui/card";
 import { Microscope, Recycle, Code2 } from "lucide-react";
-import { ScrollRevealSection } from "./ScrollRevealSection";
+import { useEffect, useState, useRef } from "react";
 
 export function AboutSection() {
+  const [scrollY, setScrollY] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        setOffset(rect.top);
+      }
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const parallaxOffset = offset < 0 ? Math.abs(offset) * 0.3 : 0;
+
   return (
-    <ScrollRevealSection 
+    <section 
+      ref={sectionRef}
       id="about" 
       className="h-screen flex items-center bg-background snap-start snap-always overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
+      <div 
+        className="max-w-7xl mx-auto px-4 md:px-8 w-full"
+        style={{
+          transform: `translateY(${-parallaxOffset}px)`,
+        }}
+      >
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             What is PySeq?
@@ -54,6 +79,6 @@ export function AboutSection() {
           </Card>
         </div>
       </div>
-    </ScrollRevealSection>
+    </section>
   );
 }

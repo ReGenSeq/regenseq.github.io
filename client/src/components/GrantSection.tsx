@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Users, Globe2, Leaf, Shield } from "lucide-react";
-import { ScrollRevealSection } from "./ScrollRevealSection";
+import { useEffect, useState, useRef } from "react";
 
 const impacts = [
   {
@@ -27,12 +27,35 @@ const impacts = [
 ];
 
 export function GrantSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        setOffset(rect.top);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const parallaxOffset = offset < 0 ? Math.abs(offset) * 0.25 : 0;
+
   return (
-    <ScrollRevealSection 
+    <section 
+      ref={sectionRef}
       id="grant" 
       className="h-screen flex items-center bg-background snap-start snap-always overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
+      <div 
+        className="max-w-7xl mx-auto px-4 md:px-8 w-full"
+        style={{
+          transform: `translateY(${-parallaxOffset}px)`,
+        }}
+      >
         <div className="text-center mb-8">
           <Badge className="mb-4 bg-primary text-primary-foreground" data-testid="badge-nsf">
             NSF POSE Phase 1
@@ -65,6 +88,6 @@ export function GrantSection() {
           </div>
         </div>
       </div>
-    </ScrollRevealSection>
+    </section>
   );
 }
