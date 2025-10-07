@@ -16,34 +16,33 @@ export function ScrollIndicator() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const viewportCenter = window.innerHeight / 2;
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
       
       const sectionElements = sections.map(section => {
-        const element = section.id === "hero" 
-          ? document.querySelector('section:first-of-type')
-          : section.id === "footer"
-          ? document.querySelector('footer')
-          : document.getElementById(section.id);
-        return element;
-      });
-
-      // Find the section closest to viewport center
-      let closestIndex = 0;
-      let closestDistance = Infinity;
-
-      sectionElements.forEach((element, index) => {
-        if (!element) return;
-        const rect = element.getBoundingClientRect();
-        const elementCenter = rect.top + rect.height / 2;
-        const distance = Math.abs(elementCenter - viewportCenter);
-        
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestIndex = index;
+        if (section.id === "hero") {
+          return document.querySelector('section:first-of-type');
+        } else if (section.id === "footer") {
+          return document.querySelector('footer');
+        } else {
+          return document.getElementById(section.id);
         }
       });
 
-      setActiveSection(closestIndex);
+      // Find which section the scroll position is currently in
+      let currentIndex = 0;
+      
+      sectionElements.forEach((element, index) => {
+        if (!element) return;
+        const rect = element.getBoundingClientRect();
+        const elementTop = rect.top + window.scrollY;
+        const elementBottom = elementTop + rect.height;
+        
+        if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
+          currentIndex = index;
+        }
+      });
+
+      setActiveSection(currentIndex);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
