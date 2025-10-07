@@ -16,7 +16,7 @@ export function ScrollIndicator() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
+      const viewportCenter = window.innerHeight / 2;
       
       const sectionElements = sections.map(section => {
         const element = section.id === "hero" 
@@ -27,18 +27,23 @@ export function ScrollIndicator() {
         return element;
       });
 
-      const currentIndex = sectionElements.findIndex((element, index) => {
-        if (!element) return false;
+      // Find the section closest to viewport center
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+
+      sectionElements.forEach((element, index) => {
+        if (!element) return;
         const rect = element.getBoundingClientRect();
-        const elementTop = rect.top + window.scrollY;
-        const elementBottom = elementTop + rect.height;
+        const elementCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(elementCenter - viewportCenter);
         
-        return scrollPosition >= elementTop && scrollPosition < elementBottom;
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
       });
 
-      if (currentIndex !== -1) {
-        setActiveSection(currentIndex);
-      }
+      setActiveSection(closestIndex);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
