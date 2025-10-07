@@ -4,55 +4,47 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Check } from "lucide-react";
 import { Link } from "wouter";
-import logo1 from "@assets/generated_images/Minimal_P_with_DNA_line_0f50d51e.png";
-import logo2 from "@assets/generated_images/Minimal_circle_sequencing_lanes_32e47afa.png";
-import logo3 from "@assets/generated_images/Clean_PySeq_wordmark_typography_87be8c39.png";
-import logo4 from "@assets/generated_images/Three_dots_connected_P_shape_1f632a34.png";
-import logo5 from "@assets/generated_images/Overlapping_rectangles_P_minimal_b92e811d.png";
-import logo6 from "@assets/generated_images/Modern_recycling_repurposing_logo_minimal_c92ed17b.png";
+import logo1 from "@assets/generated_images/Simple_curved_arrow_P_logo_6b9c102b.png";
+import logo2 from "@assets/generated_images/Bold_P_with_circle_minimal_a3bf5d1f.png";
+import logo3 from "@assets/generated_images/Infinity_cycle_curves_logo_172222ad.png";
+import logo4 from "@assets/generated_images/Hexagon_simple_brand_mark_ea45b304.png";
+import logo5 from "@assets/generated_images/Elegant_P_loop_brand_mark_e9e5734f.png";
 
 const logos = [
   {
     id: 1,
-    name: "Letter P with DNA",
-    description: "Simple monochrome letter P with subtle DNA helix line detail",
+    name: "Curved Arrow",
+    description: "Single smooth curved arrow forming a P shape with thick clean lines",
     image: logo1,
-    style: "Minimal & Clean"
+    style: "Bold & Simple"
   },
   {
     id: 2,
-    name: "Sequencing Lanes",
-    description: "Abstract geometric circle with parallel lines representing sequencing",
+    name: "P with Circle",
+    description: "Bold letter P with clean circular element, thick lines only",
     image: logo2,
-    style: "Geometric & Simple"
+    style: "Geometric & Strong"
   },
   {
     id: 3,
-    name: "PySeq Wordmark",
-    description: "Clean typography wordmark with modern sans-serif font",
+    name: "Infinity Cycle",
+    description: "Two curved shapes forming an infinity symbol representing continuous repurposing",
     image: logo3,
-    style: "Typography Focused"
+    style: "Abstract & Elegant"
   },
   {
     id: 4,
-    name: "Connected Dots",
-    description: "Three dots connected by lines forming an abstract P shape",
+    name: "Hexagon Mark",
+    description: "Simple hexagon with curved inner element, clean geometric brand mark",
     image: logo4,
-    style: "Minimal & Modern"
+    style: "Scientific & Modern"
   },
   {
     id: 5,
-    name: "Overlapping Shapes",
-    description: "Letter P made from two overlapping rounded rectangles",
+    name: "Loop Mark",
+    description: "Single elegant curved line forming a P loop, highly scalable",
     image: logo5,
-    style: "Geometric Minimal"
-  },
-  {
-    id: 6,
-    name: "Repurposing Cycle",
-    description: "Modern circular arrows with scientific equipment icons representing the repurposing process",
-    image: logo6,
-    style: "Concept Driven"
+    style: "Refined & Minimal"
   }
 ];
 
