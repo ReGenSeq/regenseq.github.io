@@ -71,36 +71,36 @@ export function ResourcesSection() {
       className="h-screen flex items-start xl:items-center snap-start snap-always overflow-hidden"
     >
       <div 
-        className="max-w-7xl mx-auto px-4 md:px-8 w-full pt-40 xl:pt-0"
+        className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 w-full pt-20 sm:pt-24 md:pt-32 xl:pt-0"
         style={{
           transform: `translateY(${-parallaxOffset}px)`,
         }}
       >
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-6 sm:mb-8 md:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4 px-2">
             Resources
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto px-2">
             Everything you need to get started with RegenSeq
           </p>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 md:gap-6 max-w-6xl mx-auto">
           {resources.map((resource, index) => (
             <Card 
               key={index} 
-              className={`p-6 hover-elevate w-full ${resource.highlight ? 'border-primary/50' : ''}`}
+              className={`p-5 sm:p-6 hover-elevate w-full ${resource.highlight ? 'border-primary/50' : ''}`}
               data-testid={`card-resource-${index}`}
             >
               <div className="flex flex-col h-full">
-                <div className={`rounded-lg ${resource.highlight ? 'bg-primary/10' : 'bg-muted/50'} w-12 h-12 flex items-center justify-center mb-4`}>
-                  <resource.icon className={`h-6 w-6 ${resource.highlight ? 'text-primary' : 'text-foreground'}`} />
+                <div className={`rounded-lg ${resource.highlight ? 'bg-primary/10' : 'bg-muted/50'} w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center mb-3 sm:mb-4`}>
+                  <resource.icon className={`h-5 w-5 sm:h-6 sm:w-6 ${resource.highlight ? 'text-primary' : 'text-foreground'}`} />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{resource.title}</h3>
-                <p className="text-sm text-muted-foreground mb-6 flex-grow">{resource.description}</p>
+                <h3 className="text-base sm:text-lg font-semibold mb-2">{resource.title}</h3>
+                <p className="text-sm text-muted-foreground mb-4 sm:mb-6 flex-grow">{resource.description}</p>
                 <Button
                   variant={resource.highlight ? "default" : "outline"}
-                  className="w-full gap-2"
+                  className="w-full gap-2 text-sm"
                   data-testid={`button-resource-${index}`}
                   onClick={() => window.open(resource.link, '_blank')}
                 >

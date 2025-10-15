@@ -60,30 +60,30 @@ export function FeaturesSection() {
       className="h-screen flex items-center snap-start snap-always overflow-hidden"
     >
       <div 
-        className="max-w-7xl mx-auto px-4 md:px-8 w-full"
+        className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 w-full py-6 sm:py-0"
         style={{
           transform: `translateY(${-parallaxOffset}px)`,
         }}
       >
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-6 sm:mb-8 md:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4 px-2">
             Technical Capabilities
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto px-2">
             RegenSeq provides comprehensive control of all sequencer components for 
             sophisticated automated workflows
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
           {features.map((feature, index) => (
             <Card 
               key={index} 
-              className="p-6 hover-elevate bg-background"
+              className="p-5 sm:p-6 hover-elevate bg-background"
               data-testid={`card-feature-${index}`}
             >
-              <feature.icon className="h-8 w-8 text-primary mb-4" />
-              <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+              <feature.icon className="h-7 w-7 sm:h-8 sm:w-8 text-primary mb-3 sm:mb-4" />
+              <h3 className="text-base sm:text-lg font-semibold mb-2">{feature.title}</h3>
               <p className="text-muted-foreground text-sm">{feature.description}</p>
             </Card>
           ))}

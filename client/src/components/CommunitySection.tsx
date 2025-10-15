@@ -51,47 +51,47 @@ export function CommunitySection() {
       className="h-screen flex items-center snap-start snap-always overflow-hidden"
     >
       <div 
-        className="max-w-7xl mx-auto px-4 md:px-8 w-full"
+        className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 w-full py-6 sm:py-0"
         style={{
           transform: `translateY(${-parallaxOffset}px)`,
         }}
       >
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-6 sm:mb-8 md:mb-10">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4 px-2">
             Join the Community
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto px-2">
             RegenSeq is a community-driven project. Your contributions, questions, and feedback 
             help build a more accessible future for biological research
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 mb-6 sm:mb-8 md:mb-10">
           {ways.map((way, index) => (
             <Card 
               key={index} 
-              className="p-6 text-center hover-elevate bg-background"
+              className="p-5 sm:p-6 text-center hover-elevate bg-background"
               data-testid={`card-community-${index}`}
             >
-              <div className="rounded-lg bg-accent/10 w-12 h-12 flex items-center justify-center mx-auto mb-4">
-                <way.icon className="h-6 w-6 text-accent" />
+              <div className="rounded-lg bg-accent/10 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <way.icon className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
               </div>
-              <h3 className="font-semibold mb-2">{way.title}</h3>
-              <p className="text-sm text-muted-foreground">{way.description}</p>
+              <h3 className="font-semibold mb-2 text-sm sm:text-base">{way.title}</h3>
+              <p className="text-xs sm:text-sm text-muted-foreground">{way.description}</p>
             </Card>
           ))}
         </div>
         
         <div className="text-center">
-          <Card className="inline-block p-8 max-w-2xl bg-background">
-            <h3 className="text-2xl font-semibold mb-4">Ready to Get Started?</h3>
-            <p className="text-muted-foreground mb-6">
+          <Card className="p-6 sm:p-8 max-w-2xl mx-auto bg-background">
+            <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Ready to Get Started?</h3>
+            <p className="text-sm sm:text-base text-muted-foreground mb-5 sm:mb-6">
               Visit our GitHub repository to explore the code, read the documentation, 
               and start repurposing sequencers for your research
             </p>
             <Button 
               size="lg" 
-              className="gap-2"
+              className="gap-2 w-full sm:w-auto"
               data-testid="button-get-started"
               onClick={() => window.open('https://github.com/nygctech/PySeq2500', '_blank')}
             >

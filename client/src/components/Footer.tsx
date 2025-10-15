@@ -25,14 +25,14 @@ export function Footer() {
       className="border-t border-border snap-start snap-always h-screen flex items-center overflow-hidden"
     >
       <div 
-        className="max-w-7xl mx-auto px-4 md:px-8 py-12 w-full"
+        className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-10 md:py-12 w-full"
         style={{
           transform: `translateY(${-parallaxOffset}px)`,
         }}
       >
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
           <div>
-            <h3 className="font-semibold text-lg mb-4">RegenSeq</h3>
+            <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">RegenSeq</h3>
             <p className="text-sm text-muted-foreground">
               Open source ecosystem for repurposing DNA sequencers as automation platforms 
               for spatial biology research.
@@ -40,7 +40,7 @@ export function Footer() {
           </div>
           
           <div>
-            <h3 className="font-semibold text-lg mb-4">Resources</h3>
+            <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">Resources</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <a 
@@ -79,8 +79,8 @@ export function Footer() {
           </div>
           
           <div>
-            <h3 className="font-semibold text-lg mb-4">About</h3>
-            <p className="text-sm text-muted-foreground mb-3">
+            <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">About</h3>
+            <p className="text-sm text-muted-foreground mb-2 sm:mb-3">
               Developed at the Technology Innovation Laboratory, New York Genome Center (NYGC)
             </p>
             <p className="text-sm text-muted-foreground">
@@ -89,8 +89,8 @@ export function Footer() {
           </div>
         </div>
         
-        <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
+        <div className="pt-6 sm:pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
+          <p className="text-xs sm:text-sm text-muted-foreground text-center md:text-left">
             © {new Date().getFullYear()} RegenSeq Open Source Community. Open source under permissive license.
           </p>
           <a 
