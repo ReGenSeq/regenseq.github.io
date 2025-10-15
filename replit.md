@@ -36,6 +36,12 @@ Preferred communication style: Simple, everyday language.
 - Global scrolling background (BackgroundLayer component) with DNA sequencer image that shifts 150px per section using IntersectionObserver
 - Mobile-responsive design with accessibility-first approach
 
+**Responsive Behavior** (October 2025):
+- **Mobile (< 768px)**: Sections use `h-screen` with `overflow-y-auto` to allow content scrolling within sections; parallax effects disabled for performance and content visibility
+- **Desktop (>= 768px)**: Sections use `h-screen` with `overflow-hidden` for snap scrolling; parallax effects active with speeds 0.15-0.3
+- **Shared Hook**: All sections use `useIsMobile()` from `/client/src/hooks/use-mobile.tsx` for responsive detection (single matchMedia listener)
+- **Performance**: Parallax calculations gated behind `!isMobile` check to avoid unnecessary computation on mobile devices
+
 ### Backend Architecture
 
 **Server Framework**: Express.js with TypeScript running on Node.js
