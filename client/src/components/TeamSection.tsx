@@ -1,8 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Building2 } from "lucide-react";
-import { useEffect, useState, useRef } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 const team = [
   {

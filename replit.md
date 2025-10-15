@@ -32,15 +32,27 @@ Preferred communication style: Simple, everyday language.
 **Key Design Patterns**:
 - Component-based architecture with reusable UI components in `/client/src/components/ui`
 - Feature components for major page sections (Hero, About, Features, Team, etc.)
-- Parallax scrolling effects with snap-scrolling sections for enhanced UX
+- Snap-scrolling sections for enhanced UX on desktop
 - Global scrolling background (BackgroundLayer component) with DNA sequencer image that shifts 150px per section using IntersectionObserver
-- Mobile-responsive design with accessibility-first approach
+- Mobile-responsive design with accessibility-first approach ensuring all content visible across 320px-1920px viewports
 
-**Responsive Behavior** (October 2025):
-- **Mobile (< 768px)**: Sections use `h-screen` with `overflow-y-auto` to allow content scrolling within sections; parallax effects disabled for performance and content visibility
-- **Desktop (>= 768px)**: Sections use `h-screen` with `overflow-hidden` for snap scrolling; parallax effects active with speeds 0.15-0.3
-- **Shared Hook**: All sections use `useIsMobile()` from `/client/src/hooks/use-mobile.tsx` for responsive detection (single matchMedia listener)
-- **Performance**: Parallax calculations gated behind `!isMobile` check to avoid unnecessary computation on mobile devices
+**Responsive Behavior** (October 2025 - Final Implementation):
+- **Mobile (< 768px)**: 
+  - Container allows natural document scrolling (no fixed height or overflow)
+  - Sections use `min-h-screen` to expand with content, ensuring all text and footer are visible
+  - `overflow-y-auto` on sections for vertical scrolling when content exceeds viewport
+  - No snap scrolling for natural mobile experience
+  - Section parallax transforms removed to prevent content clipping
+  
+- **Desktop (>= 768px)**: 
+  - Container uses `md:h-screen md:overflow-y-scroll` for controlled scroll area
+  - Sections use `md:h-screen md:snap-start md:snap-always` for smooth snap scrolling
+  - `md:overflow-hidden` prevents individual section scrolling
+  - Section parallax transforms removed (BackgroundLayer parallax still active)
+  
+- **Shared Hook**: All sections use `useIsMobile()` from `/client/src/hooks/use-mobile.tsx` for responsive detection (768px breakpoint, single matchMedia listener)
+- **Typography**: All headings use responsive sizing pattern (e.g., `text-2xl sm:text-3xl md:text-4xl`) with horizontal padding (`px-2`) to prevent edge clipping
+- **Critical Fix (Oct 2025)**: Removed section-level parallax transforms that were causing "Leadership Team" and "Broader Impacts" titles to be hidden/clipped on various viewports
 
 ### Backend Architecture
 

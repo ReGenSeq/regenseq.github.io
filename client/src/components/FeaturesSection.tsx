@@ -1,7 +1,5 @@
 import { Card } from "@/components/ui/card";
 import { Thermometer, Droplets, Camera, FlaskConical, FileCode, Clock } from "lucide-react";
-import { useEffect, useState, useRef } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 const features = [
   {

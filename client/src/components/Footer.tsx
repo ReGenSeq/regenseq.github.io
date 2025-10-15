@@ -1,6 +1,4 @@
 import { Github, ExternalLink } from "lucide-react";
-import { useEffect, useState, useRef } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 export function Footer() {
   return (

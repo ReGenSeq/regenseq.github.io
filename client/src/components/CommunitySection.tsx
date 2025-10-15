@@ -1,8 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Code2, Heart, GitPullRequest, MessageCircle } from "lucide-react";
-import { useEffect, useState, useRef } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 const ways = [
   {

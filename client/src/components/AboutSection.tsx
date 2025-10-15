@@ -1,7 +1,5 @@
 import { Card } from "@/components/ui/card";
 import { Microscope, Recycle, Code2 } from "lucide-react";
-import { useEffect, useState, useRef } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 export function AboutSection() {
   return (
