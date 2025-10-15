@@ -34,6 +34,7 @@ Preferred communication style: Simple, everyday language.
 - Feature components for major page sections (Hero, About, Features, Team, etc.)
 - Snap-scrolling sections for enhanced UX on desktop
 - Global scrolling background (BackgroundLayer component) with DNA sequencer image that shifts 150px per section using IntersectionObserver
+- Scroll indicator navigation (ScrollIndicator component) with IntersectionObserver-based active section detection
 - Mobile-responsive design with accessibility-first approach ensuring all content visible across 320px-1920px viewports
 
 **Responsive Behavior** (October 2025 - Final Implementation):
@@ -54,10 +55,18 @@ Preferred communication style: Simple, everyday language.
 - **Shared Hook**: All sections use `useIsMobile()` from `/client/src/hooks/use-mobile.tsx` for responsive detection (768px breakpoint, single matchMedia listener)
 - **Typography**: All sections use centralized CSS utility classes (`.text-heading-main`, `.text-heading-sub`, etc.) with horizontal padding (`px-2`) to prevent edge clipping
 - **Layout Pattern**: Sections use `items-start` with `md:pt-28 lg:pt-32 md:pb-[15vh]` padding (navbar spacing + generous 15vh bottom clearance)
+- **Navigation Components**:
+  - Fixed navbar at top with scroll detection and theme toggle
+  - Scroll indicator dots (right side, desktop only) using IntersectionObserver for accurate active section detection
+  - IntersectionObserver tracks all 8 sections with granular thresholds (0 to 1.0 in 0.1 increments)
+  - Active dot determined by section with highest intersection ratio
+  - Clicking dots scrolls smoothly to corresponding section
+
 - **Critical Fixes (Oct 2025)**: 
   - Removed section-level parallax transforms that were causing titles to be hidden/clipped
   - Fixed navbar overlap by changing from vertical centering to top alignment with proper padding
   - Fixed scroll clipping: Changed snap-mandatory to snap-proximity, removed overflow-hidden, added 15vh bottom padding to ensure all cards/buttons fully visible
+  - Fixed scroll indicator: Replaced scroll event listener with IntersectionObserver for reliable, performant section tracking
 
 ### Backend Architecture
 
