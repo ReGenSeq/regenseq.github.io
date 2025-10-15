@@ -80,6 +80,12 @@
   --font-serif: Georgia, serif;
   --font-mono: JetBrains Mono, Fira Code, monospace;
   --radius: .5rem; /* 8px */
+  
+  /* Responsive typography using clamp() */
+  --text-heading-main: clamp(1.5rem, 4vw, 2.5rem); /* 24px - 40px */
+  --text-heading-sub: clamp(1.25rem, 3vw, 1.875rem); /* 20px - 30px */
+  --text-subtitle-lg: clamp(0.875rem, 2vw, 1.25rem); /* 14px - 20px */
+  --text-subtitle: clamp(0.875rem, 2vw, 1.125rem); /* 14px - 18px */
   --shadow-2xs: 0px 2px 0px 0px hsl(220 14% 10% / 0.02);
   --shadow-xs: 0px 2px 0px 0px hsl(220 14% 10% / 0.03);
   --shadow-sm: 0px 2px 0px 0px hsl(220 14% 10% / 0.03), 0px 1px 2px -1px hsl(220 14% 10% / 0.04);
@@ -352,5 +358,22 @@
   .border.active-elevate-2:not(.no-active-interaction-elevate)::after,
   .border.hover-elevate:not(.no-hover-interaction-elevate)::after {
     inset: -1px;
+  }
+  
+  /* Responsive Typography Utilities */
+  .text-heading-main {
+    font-size: var(--text-heading-main);
+  }
+  
+  .text-heading-sub {
+    font-size: var(--text-heading-sub);
+  }
+  
+  .text-subtitle-lg {
+    font-size: var(--text-subtitle-lg);
+  }
+  
+  .text-subtitle {
+    font-size: var(--text-subtitle);
   }
 }

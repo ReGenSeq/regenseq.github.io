@@ -29,24 +29,26 @@ export function GrantSection() {
   return (
     <section 
       id="grant" 
-      className="min-h-screen md:h-screen flex items-center md:snap-start md:snap-always overflow-y-auto md:overflow-hidden py-20 md:py-0"
+      className="min-h-screen md:h-screen flex items-start md:snap-start md:snap-always overflow-y-auto md:overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 w-full py-20 md:pt-28 lg:pt-32 md:pb-8">
         <div className="text-center mb-6 md:mb-8">
           <Badge className="mb-3 md:mb-4 bg-primary text-primary-foreground" data-testid="badge-nsf">
             NSF POSE Phase 1
           </Badge>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 md:mb-4 px-2">
+          <h2 className="text-heading-main font-bold text-foreground mb-3 md:mb-4 px-2">
             Creating an Open Source Ecosystem
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto px-2">
+          <p className="text-subtitle text-muted-foreground max-w-3xl mx-auto px-2">
             Funded by the National Science Foundation to build a sustainable, community-driven 
             platform for repurposing DNA sequencers as automation platforms
           </p>
         </div>
         
         <div>
-          <h3 className="text-xl sm:text-2xl font-semibold text-center mb-4 md:mb-6 px-2">Broader Impacts</h3>
+          <h3 className="text-heading-sub font-semibold text-center mb-4 md:mb-6 px-2">
+            Broader Impacts
+          </h3>
           <div className="grid md:grid-cols-2 gap-6">
             {impacts.map((impact, index) => (
               <Card key={index} className="p-6 hover-elevate" data-testid={`card-impact-${index}`}>

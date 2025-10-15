@@ -38,14 +38,14 @@ export function FeaturesSection() {
   return (
     <section 
       id="features" 
-      className="min-h-screen md:h-screen flex items-center md:snap-start md:snap-always overflow-y-auto md:overflow-hidden"
+      className="min-h-screen md:h-screen flex items-start md:snap-start md:snap-always overflow-y-auto md:overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 w-full py-20 md:py-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 w-full py-20 md:pt-28 lg:pt-32 md:pb-8">
         <div className="text-center mb-6 sm:mb-8 md:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4 px-2">
+          <h2 className="text-heading-main font-bold text-foreground mb-3 sm:mb-4 md:mb-6 px-2">
             Technical Capabilities
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto px-2">
+          <p className="text-subtitle-lg text-muted-foreground max-w-3xl mx-auto px-2">
             RegenSeq provides comprehensive control of all sequencer components for 
             sophisticated automated workflows
           </p>
