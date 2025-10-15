@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Users, Globe2, Leaf, Shield } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const impacts = [
   {
@@ -27,50 +28,27 @@ const impacts = [
 ];
 
 export function GrantSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [offset, setOffset] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (sectionRef.current) {
-        const rect = sectionRef.current.getBoundingClientRect();
-        setOffset(rect.top);
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const parallaxOffset = offset < 0 ? Math.abs(offset) * 0.25 : 0;
-
   return (
     <section 
-      ref={sectionRef}
       id="grant" 
-      className="h-screen flex items-center snap-start snap-always overflow-hidden"
+      className="min-h-screen md:h-screen flex items-center md:snap-start md:snap-always overflow-y-auto md:overflow-hidden py-20 md:py-0"
     >
-      <div 
-        className="max-w-7xl mx-auto px-4 md:px-8 w-full"
-        style={{
-          transform: `translateY(${-parallaxOffset}px)`,
-        }}
-      >
-        <div className="text-center mb-8">
-          <Badge className="mb-4 bg-primary text-primary-foreground" data-testid="badge-nsf">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 w-full">
+        <div className="text-center mb-6 md:mb-8">
+          <Badge className="mb-3 md:mb-4 bg-primary text-primary-foreground" data-testid="badge-nsf">
             NSF POSE Phase 1
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 md:mb-4 px-2">
             Creating an Open Source Ecosystem
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto px-2">
             Funded by the National Science Foundation to build a sustainable, community-driven 
             platform for repurposing DNA sequencers as automation platforms
           </p>
         </div>
         
         <div>
-          <h3 className="text-2xl font-semibold text-center mb-6">Broader Impacts</h3>
+          <h3 className="text-xl sm:text-2xl font-semibold text-center mb-4 md:mb-6 px-2">Broader Impacts</h3>
           <div className="grid md:grid-cols-2 gap-6">
             {impacts.map((impact, index) => (
               <Card key={index} className="p-6 hover-elevate" data-testid={`card-impact-${index}`}>

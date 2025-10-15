@@ -10,10 +10,12 @@ import { ResourcesSection } from "@/components/ResourcesSection";
 import { CommunitySection } from "@/components/CommunitySection";
 import { Footer } from "@/components/Footer";
 import { useEffect, useState, useRef } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function Home() {
   const [activeSectionIndex, setActiveSectionIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const sections = containerRef.current?.querySelectorAll('section, footer');
@@ -42,7 +44,10 @@ export default function Home() {
   }, []);
 
   return (
-    <div ref={containerRef} className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth">
+    <div 
+      ref={containerRef} 
+      className="scroll-smooth md:snap-y md:snap-mandatory md:h-screen md:overflow-y-scroll"
+    >
       <BackgroundLayer sectionIndex={activeSectionIndex} />
       <Navigation />
       <ScrollIndicator />

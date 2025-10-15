@@ -4,39 +4,12 @@ import { useEffect, useState, useRef } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export function AboutSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [offset, setOffset] = useState(0);
-  const isMobile = useIsMobile();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (sectionRef.current) {
-        const rect = sectionRef.current.getBoundingClientRect();
-        setOffset(rect.top);
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const parallaxOffset = !isMobile && offset < 0 ? Math.abs(offset) * 0.3 : 0;
-
   return (
     <section 
-      ref={sectionRef}
       id="about" 
-      className="h-screen flex items-center snap-start snap-always overflow-y-auto md:overflow-hidden"
+      className="min-h-screen md:h-screen flex items-center md:snap-start md:snap-always overflow-y-auto md:overflow-hidden"
     >
-      <div 
-        className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 w-full py-20 md:py-6"
-        style={{
-          transform: `translateY(${-parallaxOffset}px)`,
-        }}
-      >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 w-full py-20 md:py-6">
         <div className="text-center mb-6 sm:mb-8 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4 px-2">
             What is RegenSeq?
