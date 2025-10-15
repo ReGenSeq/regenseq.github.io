@@ -15,59 +15,63 @@ export function ScrollIndicator() {
   const [activeSection, setActiveSection] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sectionElements = sections.map(section => {
-        if (section.id === "hero") {
-          return document.querySelector('section:first-of-type');
-        } else if (section.id === "footer") {
-          return document.querySelector('footer');
-        } else {
-          return document.getElementById(section.id);
-        }
-      });
+    // Get all section elements
+    const sectionElements = sections.map(section => {
+      if (section.id === "hero") {
+        return document.querySelector('section:first-of-type');
+      } else if (section.id === "footer") {
+        return document.querySelector('footer');
+      } else {
+        return document.getElementById(section.id);
+      }
+    }).filter(Boolean) as Element[];
 
-      // Find which section has the most visible area in viewport
-      let maxVisibleIndex = 0;
-      let maxVisibleArea = 0;
+    if (sectionElements.length === 0) return;
 
-      sectionElements.forEach((element, index) => {
-        if (!element) return;
-        
-        const rect = element.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        
-        // Calculate visible area of this section
-        const visibleTop = Math.max(0, rect.top);
-        const visibleBottom = Math.min(viewportHeight, rect.bottom);
-        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-        
-        if (visibleHeight > maxVisibleArea) {
-          maxVisibleArea = visibleHeight;
-          maxVisibleIndex = index;
-        }
-      });
+    // Track intersection ratios for all sections
+    const intersectionRatios = new Map<Element, number>();
 
-      setActiveSection(maxVisibleIndex);
-    };
+    // Find the scroll container - check for the main container with scroll
+    const scrollContainer = document.querySelector('[class*="snap-y"]') || 
+                           document.querySelector('[class*="overflow-y-scroll"]') || 
+                           null;
 
-    // Check on scroll and after a short delay for snap-scroll
-    let timeoutId: number;
-    const scrollHandler = () => {
-      handleScroll();
-      clearTimeout(timeoutId);
-      timeoutId = window.setTimeout(handleScroll, 150);
-    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Update intersection ratios
+        entries.forEach(entry => {
+          intersectionRatios.set(entry.target, entry.intersectionRatio);
+        });
 
-    // Get the scroll container (the main div with overflow-y-scroll)
-    const scrollContainer = document.querySelector('.h-screen.overflow-y-scroll');
-    const target = scrollContainer || window;
+        // Find section with highest intersection ratio
+        let maxRatio = 0;
+        let maxIndex = 0;
 
-    target.addEventListener("scroll", scrollHandler, { passive: true });
-    handleScroll();
-    
+        sectionElements.forEach((element, index) => {
+          const ratio = intersectionRatios.get(element) || 0;
+          if (ratio > maxRatio) {
+            maxRatio = ratio;
+            maxIndex = index;
+          }
+        });
+
+        // Update active section
+        setActiveSection(maxIndex);
+      },
+      {
+        root: scrollContainer,
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+        rootMargin: "-10% 0px -10% 0px"
+      }
+    );
+
+    // Observe all sections
+    sectionElements.forEach(element => {
+      observer.observe(element);
+    });
+
     return () => {
-      target.removeEventListener("scroll", scrollHandler);
-      clearTimeout(timeoutId);
+      observer.disconnect();
     };
   }, []);
 
