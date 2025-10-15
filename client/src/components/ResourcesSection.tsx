@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Github, FileText, Book, MessageSquare, ExternalLink } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const resources = [
   {
@@ -49,6 +50,7 @@ const resources = [
 export function ResourcesSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [offset, setOffset] = useState(0);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,19 +61,22 @@ export function ResourcesSection() {
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
-  const parallaxOffset = offset < 0 ? Math.abs(offset) * 0.25 : 0;
+  const parallaxOffset = !isMobile && offset < 0 ? Math.abs(offset) * 0.25 : 0;
 
   return (
     <section 
       ref={sectionRef}
       id="resources" 
-      className="h-screen flex items-start xl:items-center snap-start snap-always overflow-hidden"
+      className="h-screen flex items-center snap-start snap-always overflow-y-auto md:overflow-hidden"
     >
       <div 
-        className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 w-full pt-20 sm:pt-24 md:pt-32 xl:pt-0"
+        className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 w-full py-20 md:py-6"
         style={{
           transform: `translateY(${-parallaxOffset}px)`,
         }}

@@ -1,9 +1,11 @@
 import { Github, ExternalLink } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function Footer() {
   const sectionRef = useRef<HTMLElement>(null);
   const [offset, setOffset] = useState(0);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,18 +16,21 @@ export function Footer() {
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
-  const parallaxOffset = offset < 0 ? Math.abs(offset) * 0.15 : 0;
+  const parallaxOffset = !isMobile && offset < 0 ? Math.abs(offset) * 0.15 : 0;
 
   return (
     <footer 
       ref={sectionRef}
-      className="border-t border-border snap-start snap-always h-screen flex items-center overflow-hidden"
+      className="border-t border-border snap-start snap-always h-screen flex items-center overflow-y-auto md:overflow-hidden"
     >
       <div 
-        className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-10 md:py-12 w-full"
+        className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-12 w-full"
         style={{
           transform: `translateY(${-parallaxOffset}px)`,
         }}
