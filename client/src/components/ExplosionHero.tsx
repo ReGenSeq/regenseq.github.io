@@ -14,9 +14,9 @@ export function ExplosionHero() {
         </Badge>
         
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-4 sm:mb-6 tracking-tight px-2">
-          RegenSeq Open Source
+          RegenSeq
           <br />
-          Community
+          Reuse. Repurpose. Reimagine.
         </h1>
         
         <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8 sm:mb-10 md:mb-12 leading-relaxed px-2">
