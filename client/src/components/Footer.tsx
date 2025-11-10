@@ -1,4 +1,5 @@
-import { Github, ExternalLink, Twitter, Linkedin, MessageSquare, Star, GitFork, Facebook } from "lucide-react";
+import { Github, ExternalLink, Linkedin, MessageSquare, Star, GitFork, Facebook } from "lucide-react";
+import { SiX } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
@@ -19,7 +20,8 @@ export function Footer() {
       });
   }, []);
 
-  const shareUrl = encodeURIComponent('https://regenseq.github.io/');
+  const shareUrl = 'https://regenseq.github.io/';
+  const shareUrlEncoded = encodeURIComponent(shareUrl);
   const shareText = encodeURIComponent('Check out RegenSeq - repurposing DNA sequencers for spatial biology research!');
 
   return (
@@ -121,17 +123,17 @@ export function Footer() {
                 size="sm"
                 variant="outline"
                 className="gap-2"
-                onClick={() => window.open(`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`, '_blank')}
+                onClick={() => window.open(`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrlEncoded}`, '_blank')}
                 data-testid="button-share-x"
               >
-                <Twitter className="h-4 w-4" />
+                <SiX className="h-4 w-4" />
                 X
               </Button>
               <Button
                 size="sm"
                 variant="outline"
                 className="gap-2"
-                onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}&summary=${shareText}`, '_blank')}
+                onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrlEncoded}`, '_blank')}
                 data-testid="button-share-linkedin"
               >
                 <Linkedin className="h-4 w-4" />
@@ -141,7 +143,7 @@ export function Footer() {
                 size="sm"
                 variant="outline"
                 className="gap-2"
-                onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}&quote=${shareText}`, '_blank')}
+                onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${shareUrlEncoded}`, '_blank')}
                 data-testid="button-share-facebook"
               >
                 <Facebook className="h-4 w-4" />
@@ -151,7 +153,7 @@ export function Footer() {
                 size="sm"
                 variant="outline"
                 className="gap-2"
-                onClick={() => window.open(`https://reddit.com/r/bioinformatics/submit?url=${shareUrl}&title=${shareText}`, '_blank')}
+                onClick={() => window.open(`https://reddit.com/r/bioinformatics/submit?url=${shareUrlEncoded}&title=${shareText}`, '_blank')}
                 data-testid="button-share-reddit"
               >
                 <MessageSquare className="h-4 w-4" />
