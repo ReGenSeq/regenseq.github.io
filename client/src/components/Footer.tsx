@@ -117,6 +117,7 @@ export function Footer() {
                 <div className="hidden sm:block w-px h-8 bg-border mx-1"></div>
               </>
             )}
+            <span className="hidden sm:inline text-sm font-medium text-muted-foreground mr-1">Share on:</span>
             <Button
               size="sm"
               variant="outline"
