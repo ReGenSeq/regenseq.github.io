@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Building2 } from "lucide-react";
+import kasparImage from "@assets/kaspar_1762799962953.png";
 
 const team = [
   {
@@ -32,6 +33,7 @@ const team = [
     initials: "KB",
     org: "Kitspace",
     description: "Electronic engineer and software developer running Kitspace open source platform with major contributions to OpenFlexure.",
+    image: kasparImage,
   },
 ];
 
