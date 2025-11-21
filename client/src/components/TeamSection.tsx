@@ -10,6 +10,7 @@ const team = [
     role: "Technical Lead",
     initials: "KP",
     org: "New York Genome Center",
+    email: "kpandit@nygenome.org",
     description: "Senior Research Engineer and author of RegenSeq open-source control software for Illumina HiSeq 2500 systems.",
     image: "https://images.squarespace-cdn.com/content/v1/627e96178e8a965a2a04b415/1654954748529-MO49MWUTEGCT6O7ZEJ48/20201026_153623.jpg",
   },
@@ -18,6 +19,7 @@ const team = [
     role: "Co-Technical Lead",
     initials: "MP",
     org: "New York Genome Center",
+    email: "mpleska@nygenome.org",
     description: "Research Scientist applying RegenSeq to spatial transcriptomics and proteomics with expertise in image processing.",
     image: "https://images.squarespace-cdn.com/content/v1/627e96178e8a965a2a04b415/73655136-cdf7-4826-a2fb-3780555fefd2/Maros+Pleska.jpg",
   },
@@ -26,6 +28,7 @@ const team = [
     role: "Entrepreneurial Lead",
     initials: "DD",
     org: "New York Genome Center",
+    email: "ddomovic@nygenome.org",
     description: "Scientific Program Manager with computer science background and expertise in project management and stakeholder coordination.",
     image: danielImage,
   },
@@ -34,6 +37,7 @@ const team = [
     role: "Industry Mentor",
     initials: "KB",
     org: "Kitspace",
+    email: "kaspar@kitspace.org",
     description: "Electronic engineer and software developer running Kitspace open source platform with major contributions to OpenFlexure.",
     image: kasparImage,
   },
@@ -68,7 +72,13 @@ export function TeamSection() {
                   {member.initials}
                 </AvatarFallback>
               </Avatar>
-              <h3 className="font-semibold text-base sm:text-lg mb-1">{member.name}</h3>
+              <a 
+                href={`mailto:${member.email}`}
+                className="font-semibold text-base sm:text-lg mb-1 inline-block hover:text-primary transition-colors"
+                data-testid={`link-email-${member.name.toLowerCase().replace(/\s+/g, '-')}`}
+              >
+                {member.name}
+              </a>
               <p className="text-xs sm:text-sm text-primary font-medium mb-2">{member.role}</p>
               <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground mb-2 sm:mb-3">
                 <Building2 className="h-3 w-3" />
