@@ -7,8 +7,10 @@ const resources = [
     icon: Github,
     title: "GitHub Repository",
     description: "RegenSeq control software and documentation",
-    link: "https://github.com/nygctech/PySeq2500",
-    buttonText: "View Repository",
+    buttons: [
+      { text: "Legacy PySeq2500", link: "https://github.com/nygctech/PySeq2500" },
+      { text: "ReGenSeq PySeq2500", link: "https://github.com/ReGenSeq/PySeq2500" },
+    ],
     highlight: true,
   },
   {
@@ -74,15 +76,32 @@ export function ResourcesSection() {
                 </div>
                 <h3 className="text-base sm:text-lg font-semibold mb-2">{resource.title}</h3>
                 <p className="text-sm text-muted-foreground mb-4 sm:mb-6 flex-grow">{resource.description}</p>
-                <Button
-                  variant={resource.highlight ? "default" : "outline"}
-                  className="w-full gap-2 text-sm"
-                  data-testid={`button-resource-${index}`}
-                  onClick={() => window.open(resource.link, '_blank')}
-                >
-                  {resource.buttonText}
-                  <ExternalLink className="h-4 w-4" />
-                </Button>
+                {'buttons' in resource ? (
+                  <div className="flex flex-col gap-2">
+                    {resource.buttons.map((btn, btnIndex) => (
+                      <Button
+                        key={btnIndex}
+                        variant={btnIndex === 0 ? "outline" : "default"}
+                        className="w-full gap-2 text-sm"
+                        data-testid={`button-resource-${index}-${btnIndex}`}
+                        onClick={() => window.open(btn.link, '_blank')}
+                      >
+                        {btn.text}
+                        <ExternalLink className="h-4 w-4" />
+                      </Button>
+                    ))}
+                  </div>
+                ) : (
+                  <Button
+                    variant={resource.highlight ? "default" : "outline"}
+                    className="w-full gap-2 text-sm"
+                    data-testid={`button-resource-${index}`}
+                    onClick={() => window.open(resource.link, '_blank')}
+                  >
+                    {resource.buttonText}
+                    <ExternalLink className="h-4 w-4" />
+                  </Button>
+                )}
               </div>
             </Card>
           ))}
