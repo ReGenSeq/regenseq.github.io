@@ -99,7 +99,7 @@ export default function RequestFlowcells() {
     return (
       <div className="min-h-screen bg-background text-foreground">
         <Navigation />
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-24 pb-20">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-24 pb-8">
           <div className="text-center py-16">
             <CheckCircle2 className="h-14 w-14 text-primary mx-auto mb-5" />
             <h1 className="text-2xl font-bold mb-3">Request Submitted</h1>
@@ -125,7 +125,7 @@ export default function RequestFlowcells() {
     <div className="min-h-screen bg-background text-foreground">
       <Navigation />
 
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-24 pb-20">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-24 pb-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-3">
