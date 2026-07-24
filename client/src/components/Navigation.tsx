@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ThemeToggle";
 import { Menu, X } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 const navItems = [
   { label: "About", href: "/#about" },
@@ -15,6 +15,7 @@ const navItems = [
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [, navigate] = useLocation();
 
   useEffect(() => {
     const handleScroll = (e?: Event) => {
@@ -47,18 +48,31 @@ export function Navigation() {
   };
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
     // Extract the hash portion (e.g. "/#about" → "#about")
     const hash = href.includes("#") ? "#" + href.split("#")[1] : href;
-    const element = document.querySelector(hash);
-    if (element) {
-      // Section exists on this page — scroll smoothly and stay here
-      e.preventDefault();
-      setIsMobileMenuOpen(false);
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      // Section is not on this page (e.g. on /community-guidelines) —
-      // let the browser navigate to /#about on the homepage
-      setIsMobileMenuOpen(false);
+    const sectionId = hash.slice(1); // strip leading #
+
+    const scrollToSection = () => {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return true;
+      }
+      return false;
+    };
+
+    if (!scrollToSection()) {
+      // Section not on this page — navigate to homepage first, then scroll
+      navigate("/");
+      // Poll until the element appears in the DOM after the route change
+      let attempts = 0;
+      const interval = setInterval(() => {
+        if (scrollToSection() || ++attempts >= 20) {
+          clearInterval(interval);
+        }
+      }, 50);
     }
   };
 
