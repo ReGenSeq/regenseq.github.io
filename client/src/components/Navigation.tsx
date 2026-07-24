@@ -5,11 +5,11 @@ import { Menu, X } from "lucide-react";
 import { Link } from "wouter";
 
 const navItems = [
-  { label: "About", href: "#about" },
-  { label: "Features", href: "#features" },
-  { label: "Team", href: "#team" },
-  { label: "Resources", href: "#resources" },
-  { label: "Community", href: "#community" },
+  { label: "About", href: "/#about" },
+  { label: "Features", href: "/#features" },
+  { label: "Team", href: "/#team" },
+  { label: "Resources", href: "/#resources" },
+  { label: "Community", href: "/#community" },
 ];
 
 export function Navigation() {
@@ -47,11 +47,18 @@ export function Navigation() {
   };
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    setIsMobileMenuOpen(false);
-    const element = document.querySelector(href);
+    // Extract the hash portion (e.g. "/#about" → "#about")
+    const hash = href.includes("#") ? "#" + href.split("#")[1] : href;
+    const element = document.querySelector(hash);
     if (element) {
+      // Section exists on this page — scroll smoothly and stay here
+      e.preventDefault();
+      setIsMobileMenuOpen(false);
       element.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      // Section is not on this page (e.g. on /community-guidelines) —
+      // let the browser navigate to /#about on the homepage
+      setIsMobileMenuOpen(false);
     }
   };
 
