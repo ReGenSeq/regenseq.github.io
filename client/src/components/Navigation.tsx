@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ThemeToggle";
 import { Menu, X } from "lucide-react";
+import { Link } from "wouter";
 
 const navItems = [
   { label: "About", href: "#about" },
@@ -63,13 +64,13 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-2">
-            <button
-              onClick={scrollToTop}
+            <Link
+              href="/"
               className="font-bold text-xl text-foreground hover-elevate px-2 py-1 rounded-lg"
               data-testid="button-logo"
             >
               RegenSeq
-            </button>
+            </Link>
           </div>
           
           <div className="hidden md:flex items-center gap-8">

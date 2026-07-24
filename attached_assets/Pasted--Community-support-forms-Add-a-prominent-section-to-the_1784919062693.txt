@@ -1,0 +1,389 @@
+## Community support forms
+
+Add a prominent section to the **Community Guidelines** page titled:
+
+```text
+Community Resources
+```
+
+Place it near the end of the page, before the contributor checklist or final contributing section.
+
+The section should briefly explain that community members can request flowcells or ask for help locating compatible sequencers.
+
+Create two clearly differentiated cards or links:
+
+1. **Request or Purchase Flowcells**
+2. **Help Find a Sequencer**
+
+The cards should match the existing website design and should not look like advertisements. Each card should include:
+
+* A concise title
+* A short description
+* A clear call-to-action button
+* An accessible icon, if the project already uses an icon library
+* Keyboard-accessible focus and hover states
+
+Do not link to placeholder external URLs. Create internal forms and routes unless working form URLs already exist in the project.
+
+Suggested routes:
+
+```text
+/community/request-flowcells
+/community/find-a-sequencer
+```
+
+Also add both links to the existing **Join the Community** section, alongside the new **Community Guidelines** link.
+
+The **Join the Community** section should therefore include:
+
+* Community Guidelines
+* Request or Purchase Flowcells
+* Help Find a Sequencer
+
+Preserve all existing links and content in that section.
+
+---
+
+## Flowcell request form
+
+Create a page titled:
+
+```text
+Request or Purchase Flowcells
+```
+
+Suggested introductory text:
+
+> Request flowcells for your project or purchase additional flowcells for $50 each. Submit the form below and the team will follow up with availability and next steps.
+
+Clearly display:
+
+```text
+Price: $50 per flowcell
+```
+
+Do not calculate tax, shipping, or a final payable amount unless the existing project already has a checkout or payment workflow. This is a request form, not an online payment form.
+
+### Required fields
+
+Include:
+
+* Full name
+* Email address
+* Organization or institution
+* Number of flowcells requested
+* Intended use or project description
+
+### Optional fields
+
+Include:
+
+* Laboratory or research group
+* Requested date
+* Shipping or pickup preference
+* Additional notes
+
+### Quantity behavior
+
+The quantity field must:
+
+* Accept positive whole numbers only
+* Default to `1`
+* Have a minimum value of `1`
+* Display the estimated total dynamically
+
+Example:
+
+```text
+3 flowcells × $50 = $150 estimated total
+```
+
+Label this clearly as an estimate.
+
+### Form submission
+
+On submission:
+
+* Validate all required fields
+* Validate the email format
+* Prevent zero, negative, decimal, or invalid quantities
+* Show a clear success message
+* Preserve entered values when validation fails
+* Prevent accidental duplicate submissions
+* Send or store the submission using the project’s existing form-handling system
+
+If the application already uses an email service, database, CRM, server action, API route, or third-party form handler, reuse it.
+
+If no form infrastructure exists, implement the simplest maintainable server-side submission flow supported by the current stack.
+
+Do not expose private email addresses or API credentials in client-side code.
+
+The form notification should be sent to the existing project contact responsible for flowcell requests. If that contact cannot be identified in the codebase, use a clearly marked environment variable or configuration placeholder rather than inventing an address.
+
+Suggested environment variable:
+
+```text
+FLOWCELL_REQUEST_RECIPIENT
+```
+
+### Submission email or record
+
+Include:
+
+* Submission type: Flowcell request
+* Requester’s name
+* Requester’s email
+* Organization
+* Quantity
+* Estimated total
+* Intended use
+* Requested date
+* Delivery preference
+* Notes
+* Submission timestamp
+
+Use a subject such as:
+
+```text
+New flowcell request — [Name] — [Quantity] flowcells
+```
+
+---
+
+## Sequencer support form
+
+Create a page titled:
+
+```text
+Help Find a Sequencer
+```
+
+Suggested introductory text:
+
+> Tell us who you are, where you are located, and what you want to accomplish. We will use this information to help identify a suitable sequencer or sequencing resource.
+
+The form should be routed to **Kunal**.
+
+Do not invent Kunal’s email address. First inspect the existing project configuration, contact data, team page, environment variables, or form handlers for an existing email address.
+
+If no verified address exists, use a server-side environment variable:
+
+```text
+SEQUENCER_REQUEST_RECIPIENT
+```
+
+Add a code comment or setup note explaining that this value should contain Kunal’s verified email address.
+
+### Required fields
+
+Include:
+
+* Full name
+* Email address
+* Organization or institution
+* Where are you located?
+* What do you want to do?
+
+### Sequencing details
+
+Also include:
+
+* Project or experiment description
+* Sequencing platform needed, if known
+* Current sample type
+* Approximate number of samples
+* Desired timeline
+* Whether the requester already has access to sequencing equipment
+
+For the sequencing platform field, offer options such as:
+
+* Illumina
+* Oxford Nanopore
+* PacBio
+* Other
+* Not sure
+
+Include a free-text field when **Other** is selected.
+
+For equipment access, use:
+
+* Yes
+* No
+* Limited access
+* Not sure
+
+### Helpful optional fields
+
+Include:
+
+* City
+* State, province, or region
+* Country
+* Preferred travel distance
+* Collaboration interest
+* Funding status
+* Additional constraints or notes
+
+### Form submission
+
+On submission:
+
+* Validate required fields
+* Validate the email address
+* Show a clear success state
+* Prevent duplicate submissions
+* Send the form details to Kunal through the existing server-side form infrastructure
+* Do not expose the recipient address in the browser bundle
+* Include a submission timestamp
+
+Use a subject such as:
+
+```text
+Sequencer help request — [Name] — [Location]
+```
+
+The submitted notification should clearly organize:
+
+```text
+Who
+Name:
+Email:
+Organization:
+
+Where
+Location:
+Preferred travel distance:
+
+What
+Project:
+Sample type:
+Platform:
+Number of samples:
+Timeline:
+
+Additional context
+Existing equipment access:
+Collaboration interest:
+Funding status:
+Notes:
+```
+
+---
+
+## Form design
+
+Both form pages should use the same documentation-oriented visual language as the **Community Guidelines** page.
+
+Include:
+
+* Breadcrumb navigation
+* A clear page title
+* Brief introductory copy
+* A centered, readable form width
+* Proper labels above fields
+* Helpful descriptions where needed
+* Required-field indicators
+* Inline validation messages
+* Loading and disabled states during submission
+* Accessible success and error messages
+* Mobile-friendly fields and buttons
+* A link back to **Community Guidelines**
+* A link back to the main **Join the Community** section
+
+Do not use browser alerts for validation or successful submission.
+
+Use semantic elements such as:
+
+```html
+<form>
+<label>
+<fieldset>
+<legend>
+```
+
+Ensure every input has a programmatically associated label.
+
+---
+
+## Community Resources card copy
+
+Use polished card copy similar to the following.
+
+### Request or Purchase Flowcells
+
+> Request flowcells for your project or purchase additional flowcells for $50 each. Tell us how many you need and how you plan to use them.
+
+Button:
+
+```text
+Request Flowcells
+```
+
+### Help Find a Sequencer
+
+> Looking for access to a sequencer? Tell us who you are, where you are located, and what you want to accomplish, and we will help explore suitable options.
+
+Button:
+
+```text
+Find a Sequencer
+```
+
+---
+
+## Privacy note
+
+Add a brief privacy note below each form:
+
+> The information you submit will be used only to review your request and contact you about relevant resources or next steps.
+
+Do not claim regulatory compliance, encryption standards, or data-retention practices unless they are already implemented and documented in the project.
+
+---
+
+## Spam prevention
+
+Use the project’s existing spam-protection mechanism if one exists.
+
+Otherwise, add a lightweight approach such as:
+
+* A hidden honeypot field
+* Server-side submission-rate limiting
+* Basic duplicate-submission protection
+
+Do not add a disruptive CAPTCHA unless the site already uses one or spam becomes a demonstrated problem.
+
+---
+
+## Analytics
+
+If the website already has privacy-compatible analytics, track only the following events:
+
+```text
+community_guidelines_flowcell_link_clicked
+community_guidelines_sequencer_link_clicked
+flowcell_request_submitted
+sequencer_request_submitted
+```
+
+Do not include names, email addresses, project descriptions, locations, or other form-field contents in analytics events.
+
+---
+
+## Final verification
+
+After implementation, confirm that:
+
+1. The **Community Guidelines** page contains both resource cards.
+2. The **Join the Community** section contains all three new links.
+3. Both form routes work through direct navigation and page refresh.
+4. The flowcell form correctly calculates `$50 × quantity`.
+5. Invalid quantities cannot be submitted.
+6. The sequencer form collects who, where, and what the requester wants to do.
+7. Sequencer submissions are routed to Kunal using a verified server-side recipient.
+8. Recipient addresses and credentials are not exposed in client-side code.
+9. Validation, loading, success, and error states work.
+10. The forms work on desktop and mobile.
+11. Keyboard navigation and field labels are accessible.
+12. Existing pages and navigation remain unchanged.
+13. List every file changed and any environment variables that must be configured.
