@@ -1,5 +1,5 @@
-import { Github, ExternalLink, Linkedin, MessageSquare, Star, GitFork, Facebook } from "lucide-react";
-import { SiX } from "react-icons/si";
+import { Github, ExternalLink, Linkedin, MessageSquare, Star, GitFork, Facebook, Youtube } from "lucide-react";
+import { SiX, SiBluesky } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
@@ -164,15 +164,35 @@ export function Footer() {
             <p className="text-xs sm:text-sm text-muted-foreground text-center md:text-left">
               © {new Date().getFullYear()} RegenSeq Open Source Community. Open source under permissive license.
             </p>
-            <a 
-              href="https://github.com/nygctech/PySeq2500" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground"
-              data-testid="link-footer-github-icon"
-            >
-              <Github className="h-5 w-5" />
-            </a>
+            <div className="flex items-center gap-3">
+              <a 
+                href="https://github.com/nygctech/PySeq2500" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                data-testid="link-footer-github-icon"
+              >
+                <Github className="h-5 w-5" />
+              </a>
+              <a 
+                href="https://bsky.app/profile/regenseq.bsky.social" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                data-testid="link-footer-bluesky"
+              >
+                <SiBluesky className="h-5 w-5" />
+              </a>
+              <a 
+                href="https://youtube.com/@ReGenSeq" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                data-testid="link-footer-youtube"
+              >
+                <Youtube className="h-5 w-5" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
