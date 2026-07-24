@@ -110,7 +110,6 @@ export function ResourcesSection() {
         </div>
 
         <div className="max-w-6xl mx-auto">
-          <h3 className="text-base sm:text-lg font-semibold text-foreground mb-4 px-1">Community Forms</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
             {forms.map((form, index) => (
               <Card
