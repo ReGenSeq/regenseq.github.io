@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Code2, Heart, GitPullRequest, MessageCircle } from "lucide-react";
+import { Code2, Heart, GitPullRequest, MessageCircle, BookOpen } from "lucide-react";
+import { Link } from "wouter";
 
 const ways = [
   {
@@ -65,15 +66,28 @@ export function CommunitySection() {
               Visit our GitHub repository to explore the code, read the documentation, 
               and start repurposing sequencers for your research
             </p>
-            <Button 
-              size="lg" 
-              className="gap-2 w-full sm:w-auto"
-              data-testid="button-get-started"
-              onClick={() => window.open('https://github.com/nygctech/PySeq2500', '_blank')}
-            >
-              Get Started with RegenSeq
-              <Code2 className="h-5 w-5" />
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button 
+                size="lg" 
+                className="gap-2"
+                data-testid="button-get-started"
+                onClick={() => window.open('https://github.com/nygctech/PySeq2500', '_blank')}
+              >
+                Get Started with RegenSeq
+                <Code2 className="h-5 w-5" />
+              </Button>
+              <Link href="/community-guidelines">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="gap-2 w-full sm:w-auto"
+                  data-testid="button-community-guidelines"
+                >
+                  <BookOpen className="h-5 w-5" />
+                  Community Guidelines
+                </Button>
+              </Link>
+            </div>
           </Card>
         </div>
       </div>

@@ -1,0 +1,551 @@
+Please inspect the existing application structure, routing, design system, navigation, and the current **Join the Community** section before making changes.
+
+## Goal
+
+Create a new documentation-style page titled **Community Guidelines** and add a link to it within the existing **Join the Community** section.
+
+The page should explain the project’s software architecture and development conventions for contributors.
+
+## Design references
+
+Use these pages only as visual and structural inspiration:
+
+* https://opensource.creativecommons.org/contributing-code/python-guidelines/
+* https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/setting-guidelines-for-repository-contributors
+
+Do not copy either design directly. Adapt their documentation patterns to the existing website’s visual identity.
+
+The new page must look like a natural part of the current site. Reuse the application’s existing:
+
+* Header and footer
+* Fonts and typography
+* Colors
+* Buttons and links
+* Container widths
+* Spacing system
+* Border radii
+* Light/dark mode behavior, if supported
+
+## Navigation and routing
+
+1. Create a dedicated route for the page, following the project’s existing route conventions.
+2. Use a clean URL such as:
+
+```text
+/community-guidelines
+```
+
+3. Add a **Community Guidelines** link or card to the existing **Join the Community** section.
+4. The link should open the new internal page in the same tab.
+5. Do not remove or alter existing links in that section.
+6. Ensure direct navigation and browser refreshes on the new route work correctly.
+
+## Page layout
+
+Create a polished technical-documentation layout.
+
+### Header
+
+At the top of the article, include:
+
+* A breadcrumb appropriate to the current site, such as:
+
+```text
+Community / Community Guidelines
+```
+
+* Page title: **Community Guidelines**
+* Introductory text:
+
+> These guidelines establish shared conventions for building reliable, understandable, and extensible laboratory automation software. Following them helps contributors work consistently across instruments, systems, interfaces, experiment configurations, and recipes.
+
+### Desktop layout
+
+Use a responsive two-column documentation layout:
+
+* Main article content
+* Sticky **On this page** table of contents
+
+The table of contents should link to every main section and highlight the currently visible section while scrolling, when that can be implemented cleanly with the current stack.
+
+### Mobile layout
+
+On smaller screens:
+
+* Collapse the table of contents into a compact expandable control, or
+* Place it above the article as a simple section list
+
+Do not allow horizontal overflow.
+
+### Documentation styling
+
+Use:
+
+* Clear `h2`, `h3`, and occasional `h4` hierarchy
+* Comfortable paragraph width and line height
+* Anchor links on headings
+* Inline-code formatting for filenames, functions, classes, configuration keys, and commands
+* Styled code blocks for examples
+* Subtle borders or dividers between major sections
+* Note, recommendation, and warning callouts where useful
+* Lists only where they improve readability
+* Accessible semantic HTML
+* Visible keyboard focus states
+* Sufficient color contrast
+
+Do not make every sentence a separate card. The page should feel like documentation, not a marketing landing page.
+
+## Page content
+
+Please professionally edit and organize the following material. Preserve its technical meaning while correcting spelling, grammar, and unclear phrasing.
+
+---
+
+## 1. General Python conventions
+
+### Use `params` for user-provided configuration
+
+Use `params` to validate and represent information supplied by the user, including:
+
+* Experiment configuration files
+* Machine configuration files
+* Recipes
+* Other user-defined runtime inputs
+
+Clearly distinguish user-provided configuration from internal application state.
+
+Add a small example demonstrating a validated experiment configuration model.
+
+### Use `attrs` for structured internal data
+
+Use `attrs` to define and format structured internal data, including:
+
+* Imaging parameters
+* Regions of interest
+* Pumping parameters
+* Stage positions
+* Other internal data models
+
+Add a concise Python example showing an `attrs`-based region-of-interest model.
+
+### Use type annotations
+
+Use Python type annotations throughout the codebase.
+
+Type annotations should:
+
+* Make interfaces self-documenting
+* Clarify expected inputs and outputs
+* Improve editor and static-analysis support
+* Reduce ambiguity between components
+
+Public functions, methods, configuration objects, queue tasks, and communication interfaces should all be typed.
+
+### Use abstract base classes
+
+Use abstract base classes to define shared interfaces for:
+
+* Instruments
+* Systems
+* Protocols
+* Configuration models
+
+Concrete implementations should inherit from these interfaces rather than recreating incompatible APIs.
+
+Add a small example such as:
+
+```python
+from abc import ABC, abstractmethod
+
+
+class Instrument(ABC):
+    @abstractmethod
+    async def _connect(self) -> None:
+        ...
+
+    @abstractmethod
+    async def _disconnect(self) -> None:
+        ...
+```
+
+Include a note explaining that the examples are illustrative and should be adapted to the project’s actual implementation.
+
+---
+
+## 2. Instruments
+
+All instruments should inherit from the shared `Instrument` abstract base class.
+
+### Communication protocols
+
+Instrument implementations should use the appropriate communication-protocol mixin, such as:
+
+* Serial
+* TCP/IP
+* USB
+* HTTP
+* Vendor SDK
+* Simulated or mock communication
+
+The communication layer should remain separate from instrument-specific behavior wherever practical.
+
+### Asynchronous communication
+
+All commands that communicate with physical hardware should be asynchronous.
+
+This includes operations such as:
+
+* Connecting
+* Disconnecting
+* Sending commands
+* Reading responses
+* Moving hardware
+* Starting or stopping acquisition
+* Waiting for hardware state changes
+
+### Naming asynchronous hardware commands
+
+Low-level asynchronous commands that communicate directly with an instrument should use a leading underscore.
+
+Examples:
+
+```python
+async def _move_to(self, position: float) -> None:
+    ...
+
+async def _set_temperature(self, temperature: float) -> None:
+    ...
+
+async def _capture_image(self) -> Image:
+    ...
+```
+
+Explain that the leading underscore identifies low-level internal hardware operations. Public methods should generally validate the request and add the corresponding operation to the system queue rather than bypassing queue management.
+
+---
+
+## 3. Systems
+
+All systems should inherit from the shared `System` abstract base class.
+
+Systems coordinate multiple instruments and expose higher-level workflows.
+
+### System composition
+
+Present the following hierarchy in a readable nested list or lightweight diagram:
+
+```text
+Flowcell
+├── Pumps
+├── Valves
+└── Temperature controller
+
+Microscope
+├── Stages
+├── Cameras
+├── Lasers
+└── Optical components
+    ├── Shutters
+    └── Filters
+
+Sequencer
+├── Flowcells
+└── Microscopes
+```
+
+Use the project’s preferred singular or plural class names consistently once the existing codebase has been inspected.
+
+### High-level asynchronous operations
+
+Systems should provide asynchronous high-level commands for operations such as:
+
+* Pumping
+* Imaging
+* Synchronizing instruments
+* Temperature control
+* Coordinating fluidics and imaging
+* Executing experiment steps
+
+Low-level asynchronous methods should use the underscore naming convention.
+
+Public methods should act as wrappers around low-level asynchronous commands and add tasks to the appropriate queue.
+
+Add a simplified example:
+
+```python
+async def _pump_reagent(
+    self,
+    reagent: str,
+    volume_ul: float,
+) -> None:
+    ...
+
+
+def pump_reagent(
+    self,
+    reagent: str,
+    volume_ul: float,
+) -> TaskId:
+    return self.queue.add(
+        self._pump_reagent(
+            reagent=reagent,
+            volume_ul=volume_ul,
+        )
+    )
+```
+
+Adapt the types and queue API to the project rather than introducing incompatible abstractions.
+
+---
+
+## 4. System queues
+
+Each system should maintain a task queue.
+
+### Queue behavior
+
+System queues must:
+
+* Process tasks in FIFO order by default
+* Assign a unique ID to every task
+* Support pausing and resuming
+* Allow queued tasks to be reordered
+* Allow queued tasks to be deleted
+* Expose task status clearly
+
+### Task immutability
+
+Once created, a queued task may be:
+
+* Reordered
+* Deleted before execution
+* Paused as part of the queue
+* Inspected
+
+A queued task must not be modified in place.
+
+To change an operation, delete the original task and create a new one. This keeps task history predictable and prevents the parameters displayed to the user from differing from those that are eventually executed.
+
+Add a **Why this matters** callout explaining that immutable tasks improve reproducibility, auditability, debugging, and user trust.
+
+---
+
+## 5. User interfaces
+
+User interfaces should clearly separate machine-level settings from experiment-level settings.
+
+Whenever possible, users should interact with safe, validated controls rather than editing low-level hardware values directly.
+
+The interface should:
+
+* Validate configuration before execution
+* Show clear validation errors
+* Display queued and active tasks
+* Show task IDs and statuses
+* Allow supported queue operations
+* Prevent unsupported changes to running or completed tasks
+* Make the source of each setting understandable
+
+---
+
+## 6. Hardware settings
+
+Hardware settings that cannot or should not be changed frequently must be stored in:
+
+```text
+machine_settings.yaml
+```
+
+Examples may include:
+
+* Hardware addresses
+* Communication ports
+* Device identifiers
+* Axis limits
+* Calibration constants
+* Safety limits
+* Installed hardware capabilities
+* Machine-specific mappings
+
+Add a warning callout:
+
+> Machine settings describe the physical system. They should be changed only by users who understand the hardware and the consequences of the change.
+
+Do not place ordinary experiment parameters in `machine_settings.yaml`.
+
+---
+
+## 7. Experiment and software settings
+
+Experiment and software settings that users need to change easily should be stored in:
+
+```text
+default_config.toml
+```
+
+Experiment settings should model the parameters required for:
+
+* Region-of-interest selection
+* Stage movement
+* Focusing
+* Imaging
+* Exposure
+* Fluidics
+* Reagent handling
+
+Show a short illustrative TOML example.
+
+### Reagents
+
+Reagents should be defined in a dedicated TOML section:
+
+```toml
+[method.reagent]
+wash_buffer = 1
+stain = 2
+imaging_buffer = 3
+```
+
+The structure should map each reagent name to its assigned port.
+
+### Fluidics defaults
+
+Reagent operations should use the relevant parameters defined under:
+
+```toml
+[method.fluidics]
+```
+
+These may include:
+
+* Default flow rate
+* Pumping volume
+* Pause duration
+* Incubation duration
+* Wash behavior
+* Other fluidics defaults
+
+Include an example:
+
+```toml
+[method.fluidics]
+default_flow_rate_ul_min = 250
+default_pause_seconds = 5
+default_incubation_seconds = 60
+```
+
+Clarify that reagent definitions identify what is connected and where, while fluidics settings define how those reagents are handled.
+
+---
+
+## 8. Recipes
+
+Recipes should begin with a simple, readable YAML flow designed for humans to author.
+
+The application should then validate and transform that input into a more structured and annotated internal YAML representation.
+
+### Authoring format
+
+The user-facing recipe format should prioritize:
+
+* Readability
+* A clear order of operations
+* Minimal repetition
+* Simple parameter overrides
+* Helpful validation messages
+
+Add a simple example:
+
+```yaml
+steps:
+  - pump:
+      reagent: wash_buffer
+      volume_ul: 500
+
+  - wait:
+      seconds: 30
+
+  - image:
+      region: roi_1
+      channel: fluorescence
+```
+
+### Structured representation
+
+The processed representation may add:
+
+* Task IDs
+* Resolved defaults
+* Validated units
+* Reagent ports
+* Timing information
+* Source metadata
+* Annotations
+* Dependency information
+
+Add a callout explaining that users should normally edit the simple source recipe rather than the generated structured representation.
+
+---
+
+## 9. Contributor checklist
+
+End the page with a concise checklist:
+
+* User-provided inputs are validated through `params`.
+* Internal structured data uses `attrs` where appropriate.
+* Public APIs include type annotations.
+* Instruments inherit from the shared instrument interface.
+* Systems inherit from the shared system interface.
+* Communication behavior is separated through protocol mixins.
+* Direct hardware communication is asynchronous.
+* Low-level asynchronous hardware methods use a leading underscore.
+* Public system methods create queued tasks.
+* Queues are FIFO by default.
+* Every task has a unique ID.
+* Queued tasks can be reordered or deleted, but not edited.
+* Machine-specific values belong in `machine_settings.yaml`.
+* User-editable experiment settings belong in `default_config.toml`.
+* Reagents are mapped under `[method.reagent]`.
+* Fluidics defaults are defined under `[method.fluidics]`.
+* Recipes use a simple user-facing YAML format before being validated and expanded.
+
+---
+
+## 10. Contributing improvements
+
+Finish with a short section explaining that these guidelines should evolve with the project.
+
+Suggested text:
+
+> These guidelines define the project’s current architectural conventions. When a use case does not fit them, contributors should document the limitation and discuss the proposed change before introducing a new pattern. Improvements to the guidelines are welcome when they make the system safer, clearer, or easier to extend.
+
+Add a link or button back to the main **Join the Community** section. Reuse an existing contact, issue, discussion, or contribution link only when one already exists in the project. Do not invent a nonfunctional destination.
+
+## Implementation requirements
+
+* Reuse existing components whenever possible.
+* Avoid duplicating the site header, footer, or navigation.
+* Do not introduce a large documentation framework for a single page.
+* Do not add unnecessary dependencies.
+* Keep the page content in a maintainable structure rather than one oversized JSX block.
+* A local content array or small reusable documentation components are acceptable.
+* Preserve existing functionality and styling on all other pages.
+* Ensure headings have stable IDs for anchor navigation.
+* Ensure anchor links account for any fixed header.
+* Make code blocks wrap or scroll safely on mobile.
+* Ensure the page is keyboard accessible.
+* Ensure the page looks polished at desktop, laptop, tablet, and mobile widths.
+* Correct obvious spelling mistakes in the supplied material, including terms such as “abstract base class,” “instrument,” “separate,” and “region of interest.”
+* Do not change established project terminology without checking the existing codebase first.
+
+## Final verification
+
+After implementation:
+
+1. Confirm the new route loads directly.
+2. Confirm the **Community Guidelines** link appears under **Join the Community**.
+3. Confirm all table-of-contents links scroll to the correct headings.
+4. Confirm the layout works on mobile and desktop.
+5. Confirm there are no console errors.
+6. Confirm no existing navigation or page was broken.
+7. Briefly list every file changed and explain what changed in each file.
