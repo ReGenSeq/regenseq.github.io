@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight, FlaskConical, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const sections = [
@@ -14,6 +14,7 @@ const sections = [
   { id: "hardware-settings", title: "6. Hardware Settings" },
   { id: "experiment-settings", title: "7. Experiment and Software Settings" },
   { id: "recipes", title: "8. Recipes" },
+  { id: "community-resources", title: "Community Resources" },
   { id: "contributor-checklist", title: "9. Contributor Checklist" },
   { id: "contributing-improvements", title: "10. Contributing Improvements" },
 ];
@@ -488,6 +489,52 @@ steps:
                 representation. The structured representation is an internal artifact produced by the application.
               </p>
             </Callout>
+
+            <SectionDivider />
+
+            {/* ── Community Resources ── */}
+            <div id="community-resources" data-toc-section className="scroll-mt-20" />
+            <HeadingAnchor id="community-resources-heading" level={2}>Community Resources</HeadingAnchor>
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
+              Community members can request flowcells for their projects or get help locating compatible
+              sequencing equipment. Both forms are reviewed by the RegenSeq team.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-2">
+              <div className="rounded-md border border-border bg-muted/30 p-5 flex flex-col gap-3">
+                <div className="flex items-center gap-2">
+                  <div className="rounded-md bg-primary/10 w-8 h-8 flex items-center justify-center shrink-0">
+                    <FlaskConical className="h-4 w-4 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-base">Request or Purchase Flowcells</h3>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+                  Request flowcells for your project or purchase additional flowcells for $50 each.
+                  Tell us how many you need and how you plan to use them.
+                </p>
+                <Link href="/community/request-flowcells">
+                  <Button variant="outline" size="sm" className="w-full sm:w-auto">
+                    Request Flowcells
+                  </Button>
+                </Link>
+              </div>
+              <div className="rounded-md border border-border bg-muted/30 p-5 flex flex-col gap-3">
+                <div className="flex items-center gap-2">
+                  <div className="rounded-md bg-primary/10 w-8 h-8 flex items-center justify-center shrink-0">
+                    <Search className="h-4 w-4 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-base">Help Find a Sequencer</h3>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed flex-1">
+                  Looking for access to a sequencer? Tell us who you are, where you are located, and
+                  what you want to accomplish, and we will help explore suitable options.
+                </p>
+                <Link href="/community/find-a-sequencer">
+                  <Button variant="outline" size="sm" className="w-full sm:w-auto">
+                    Find a Sequencer
+                  </Button>
+                </Link>
+              </div>
+            </div>
 
             <SectionDivider />
 
