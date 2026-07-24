@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { ChevronDown, ChevronRight, FlaskConical, Search } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const sections = [
@@ -14,9 +14,9 @@ const sections = [
   { id: "hardware-settings", title: "6. Hardware Settings" },
   { id: "experiment-settings", title: "7. Experiment and Software Settings" },
   { id: "recipes", title: "8. Recipes" },
-  { id: "community-resources", title: "Community Resources" },
-  { id: "contributor-checklist", title: "9. Contributor Checklist" },
-  { id: "contributing-improvements", title: "10. Contributing Improvements" },
+  { id: "how-to-contribute", title: "How to Contribute" },
+  { id: "setting-up-environment", title: "Setting Up Your Environment" },
+  { id: "contributing-improvements", title: "Contributing Improvements" },
 ];
 
 function Code({ children }: { children: string }) {
@@ -492,90 +492,62 @@ steps:
 
             <SectionDivider />
 
-            {/* ── Community Resources ── */}
-            <div id="community-resources" data-toc-section className="scroll-mt-20" />
-            <HeadingAnchor id="community-resources-heading" level={2}>Community Resources</HeadingAnchor>
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6">
-              Community members can request flowcells for their projects or get help locating compatible
-              sequencing equipment. Both forms are reviewed by the RegenSeq team.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-2">
-              <div className="rounded-md border border-border bg-muted/30 p-5 flex flex-col gap-3">
-                <div className="flex items-center gap-2">
-                  <div className="rounded-md bg-primary/10 w-8 h-8 flex items-center justify-center shrink-0">
-                    <FlaskConical className="h-4 w-4 text-primary" />
-                  </div>
-                  <h3 className="font-semibold text-base">Request or Purchase Flowcells</h3>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-                  Request flowcells for your project or purchase additional flowcells for $50 each.
-                  Tell us how many you need and how you plan to use them.
-                </p>
-                <Link href="/community/request-flowcells">
-                  <Button variant="outline" size="sm" className="w-full sm:w-auto">
-                    Request Flowcells
-                  </Button>
-                </Link>
-              </div>
-              <div className="rounded-md border border-border bg-muted/30 p-5 flex flex-col gap-3">
-                <div className="flex items-center gap-2">
-                  <div className="rounded-md bg-primary/10 w-8 h-8 flex items-center justify-center shrink-0">
-                    <Search className="h-4 w-4 text-primary" />
-                  </div>
-                  <h3 className="font-semibold text-base">Help Find a Sequencer</h3>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-                  Looking for access to a sequencer? Tell us who you are, where you are located, and
-                  what you want to accomplish, and we will help explore suitable options.
-                </p>
-                <Link href="/community/find-a-sequencer">
-                  <Button variant="outline" size="sm" className="w-full sm:w-auto">
-                    Find a Sequencer
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-            <SectionDivider />
-
-            {/* ── Section 9 ── */}
-            <div id="contributor-checklist" data-toc-section className="scroll-mt-20" />
-            <HeadingAnchor id="contributor-checklist-heading" level={2}>9. Contributor Checklist</HeadingAnchor>
+            {/* ── How to Contribute ── */}
+            <div id="how-to-contribute" data-toc-section className="scroll-mt-20" />
+            <HeadingAnchor id="how-to-contribute-heading" level={2}>How to Contribute</HeadingAnchor>
             <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4">
-              Before submitting a contribution, verify the following:
+              Start by searching through the{" "}
+              <a href="https://github.com/ReGenSeq/PySeq2500/pulls" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2 hover:no-underline">pull requests</a>
+              {" "}and{" "}
+              <a href="https://github.com/ReGenSeq/PySeq2500/issues" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2 hover:no-underline">issues</a>
+              {" "}to see whether someone else has raised a similar idea or question.
+              If you don't see your idea listed and it fits the goals of the PySeq ecosystem, open a pull request.
             </p>
-            <ul className="space-y-2 text-sm sm:text-base text-muted-foreground mb-4">
-              {[
-                <>User-provided inputs are validated through <Code>params</Code>.</>,
-                <>Internal structured data uses <Code>attrs</Code> where appropriate.</>,
-                "Public APIs include type annotations.",
-                "Instruments inherit from the shared instrument interface.",
-                "Systems inherit from the shared system interface.",
-                "Communication behavior is separated through protocol mixins.",
-                "Direct hardware communication is asynchronous.",
-                "Low-level asynchronous hardware methods use a leading underscore.",
-                "Public system methods create queued tasks.",
-                "Queues are FIFO by default.",
-                "Every task has a unique ID.",
-                "Queued tasks can be reordered or deleted, but not edited.",
-                <>Machine-specific values belong in <Code>machine_settings.yaml</Code>.</>,
-                <>User-editable experiment settings belong in <Code>default_config.toml</Code>.</>,
-                <>Reagents are mapped under <Code>[method.reagent]</Code>.</>,
-                <>Fluidics defaults are defined under <Code>[method.fluidics]</Code>.</>,
-                "Recipes use a simple user-facing YAML format before being validated and expanded.",
-              ].map((item, i) => (
+            <Note>
+              A pull request doesn't have to represent finished work. Open it early as a draft or mark it as WIP so others can watch or give feedback on your progress.
+            </Note>
+            <HeadingAnchor id="submitting-a-pr" level={3}>Submitting a pull request</HeadingAnchor>
+            <ol className="space-y-3 text-sm sm:text-base text-muted-foreground mb-4 list-none">
+              {([
+                <>
+                  <a href="https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2 hover:no-underline">Fork the repository</a>
+                  {" "}and clone it locally. Connect your local clone to the original repository by adding it as a remote called <Code>upstream</Code> and pull in changes often so that merge conflicts are less likely when you submit.
+                </>,
+                <>
+                  <a href="https://docs.github.com/en/get-started/using-github/github-flow" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2 hover:no-underline">Create a branch</a>
+                  {" "}for your edits.
+                </>,
+                <>Reference any relevant issues or supporting documentation in your PR (for example: <Code>Closes #37</Code>).</>,
+                "Test your changes against any existing tests and create new ones when needed. Make sure your changes don't break the existing project.",
+              ] as React.ReactNode[]).map((item, i) => (
                 <li key={i} className="flex gap-3">
-                  <span className="mt-0.5 h-4 w-4 shrink-0 rounded-sm border border-border bg-muted flex items-center justify-center text-primary text-xs">✓</span>
+                  <span className="mt-0.5 h-5 w-5 shrink-0 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xs font-semibold">{i + 1}</span>
                   <span>{item}</span>
                 </li>
               ))}
-            </ul>
+            </ol>
 
             <SectionDivider />
 
-            {/* ── Section 10 ── */}
+            {/* ── Setting Up Your Environment ── */}
+            <div id="setting-up-environment" data-toc-section className="scroll-mt-20" />
+            <HeadingAnchor id="setting-up-environment-heading" level={2}>Setting Up Your Environment</HeadingAnchor>
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4">
+              The PySeq ecosystem uses{" "}
+              <a href="https://docs.astral.sh/uv/" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2 hover:no-underline">uv</a>
+              {" "}for package and project management.
+            </p>
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-2">
+              Once you have uv set up, forked a repository, and cloned it locally, run:
+            </p>
+            <CodeBlock lang="bash">{`uv sync
+uv run pre-commit install`}</CodeBlock>
+
+            <SectionDivider />
+
+            {/* ── Contributing Improvements ── */}
             <div id="contributing-improvements" data-toc-section className="scroll-mt-20" />
-            <HeadingAnchor id="contributing-improvements-heading" level={2}>10. Contributing Improvements</HeadingAnchor>
+            <HeadingAnchor id="contributing-improvements-heading" level={2}>Contributing Improvements</HeadingAnchor>
             <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4">
               These guidelines define the project's current architectural conventions. When a use case does not fit
               them, contributors should document the limitation and discuss the proposed change before introducing a
