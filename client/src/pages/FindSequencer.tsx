@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { ChevronRight, CheckCircle2, Loader2, Search } from "lucide-react";
+import { CheckCircle2, Loader2, Search } from "lucide-react";
 import { submitToFormspree } from "@/lib/formspree";
 import { useToast } from "@/hooks/use-toast";
 
@@ -115,15 +115,6 @@ export default function FindSequencer() {
       <Navigation />
 
       <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-24 pb-20">
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-1.5 text-sm text-muted-foreground mb-6 flex-wrap" aria-label="Breadcrumb">
-          <Link href="/#community" className="hover:text-foreground transition-colors">Community</Link>
-          <ChevronRight className="h-3.5 w-3.5 shrink-0" />
-          <Link href="/community-guidelines" className="hover:text-foreground transition-colors">Community Guidelines</Link>
-          <ChevronRight className="h-3.5 w-3.5 shrink-0" />
-          <span className="text-foreground">Find a Sequencer</span>
-        </nav>
-
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-3">
