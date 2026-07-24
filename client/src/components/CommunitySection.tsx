@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Code2, Heart, GitPullRequest, MessageCircle, BookOpen, FlaskConical, Search } from "lucide-react";
+import { Code2, Heart, GitPullRequest, MessageCircle, BookOpen } from "lucide-react";
 import { Link } from "wouter";
 
 const ways = [
@@ -85,28 +85,6 @@ export function CommunitySection() {
                 >
                   <BookOpen className="h-5 w-5" />
                   Community Guidelines
-                </Button>
-              </Link>
-              <Link href="/community/request-flowcells">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="gap-2 w-full sm:w-auto"
-                  data-testid="button-request-flowcells"
-                >
-                  <FlaskConical className="h-5 w-5" />
-                  Request Flowcells
-                </Button>
-              </Link>
-              <Link href="/community/find-a-sequencer">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="gap-2 w-full sm:w-auto"
-                  data-testid="button-find-sequencer"
-                >
-                  <Search className="h-5 w-5" />
-                  Find a Sequencer
                 </Button>
               </Link>
             </div>

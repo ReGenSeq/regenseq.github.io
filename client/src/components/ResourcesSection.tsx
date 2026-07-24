@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Github, FileText, Book, MessageSquare, ExternalLink } from "lucide-react";
+import { Github, Book, ExternalLink, FlaskConical, Search } from "lucide-react";
+import { Link } from "wouter";
 
 const resources = [
   {
@@ -14,27 +15,11 @@ const resources = [
     highlight: true,
   },
   {
-    icon: FileText,
-    title: "Scientific Publication",
-    description: "Nature Scientific Reports paper (2022)",
-    link: "https://www.nature.com/articles/s41598-022-08740-w",
-    buttonText: "Read Paper",
-    highlight: true,
-  },
-  {
     icon: Book,
     title: "Documentation",
     description: "Repurpose an Illumina HiSeq 2500 system to function as an automated fluorescence microscope",
     link: "https://pyseq2500.readthedocs.io",
     buttonText: "Read the Docs",
-    highlight: false,
-  },
-  {
-    icon: FileText,
-    title: "bioRxiv Preprint",
-    description: "An open source Python code base and flow cell design for repurposing HiSeq 2500",
-    link: "https://www.biorxiv.org/content/10.1101/2021.06.25.449721v1",
-    buttonText: "Read Preprint",
     highlight: false,
   },
   {
@@ -44,6 +29,23 @@ const resources = [
     link: "https://www.protocols.io/workspaces/regenseq",
     buttonText: "View Protocols",
     highlight: false,
+  },
+];
+
+const forms = [
+  {
+    icon: FlaskConical,
+    title: "Request or Purchase Flowcells",
+    description: "Request flowcells for your project or purchase additional flowcells for $50 each. Tell us how many you need and how you plan to use them.",
+    href: "/community/request-flowcells",
+    buttonText: "Request Flowcells",
+  },
+  {
+    icon: Search,
+    title: "Find a Sequencer",
+    description: "Looking for access to a sequencer? Tell us who you are, where you are located, and what you want to accomplish.",
+    href: "/community/find-a-sequencer",
+    buttonText: "Find a Sequencer",
   },
 ];
 
@@ -62,8 +64,8 @@ export function ResourcesSection() {
             Everything you need to get started with RegenSeq
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 md:gap-6 max-w-6xl mx-auto">
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 md:gap-6 max-w-6xl mx-auto mb-8 md:mb-10">
           {resources.map((resource, index) => (
             <Card 
               key={index} 
@@ -93,7 +95,7 @@ export function ResourcesSection() {
                   </div>
                 ) : (
                   <Button
-                    variant={resource.highlight ? "default" : "outline"}
+                    variant="outline"
                     className="w-full gap-2 text-sm"
                     data-testid={`button-resource-${index}`}
                     onClick={() => window.open(resource.link, '_blank')}
@@ -105,6 +107,36 @@ export function ResourcesSection() {
               </div>
             </Card>
           ))}
+        </div>
+
+        <div className="max-w-6xl mx-auto">
+          <h3 className="text-base sm:text-lg font-semibold text-foreground mb-4 px-1">Community Forms</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+            {forms.map((form, index) => (
+              <Card
+                key={index}
+                className="p-5 sm:p-6 hover-elevate w-full"
+                data-testid={`card-form-${index}`}
+              >
+                <div className="flex flex-col h-full">
+                  <div className="rounded-lg bg-muted/50 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center mb-3 sm:mb-4">
+                    <form.icon className="h-5 w-5 sm:h-6 sm:w-6 text-foreground" />
+                  </div>
+                  <h3 className="text-base sm:text-lg font-semibold mb-2">{form.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-4 sm:mb-6 flex-grow">{form.description}</p>
+                  <Link href={form.href}>
+                    <Button
+                      variant="outline"
+                      className="w-full gap-2 text-sm"
+                      data-testid={`button-form-${index}`}
+                    >
+                      {form.buttonText}
+                    </Button>
+                  </Link>
+                </div>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
     </section>

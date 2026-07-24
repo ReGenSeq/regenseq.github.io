@@ -7,6 +7,7 @@ import { FeaturesSection } from "@/components/FeaturesSection";
 import { GrantSection } from "@/components/GrantSection";
 import { TeamSection } from "@/components/TeamSection";
 import { ResourcesSection } from "@/components/ResourcesSection";
+import { PapersSection } from "@/components/PapersSection";
 import { CommunitySection } from "@/components/CommunitySection";
 import { Footer } from "@/components/Footer";
 import { useEffect, useState, useRef } from "react";
@@ -57,6 +58,7 @@ export default function Home() {
       <GrantSection />
       <TeamSection />
       <ResourcesSection />
+      <PapersSection />
       <CommunitySection />
       <Footer />
     </div>
