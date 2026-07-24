@@ -14,9 +14,9 @@ const sections = [
   { id: "hardware-settings", title: "6. Hardware Settings" },
   { id: "experiment-settings", title: "7. Experiment and Software Settings" },
   { id: "recipes", title: "8. Recipes" },
-  { id: "how-to-contribute", title: "How to Contribute" },
-  { id: "setting-up-environment", title: "Setting Up Your Environment" },
-  { id: "contributing-improvements", title: "Contributing Improvements" },
+  { id: "how-to-contribute", title: "9. How to Contribute" },
+  { id: "setting-up-environment", title: "10. Setting Up Your Environment" },
+  { id: "contributing-improvements", title: "11. Contributing Improvements" },
 ];
 
 function Code({ children }: { children: string }) {
@@ -494,7 +494,7 @@ steps:
 
             {/* ── How to Contribute ── */}
             <div id="how-to-contribute" data-toc-section className="scroll-mt-20" />
-            <HeadingAnchor id="how-to-contribute-heading" level={2}>How to Contribute</HeadingAnchor>
+            <HeadingAnchor id="how-to-contribute-heading" level={2}>9. How to Contribute</HeadingAnchor>
             <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4">
               Start by searching through the{" "}
               <a href="https://github.com/ReGenSeq/PySeq2500/pulls" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2 hover:no-underline">pull requests</a>
@@ -531,7 +531,7 @@ steps:
 
             {/* ── Setting Up Your Environment ── */}
             <div id="setting-up-environment" data-toc-section className="scroll-mt-20" />
-            <HeadingAnchor id="setting-up-environment-heading" level={2}>Setting Up Your Environment</HeadingAnchor>
+            <HeadingAnchor id="setting-up-environment-heading" level={2}>10. Setting Up Your Environment</HeadingAnchor>
             <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4">
               The PySeq ecosystem uses{" "}
               <a href="https://docs.astral.sh/uv/" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2 hover:no-underline">uv</a>
@@ -547,7 +547,7 @@ uv run pre-commit install`}</CodeBlock>
 
             {/* ── Contributing Improvements ── */}
             <div id="contributing-improvements" data-toc-section className="scroll-mt-20" />
-            <HeadingAnchor id="contributing-improvements-heading" level={2}>Contributing Improvements</HeadingAnchor>
+            <HeadingAnchor id="contributing-improvements-heading" level={2}>11. Contributing Improvements</HeadingAnchor>
             <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4">
               These guidelines define the project's current architectural conventions. When a use case does not fit
               them, contributors should document the limitation and discuss the proposed change before introducing a
