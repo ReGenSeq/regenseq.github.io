@@ -1,0 +1,111 @@
+Fix direct navigation and page refreshes for all client-side routes on the GitHub Pages deployment.
+
+## Current problem
+
+The application is deployed at:
+
+```text
+https://regenseq.github.io/
+```
+
+Internal navigation to routes such as:
+
+```text
+/community-guidelines
+```
+
+may work while browsing the website, but opening the complete URL directly produces a GitHub Pages 404:
+
+```text
+https://regenseq.github.io/community-guidelines
+```
+
+This also means links opened from Slack, email, bookmarks, or external websites do not work.
+
+## Goal
+
+Configure the React/Vite single-page application so all valid client-side routes work when:
+
+* Opened from an external link
+* Pasted into Slack or email
+* Opened in a new tab
+* Refreshed
+* Entered directly into the browser address bar
+
+Do not change the visible URL to a hash-based route unless there is no viable alternative.
+
+## Preferred implementation
+
+Implement a GitHub Pages SPA fallback using a generated `404.html` file and route-restoration logic.
+
+The solution should follow the established GitHub Pages SPA fallback pattern:
+
+1. During the production build, create or copy an appropriate `404.html` file into the final deployment directory.
+2. When GitHub Pages receives an unknown path such as `/community-guidelines`, the fallback page should preserve the requested path and redirect to the application entry point.
+3. The main application entry point should restore the original route before React initializes.
+4. The router should then render the correct page.
+5. Query parameters and URL fragments should be preserved.
+6. The browser’s final visible URL should remain:
+
+```text
+https://regenseq.github.io/community-guidelines
+```
+
+It should not remain on an encoded redirect URL.
+
+## Important deployment detail
+
+This is a user or organization GitHub Pages site served from the domain root:
+
+```text
+https://regenseq.github.io/
+```
+
+Do not configure the application as though it were served from:
+
+```text
+https://regenseq.github.io/regenseq.github.io/
+```
+
+Inspect the existing `vite.config.ts`, routing setup, deployment workflow, and build scripts before changing anything.
+
+Ensure the Vite base path remains appropriate for a root-level GitHub Pages site.
+
+## Requirements
+
+* Preserve the existing React router and all existing routes.
+* Do not replace the router with hash routing unless technically necessary.
+* Do not create a separate static HTML file manually for every route.
+* Do not hardcode only `/community-guidelines`; the fallback must work for every valid application route.
+* Do not break static assets, images, fonts, CSS, JavaScript bundles, or SEO metadata.
+* Preserve query strings and hash fragments.
+* Ensure unknown invalid routes still reach the application’s existing not-found page, when one exists.
+* Ensure the production build includes both `index.html` and `404.html`.
+* Ensure the GitHub Actions deployment publishes the updated build output.
+* Keep the solution maintainable and add a short explanatory comment where the redirect logic is implemented.
+
+## Test these URLs after deployment
+
+```text
+https://regenseq.github.io/
+https://regenseq.github.io/community-guidelines
+https://regenseq.github.io/community-guidelines/
+```
+
+Also test any other existing internal route by:
+
+1. Opening it directly in a private/incognito window.
+2. Refreshing the page.
+3. Opening it from an external application.
+4. Confirming that the correct React page renders rather than GitHub’s 404 page.
+
+## Final response
+
+After implementing the fix:
+
+1. Run the production build.
+2. Verify that `404.html` exists in the build output.
+3. Verify that the existing routes still work locally.
+4. Push the changes to GitHub.
+5. Confirm that the GitHub Pages deployment completes successfully.
+6. List every changed file and explain the purpose of each change.

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>RegenSeq</title>
+  <script>
+    // GitHub Pages SPA Fallback
+    //
+    // GitHub Pages has no server-side routing, so any path that isn't a real
+    // file (e.g. /community-guidelines) returns this 404.html instead of the
+    // app. We save the full requested URL in sessionStorage and immediately
+    // redirect to the app root (/). The restore script in index.html then
+    // calls history.replaceState() to put the original path back before React
+    // mounts, so the React router renders the correct page transparently.
+    //
+    // Query strings and hash fragments are preserved because the full href is
+    // stored. The browser's final visible URL stays clean (no encoded redirects).
+    sessionStorage.setItem('spa-redirect', location.href);
+    location.replace('/');
+  </script>
+</head>
+<body></body>
+</html>
