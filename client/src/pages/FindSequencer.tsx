@@ -11,15 +11,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
-} from "@/components/ui/select";
 import { ChevronRight, CheckCircle2, Loader2, Search } from "lucide-react";
 import { submitToFormspree } from "@/lib/formspree";
 import { useToast } from "@/hooks/use-toast";
-
-const PLATFORMS = ["Illumina", "Oxford Nanopore", "PacBio", "Other", "Not sure"] as const;
-const EQUIPMENT_ACCESS = ["Yes", "No", "Limited access", "Not sure"] as const;
 
 const schema = z.object({
   fullName: z.string().min(1, "Full name is required"),
@@ -27,20 +21,10 @@ const schema = z.object({
   organization: z.string().min(1, "Organization or institution is required"),
   location: z.string().min(1, "Location is required"),
   whatYouWantToDo: z.string().min(10, "Please describe what you want to accomplish (at least 10 characters)"),
-  projectDescription: z.string().optional(),
-  platform: z.enum(PLATFORMS).optional(),
-  otherPlatform: z.string().optional(),
-  sampleType: z.string().optional(),
-  approximateSamples: z.string().optional(),
-  desiredTimeline: z.string().optional(),
-  hasEquipmentAccess: z.enum(EQUIPMENT_ACCESS).optional(),
   city: z.string().optional(),
   stateRegion: z.string().optional(),
   country: z.string().optional(),
   preferredTravelDistance: z.string().optional(),
-  collaborationInterest: z.string().optional(),
-  fundingStatus: z.string().optional(),
-  additionalNotes: z.string().optional(),
   website: z.string().optional(),
 });
 
@@ -67,25 +51,13 @@ export default function FindSequencer() {
       organization: "",
       location: "",
       whatYouWantToDo: "",
-      projectDescription: "",
-      platform: undefined,
-      otherPlatform: "",
-      sampleType: "",
-      approximateSamples: "",
-      desiredTimeline: "",
-      hasEquipmentAccess: undefined,
       city: "",
       stateRegion: "",
       country: "",
       preferredTravelDistance: "",
-      collaborationInterest: "",
-      fundingStatus: "",
-      additionalNotes: "",
       website: "",
     },
   });
-
-  const platform = form.watch("platform");
 
   async function onSubmit(values: FormValues) {
     if (values.website) return; // honeypot
@@ -95,25 +67,12 @@ export default function FindSequencer() {
       await submitToFormspree(import.meta.env.VITE_FORMSPREE_SEQUENCER_ID, {
         _subject: `Sequencer help request — ${values.fullName} — ${locationStr}`,
         _replyto: values.email,
-        // Who
         "Full name": values.fullName,
         "Email": values.email,
         "Organization": values.organization,
-        // Where
         "Location": locationStr,
         ...(values.preferredTravelDistance && { "Preferred travel distance": values.preferredTravelDistance }),
-        // What
         "Goal": values.whatYouWantToDo,
-        ...(values.projectDescription && { "Project description": values.projectDescription }),
-        ...(values.platform && { "Platform": values.platform + (values.otherPlatform ? ` — ${values.otherPlatform}` : "") }),
-        ...(values.sampleType && { "Sample type": values.sampleType }),
-        ...(values.approximateSamples && { "Approximate samples": values.approximateSamples }),
-        ...(values.desiredTimeline && { "Desired timeline": values.desiredTimeline }),
-        // Additional context
-        ...(values.hasEquipmentAccess && { "Has equipment access": values.hasEquipmentAccess }),
-        ...(values.collaborationInterest && { "Collaboration interest": values.collaborationInterest }),
-        ...(values.fundingStatus && { "Funding status": values.fundingStatus }),
-        ...(values.additionalNotes && { "Notes": values.additionalNotes }),
       });
       setSubmitted(true);
     } catch (err: any) {
@@ -275,7 +234,7 @@ export default function FindSequencer() {
 
             <hr className="border-border" />
 
-            {/* Your project */}
+            {/* Goal */}
             <fieldset className="space-y-5">
               <legend className="text-base font-semibold text-foreground">What do you want to accomplish?</legend>
 
@@ -285,139 +244,10 @@ export default function FindSequencer() {
                   <FormControl>
                     <Textarea
                       placeholder="Briefly describe what you are trying to accomplish..."
-                      rows={3}
+                      rows={4}
                       data-testid="input-goal"
                       {...field}
                     />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )} />
-
-              <FormField control={form.control} name="projectDescription" render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Project or experiment description <span className="text-muted-foreground font-normal text-xs">(optional)</span></FormLabel>
-                  <FormControl>
-                    <Textarea placeholder="Provide more detail about your experiment or project..." rows={3} data-testid="input-projectDescription" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )} />
-
-              <FormField control={form.control} name="platform" render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Sequencing platform needed <span className="text-muted-foreground font-normal text-xs">(optional)</span></FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <FormControl>
-                      <SelectTrigger data-testid="select-platform">
-                        <SelectValue placeholder="Select a platform" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {PLATFORMS.map((p) => (
-                        <SelectItem key={p} value={p}>{p}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )} />
-
-              {platform === "Other" && (
-                <FormField control={form.control} name="otherPlatform" render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Please specify platform</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Describe the platform..." data-testid="input-otherPlatform" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )} />
-              )}
-
-              <FormField control={form.control} name="sampleType" render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Current sample type <span className="text-muted-foreground font-normal text-xs">(optional)</span></FormLabel>
-                  <FormControl>
-                    <Input placeholder="e.g. Fixed tissue sections, single cells, FFPE" data-testid="input-sampleType" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )} />
-
-              <FormField control={form.control} name="approximateSamples" render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Approximate number of samples <span className="text-muted-foreground font-normal text-xs">(optional)</span></FormLabel>
-                  <FormControl>
-                    <Input placeholder="e.g. 20 per experiment, ~100 total" data-testid="input-approximateSamples" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )} />
-
-              <FormField control={form.control} name="desiredTimeline" render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Desired timeline <span className="text-muted-foreground font-normal text-xs">(optional)</span></FormLabel>
-                  <FormControl>
-                    <Input placeholder="e.g. Starting Q3 2025, flexible" data-testid="input-timeline" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )} />
-
-              <FormField control={form.control} name="hasEquipmentAccess" render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Do you already have access to sequencing equipment? <span className="text-muted-foreground font-normal text-xs">(optional)</span></FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <FormControl>
-                      <SelectTrigger data-testid="select-equipmentAccess">
-                        <SelectValue placeholder="Select an option" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {EQUIPMENT_ACCESS.map((opt) => (
-                        <SelectItem key={opt} value={opt}>{opt}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )} />
-            </fieldset>
-
-            <hr className="border-border" />
-
-            {/* Additional context */}
-            <fieldset className="space-y-5">
-              <legend className="text-base font-semibold text-foreground">
-                Additional context <span className="text-muted-foreground font-normal text-sm">(all optional)</span>
-              </legend>
-
-              <FormField control={form.control} name="collaborationInterest" render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Collaboration interest</FormLabel>
-                  <FormControl>
-                    <Input placeholder="e.g. Open to collaboration, seeking core facility access" data-testid="input-collaboration" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )} />
-
-              <FormField control={form.control} name="fundingStatus" render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Funding status</FormLabel>
-                  <FormControl>
-                    <Input placeholder="e.g. NSF-funded, unfunded pilot, pending grant" data-testid="input-funding" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )} />
-
-              <FormField control={form.control} name="additionalNotes" render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Additional constraints or notes</FormLabel>
-                  <FormControl>
-                    <Textarea placeholder="Any other context that would help us find the right resource..." rows={3} data-testid="input-additionalNotes" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
