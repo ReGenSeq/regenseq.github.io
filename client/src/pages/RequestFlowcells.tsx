@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ChevronRight, CheckCircle2, Loader2, FlaskConical } from "lucide-react";
-import { apiRequest } from "@/lib/queryClient";
+import { submitToFormspree } from "@/lib/formspree";
 import { useToast } from "@/hooks/use-toast";
 
 const PRICE = 50;
@@ -70,13 +70,26 @@ export default function RequestFlowcells() {
 
   async function onSubmit(values: FormValues) {
     if (values.website) return; // honeypot
+    const qty = Number(values.quantity);
     try {
-      await apiRequest("POST", "/api/forms/flowcell-request", values);
+      await submitToFormspree(import.meta.env.VITE_FORMSPREE_FLOWCELL_ID, {
+        _subject: `New flowcell request — ${values.fullName} — ${qty} flowcell(s)`,
+        _replyto: values.email,
+        "Full name": values.fullName,
+        "Email": values.email,
+        "Organization": values.organization,
+        "Quantity": `${qty} × $50 = $${qty * PRICE} estimated total`,
+        "Intended use": values.intendedUse,
+        ...(values.labGroup && { "Lab group": values.labGroup }),
+        ...(values.requestedDate && { "Requested date": values.requestedDate }),
+        ...(values.deliveryPreference && { "Delivery preference": values.deliveryPreference }),
+        ...(values.notes && { "Notes": values.notes }),
+      });
       setSubmitted(true);
-    } catch {
+    } catch (err: any) {
       toast({
         title: "Submission failed",
-        description: "Something went wrong. Please try again or contact the team directly.",
+        description: err?.message ?? "Something went wrong. Please try again or contact the team directly.",
         variant: "destructive",
       });
     }

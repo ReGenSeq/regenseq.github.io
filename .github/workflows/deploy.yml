@@ -33,6 +33,11 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          # Formspree form IDs — set these as repository secrets in GitHub:
+          # Settings → Secrets and variables → Actions → New repository secret
+          VITE_FORMSPREE_FLOWCELL_ID: ${{ secrets.VITE_FORMSPREE_FLOWCELL_ID }}
+          VITE_FORMSPREE_SEQUENCER_ID: ${{ secrets.VITE_FORMSPREE_SEQUENCER_ID }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

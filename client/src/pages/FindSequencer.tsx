@@ -15,7 +15,7 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import { ChevronRight, CheckCircle2, Loader2, Search } from "lucide-react";
-import { apiRequest } from "@/lib/queryClient";
+import { submitToFormspree } from "@/lib/formspree";
 import { useToast } from "@/hooks/use-toast";
 
 const PLATFORMS = ["Illumina", "Oxford Nanopore", "PacBio", "Other", "Not sure"] as const;
@@ -89,13 +89,37 @@ export default function FindSequencer() {
 
   async function onSubmit(values: FormValues) {
     if (values.website) return; // honeypot
+    const locationStr = [values.city, values.stateRegion, values.country]
+      .filter(Boolean).join(", ") || values.location;
     try {
-      await apiRequest("POST", "/api/forms/sequencer-request", values);
+      await submitToFormspree(import.meta.env.VITE_FORMSPREE_SEQUENCER_ID, {
+        _subject: `Sequencer help request — ${values.fullName} — ${locationStr}`,
+        _replyto: values.email,
+        // Who
+        "Full name": values.fullName,
+        "Email": values.email,
+        "Organization": values.organization,
+        // Where
+        "Location": locationStr,
+        ...(values.preferredTravelDistance && { "Preferred travel distance": values.preferredTravelDistance }),
+        // What
+        "Goal": values.whatYouWantToDo,
+        ...(values.projectDescription && { "Project description": values.projectDescription }),
+        ...(values.platform && { "Platform": values.platform + (values.otherPlatform ? ` — ${values.otherPlatform}` : "") }),
+        ...(values.sampleType && { "Sample type": values.sampleType }),
+        ...(values.approximateSamples && { "Approximate samples": values.approximateSamples }),
+        ...(values.desiredTimeline && { "Desired timeline": values.desiredTimeline }),
+        // Additional context
+        ...(values.hasEquipmentAccess && { "Has equipment access": values.hasEquipmentAccess }),
+        ...(values.collaborationInterest && { "Collaboration interest": values.collaborationInterest }),
+        ...(values.fundingStatus && { "Funding status": values.fundingStatus }),
+        ...(values.additionalNotes && { "Notes": values.additionalNotes }),
+      });
       setSubmitted(true);
-    } catch {
+    } catch (err: any) {
       toast({
         title: "Submission failed",
-        description: "Something went wrong. Please try again or contact the team directly.",
+        description: err?.message ?? "Something went wrong. Please try again or contact the team directly.",
         variant: "destructive",
       });
     }
