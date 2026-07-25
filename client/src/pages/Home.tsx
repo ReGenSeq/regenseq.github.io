@@ -18,6 +18,24 @@ export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
+  // Scroll to hash on load (e.g. /#community from another page)
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (!hash) return;
+    const id = hash.slice(1);
+    let attempts = 0;
+    const interval = setInterval(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        clearInterval(interval);
+      } else if (++attempts >= 20) {
+        clearInterval(interval);
+      }
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
+
   useEffect(() => {
     const sections = containerRef.current?.querySelectorAll('section, footer');
     if (!sections) return;
