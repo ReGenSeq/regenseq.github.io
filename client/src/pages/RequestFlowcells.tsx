@@ -300,9 +300,9 @@ export default function RequestFlowcells() {
           <Link href="/community-guidelines">
             <Button variant="ghost" size="sm" data-testid="link-back-guidelines">← Community Guidelines</Button>
           </Link>
-          <Link href="/#community">
+          <a href="/#community">
             <Button variant="ghost" size="sm" data-testid="link-back-community">← Join the Community</Button>
-          </Link>
+          </a>
         </div>
       </div>
 
