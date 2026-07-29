@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "wouter";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -111,6 +112,14 @@ export default function CommunityGuidelines() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>Community Guidelines | RegenSeq</title>
+        <meta name="description" content="Coding conventions and contribution guidelines for the PySeq2500 open source project — instruments, systems, hardware settings, recipes, and how to contribute." />
+        <link rel="canonical" href="https://regenseq.github.io/community-guidelines" />
+        <meta property="og:title" content="Community Guidelines | RegenSeq" />
+        <meta property="og:description" content="Shared conventions for building reliable laboratory automation software with PySeq2500." />
+        <meta property="og:url" content="https://regenseq.github.io/community-guidelines" />
+      </Helmet>
       <Navigation />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 pt-24 pb-20">

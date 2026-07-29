@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { Navigation } from "@/components/Navigation";
 import { ScrollIndicator } from "@/components/ScrollIndicator";
 import { BackgroundLayer } from "@/components/BackgroundLayer";
@@ -67,6 +68,14 @@ export default function Home() {
       ref={containerRef} 
       className="scroll-smooth md:h-screen md:overflow-y-scroll"
     >
+      <Helmet>
+        <title>RegenSeq | Repurpose DNA Sequencers for Spatial Biology</title>
+        <meta name="description" content="Open source toolkit to repurpose Illumina HiSeq 2500 sequencers as automation platforms for spatial biology and proteomics research." />
+        <link rel="canonical" href="https://regenseq.github.io/" />
+        <meta property="og:title" content="RegenSeq | Open Source DNA Sequencer Repurposing" />
+        <meta property="og:description" content="NSF-funded toolkit for repurposing HiSeq 2500 sequencers into automation platforms for spatial biology research." />
+        <meta property="og:url" content="https://regenseq.github.io/" />
+      </Helmet>
       <BackgroundLayer sectionIndex={activeSectionIndex} />
       <Navigation />
       <ScrollIndicator />

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "wouter";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -112,6 +113,14 @@ export default function FindSequencer() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>Find a Sequencer | RegenSeq</title>
+        <meta name="description" content="Tell us your location and research goals and we'll help match you with a nearby decommissioned Illumina HiSeq 2500 sequencer." />
+        <link rel="canonical" href="https://regenseq.github.io/community/find-a-sequencer" />
+        <meta property="og:title" content="Find a Sequencer | RegenSeq" />
+        <meta property="og:description" content="Submit your details and let the RegenSeq community help you locate a suitable sequencer for spatial biology research." />
+        <meta property="og:url" content="https://regenseq.github.io/community/find-a-sequencer" />
+      </Helmet>
       <Navigation />
 
       <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-24 pb-8">

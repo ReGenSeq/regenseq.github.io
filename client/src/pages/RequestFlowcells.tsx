@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "wouter";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -123,6 +124,14 @@ export default function RequestFlowcells() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <Helmet>
+        <title>Request Flowcells | RegenSeq</title>
+        <meta name="description" content="Request or purchase custom HiSeq flowcells for your spatial biology research. Submit the form and the RegenSeq team will follow up on availability." />
+        <link rel="canonical" href="https://regenseq.github.io/community/request-flowcells" />
+        <meta property="og:title" content="Request Flowcells | RegenSeq" />
+        <meta property="og:description" content="Get custom flowcells for repurposed Illumina HiSeq 2500 sequencers. Request or purchase for $50 each." />
+        <meta property="og:url" content="https://regenseq.github.io/community/request-flowcells" />
+      </Helmet>
       <Navigation />
 
       <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-24 pb-8">
