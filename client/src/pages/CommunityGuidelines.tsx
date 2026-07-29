@@ -119,6 +119,34 @@ export default function CommunityGuidelines() {
         <meta property="og:title" content="Community Guidelines | RegenSeq" />
         <meta property="og:description" content="Shared conventions for building reliable laboratory automation software with PySeq2500." />
         <meta property="og:url" content="https://regenseq.github.io/community-guidelines" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="RegenSeq" />
+        <meta property="og:image" content="https://regenseq.github.io/og-image.png" />
+        <meta property="og:image:width" content="1408" />
+        <meta property="og:image:height" content="768" />
+        <meta property="og:image:alt" content="RegenSeq community guidelines for PySeq2500 contributors" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Community Guidelines | RegenSeq" />
+        <meta name="twitter:description" content="Coding conventions and contribution guidelines for the PySeq2500 open source project." />
+        <meta name="twitter:image" content="https://regenseq.github.io/og-image.png" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Community",
+              "item": "https://regenseq.github.io/#community"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Community Guidelines",
+              "item": "https://regenseq.github.io/community-guidelines"
+            }
+          ]
+        })}</script>
       </Helmet>
       <Navigation />
 

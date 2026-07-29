@@ -120,6 +120,16 @@ export default function FindSequencer() {
         <meta property="og:title" content="Find a Sequencer | RegenSeq" />
         <meta property="og:description" content="Submit your details and let the RegenSeq community help you locate a suitable sequencer for spatial biology research." />
         <meta property="og:url" content="https://regenseq.github.io/community/find-a-sequencer" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="RegenSeq" />
+        <meta property="og:image" content="https://regenseq.github.io/og-image.png" />
+        <meta property="og:image:width" content="1408" />
+        <meta property="og:image:height" content="768" />
+        <meta property="og:image:alt" content="Find a decommissioned HiSeq 2500 sequencer near you — RegenSeq" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Find a Sequencer | RegenSeq" />
+        <meta name="twitter:description" content="Tell us your location and research goals and we'll help match you with a nearby decommissioned Illumina HiSeq 2500 sequencer." />
+        <meta name="twitter:image" content="https://regenseq.github.io/og-image.png" />
       </Helmet>
       <Navigation />
 

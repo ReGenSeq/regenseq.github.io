@@ -131,6 +131,16 @@ export default function RequestFlowcells() {
         <meta property="og:title" content="Request Flowcells | RegenSeq" />
         <meta property="og:description" content="Get custom flowcells for repurposed Illumina HiSeq 2500 sequencers. Request or purchase for $50 each." />
         <meta property="og:url" content="https://regenseq.github.io/community/request-flowcells" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="RegenSeq" />
+        <meta property="og:image" content="https://regenseq.github.io/og-image.png" />
+        <meta property="og:image:width" content="1408" />
+        <meta property="og:image:height" content="768" />
+        <meta property="og:image:alt" content="Request custom HiSeq flowcells from the RegenSeq community" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Request Flowcells | RegenSeq" />
+        <meta name="twitter:description" content="Request or purchase custom HiSeq flowcells for your spatial biology research." />
+        <meta name="twitter:image" content="https://regenseq.github.io/og-image.png" />
       </Helmet>
       <Navigation />
 

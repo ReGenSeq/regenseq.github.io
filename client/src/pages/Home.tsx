@@ -75,6 +75,16 @@ export default function Home() {
         <meta property="og:title" content="RegenSeq | Open Source DNA Sequencer Repurposing" />
         <meta property="og:description" content="NSF-funded toolkit for repurposing HiSeq 2500 sequencers into automation platforms for spatial biology research." />
         <meta property="og:url" content="https://regenseq.github.io/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="RegenSeq" />
+        <meta property="og:image" content="https://regenseq.github.io/og-image.png" />
+        <meta property="og:image:width" content="1408" />
+        <meta property="og:image:height" content="768" />
+        <meta property="og:image:alt" content="Repurposed Illumina HiSeq 2500 sequencer for spatial biology research" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="RegenSeq | Open Source DNA Sequencer Repurposing" />
+        <meta name="twitter:description" content="NSF-funded toolkit for repurposing HiSeq 2500 sequencers into automation platforms for spatial biology research." />
+        <meta name="twitter:image" content="https://regenseq.github.io/og-image.png" />
       </Helmet>
       <BackgroundLayer sectionIndex={activeSectionIndex} />
       <Navigation />
