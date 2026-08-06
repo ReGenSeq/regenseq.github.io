@@ -45,7 +45,7 @@ export function ExplosionHero() {
             onClick={() => window.open('https://www.nature.com/articles/s41598-022-08740-w', '_blank')}
           >
             <FileText className="h-5 w-5" />
-            Read the Paper
+            Read the paper
           </Button>
         </div>
       </div>
