@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Github, Book, ExternalLink, FlaskConical, Search, Users } from "lucide-react";
+import { Github, Book, ExternalLink, FlaskConical, Search, PlayCircle } from "lucide-react";
 import { Link } from "wouter";
 
 type ExternalButton = { text: string; link: string };
@@ -55,13 +55,12 @@ const allCards: CardDef[] = [
     buttonText: "Find a Sequencer",
   },
   {
-    icon: Users,
-    title: "Community & Media",
+    icon: PlayCircle,
+    title: "Video Tutorials",
     description:
-      "Watch ReGenSeq demonstrations and tutorials, and follow project news and community updates.",
+      "Watch ReGenSeq demonstrations, tutorials, and project videos on YouTube.",
     externalButtons: [
       { text: "Watch on YouTube", link: "https://youtube.com/@ReGenSeq" },
-      { text: "Follow on Bluesky", link: "https://bsky.app/profile/regenseq.bsky.social" },
     ],
   },
 ];
