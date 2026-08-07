@@ -1,0 +1,75 @@
+Please reorganize the footer shown in the current ReGenSeq site so that the About section no longer visually dominates the footer.
+
+Before changing anything, inspect the existing footer component, its CSS/Tailwind classes, responsive breakpoints, and any existing About, Governance, or Community Guidelines routes. Preserve the current overall design language and make only the changes described below.
+
+DESKTOP LAYOUT
+
+Keep the existing three-column structure:
+
+1. ReGenSeq
+2. Resources
+3. About
+
+Make the columns feel visually balanced rather than allowing the About column to become much taller than the others.
+
+Suggested desktop proportions:
+- ReGenSeq: approximately 38%
+- Resources: approximately 24%
+- About: approximately 38%
+
+Align all three headings and the first line of content at the same vertical position.
+
+ABOUT COLUMN
+
+Replace the current long About and governance paragraphs in the footer with this shorter content:
+
+“ReGenSeq is developed at the Technology Innovation Laboratory at the New York Genome Center and supported by an NSF POSE Phase I award.”
+
+Below that, display the leadership information in a compact format:
+
+Project Director: Kunal Pandit
+Technical Lead: Maros Pleska
+
+Add a subtle text link underneath:
+
+“Learn more about ReGenSeq and its governance →”
+
+Link it to the most appropriate existing About, Governance, or Community Guidelines page. If no appropriate destination currently exists, preserve the link structure clearly in the code but do not create an unnecessary new page without reporting it first.
+
+GOVERNANCE CONTENT
+
+Remove the full benevolent-dictator governance explanation from the footer. Do not delete the content from the project.
+
+Move it to the existing About, Governance, or Community Guidelines page, whichever is most semantically appropriate. Preserve the wording unless small formatting changes are necessary for readability.
+
+VISUAL STYLING
+
+- Keep the About body text at the same font size and color as the ReGenSeq description.
+- Give the About text a reasonable max-width, approximately 380–420px.
+- Use a slightly tighter line height than the current long paragraph.
+- Keep the leadership lines visually secondary to the introductory sentence.
+- Do not place the About content inside a visually heavy card.
+- Maintain generous but balanced spacing between columns.
+- Reduce the opacity of the footer background illustration if needed so it remains decorative and does not compete with the text.
+- Keep the Resources links and external-link icons unchanged.
+- Keep the stars, forks, and social-sharing section unchanged.
+
+RESPONSIVE BEHAVIOR
+
+On tablets:
+- Allow the columns to wrap cleanly if necessary.
+- Do not compress the About text into a very narrow column.
+
+On mobile:
+- Stack sections in this order: ReGenSeq, Resources, About.
+- Use consistent vertical spacing between sections.
+- Keep the shortened About content fully visible.
+- Avoid oversized gaps caused by desktop height or grid rules.
+
+Do not change unrelated footer functionality, repository statistics, social sharing, branding, or page navigation.
+
+After implementation, report:
+1. Which files were changed
+2. The final desktop column/grid rules
+3. The mobile breakpoint behavior
+4. Where the longer governance text was moved

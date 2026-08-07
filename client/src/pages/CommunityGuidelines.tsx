@@ -161,10 +161,19 @@ export default function CommunityGuidelines() {
         {/* Page header */}
         <div className="mb-8 max-w-3xl">
           <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Community Guidelines</h1>
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6">
             These guidelines establish shared conventions for building reliable, understandable, and extensible
             laboratory automation software. Following them helps contributors work consistently across instruments,
             systems, interfaces, experiment configurations, and recipes.
+          </p>
+          <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-3">Governance</h2>
+          <p className="text-base text-muted-foreground leading-relaxed">
+            The project follows a benevolent dictator governance model designed to combine open community
+            participation with clear technical and strategic leadership. Community members are encouraged to propose
+            ideas, contribute code and documentation, and participate in discussions that shape the direction of the
+            project. Final decisions are made by the project director after consultation with the community, with
+            the goal of maintaining technical consistency, long-term sustainability, and alignment with ReGenSeq's
+            mission.
           </p>
         </div>
 

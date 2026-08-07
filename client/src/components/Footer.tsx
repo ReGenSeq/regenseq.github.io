@@ -1,6 +1,7 @@
 import { Github, ExternalLink, Linkedin, MessageSquare, Star, GitFork, Facebook, Youtube } from "lucide-react";
 import { SiX, SiBluesky } from "react-icons/si";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import { useEffect, useState } from "react";
 
 export function Footer() {
@@ -29,7 +30,7 @@ export function Footer() {
       className="border-t border-border min-h-screen md:h-screen flex items-center overflow-y-auto md:overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-12 w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[38fr_24fr_38fr] gap-6 sm:gap-8 mb-6 sm:mb-8">
           <div>
             <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">RegenSeq</h3>
             <p className="text-sm text-muted-foreground">
@@ -77,18 +78,21 @@ export function Footer() {
             </ul>
           </div>
           
-          <div>
+          <div className="max-w-[420px]">
             <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">About</h3>
-            <p className="text-sm text-muted-foreground mb-2 sm:mb-3">
-              ReGenSeq is developed at the Technology Innovation Laboratory at the New York Genome Center (NYGC) and supported by an NSF POSE Phase I award.
+            <p className="text-sm text-muted-foreground leading-snug mb-3">
+              ReGenSeq is developed at the Technology Innovation Laboratory at the New York Genome Center and supported by an NSF POSE Phase I award.
             </p>
-            <p className="text-sm text-muted-foreground mb-2 sm:mb-3">
-              The project follows a benevolent dictator governance model designed to combine open community participation with clear technical and strategic leadership. Community members are encouraged to propose ideas, contribute code and documentation, and participate in discussions that shape the direction of the project. Final decisions are made by the project director after consultation with the community, with the goal of maintaining technical consistency, long-term sustainability, and alignment with ReGenSeq's mission.
-            </p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground/75 leading-snug mb-3">
               Project Director: Kunal Pandit<br />
               Technical Lead: Maros Pleska
             </p>
+            <Link
+              href="/community-guidelines"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Learn more about ReGenSeq and its governance →
+            </Link>
           </div>
         </div>
         
