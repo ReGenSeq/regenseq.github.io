@@ -10,14 +10,27 @@ import { teamMembers } from "./client/src/data/team";
  * structured data in sync with the UI — edit client/src/data/team.ts and both
  * are updated automatically.
  */
+/** Derive a stable URL fragment id from a person's name, e.g. "Dr. Kunal Pandit" → "person-kunal-pandit" */
+function personId(name: string): string {
+  return (
+    "https://regenseq.github.io/#" +
+    name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "")
+  );
+}
+
 function teamJsonLdPlugin() {
   return {
     name: "vite-team-jsonld",
     transformIndexHtml(html: string): string {
+      // Build Person JSON-LD blocks with @id anchors for cross-referencing
       const personBlocks = teamMembers.map((m) => {
         const block: Record<string, unknown> = {
           "@context": "https://schema.org",
           "@type": "Person",
+          "@id": personId(m.name),
           name: m.name,
           jobTitle: m.role,
           email: m.email,
@@ -54,7 +67,35 @@ function teamJsonLdPlugin() {
         return html;
       }
 
-      return html.replace(placeholder, `    ${scriptTag}`);
+      let result = html.replace(placeholder, `    ${scriptTag}`);
+
+      // Inject a "member" array into the RegenSeq Organization JSON-LD block so
+      // search engines can associate each Person with the organisation.
+      // We scan every ld+json script tag, parse it, and patch the one whose
+      // top-level @type is "Organization" and name is "RegenSeq".
+      result = result.replace(
+        /(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/g,
+        (_match, open, body, close) => {
+          let parsed: Record<string, unknown>;
+          try {
+            parsed = JSON.parse(body);
+          } catch {
+            return _match; // not JSON we can handle — leave untouched
+          }
+          if (
+            parsed["@type"] === "Organization" &&
+            parsed["name"] === "RegenSeq"
+          ) {
+            parsed["member"] = teamMembers.map((m) => ({
+              "@id": personId(m.name),
+            }));
+            return `${open}\n    ${JSON.stringify(parsed, null, 2).replace(/\n/g, "\n    ")}\n    ${close}`;
+          }
+          return _match;
+        }
+      );
+
+      return result;
     },
   };
 }
