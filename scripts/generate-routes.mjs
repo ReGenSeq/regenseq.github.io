@@ -25,6 +25,9 @@ const routes = [
     ogDescription:
       'NSF-funded toolkit for repurposing HiSeq 2500 sequencers into automation platforms for spatial biology research.',
     ogImage: 'https://regenseq.github.io/og-image.png',
+    ogImageWidth: '1408',
+    ogImageHeight: '768',
+    ogImageAlt: 'DNA sequencing laboratory equipment showing repurposed Illumina HiSeq 2500 sequencer for spatial biology research',
   },
   {
     path: '/community-guidelines',
@@ -36,6 +39,9 @@ const routes = [
     ogDescription:
       'Shared conventions for building reliable laboratory automation software with PySeq2500.',
     ogImage: 'https://regenseq.github.io/og-image.png',
+    ogImageWidth: '1408',
+    ogImageHeight: '768',
+    ogImageAlt: 'DNA sequencing laboratory equipment showing repurposed Illumina HiSeq 2500 sequencer for spatial biology research',
   },
   {
     path: '/community/request-flowcells',
@@ -47,6 +53,9 @@ const routes = [
     ogDescription:
       'Get custom flowcells for repurposed Illumina HiSeq 2500 sequencers. Request or purchase for $50 each.',
     ogImage: 'https://regenseq.github.io/og-image.png',
+    ogImageWidth: '1408',
+    ogImageHeight: '768',
+    ogImageAlt: 'DNA sequencing laboratory equipment showing repurposed Illumina HiSeq 2500 sequencer for spatial biology research',
   },
   {
     path: '/community/find-a-sequencer',
@@ -58,6 +67,9 @@ const routes = [
     ogDescription:
       'Submit your details and let the RegenSeq community help you locate a suitable sequencer for spatial biology research.',
     ogImage: 'https://regenseq.github.io/og-image.png',
+    ogImageWidth: '1408',
+    ogImageHeight: '768',
+    ogImageAlt: 'DNA sequencing laboratory equipment showing repurposed Illumina HiSeq 2500 sequencer for spatial biology research',
   },
 ];
 
@@ -103,6 +115,21 @@ function injectMeta(html, route) {
   html = html.replace(
     /(<meta property="og:image" content=")[^"]*(")/,
     `$1${route.ogImage}$2`
+  );
+  // og:image:width
+  html = html.replace(
+    /(<meta property="og:image:width" content=")[^"]*(")/,
+    `$1${route.ogImageWidth}$2`
+  );
+  // og:image:height
+  html = html.replace(
+    /(<meta property="og:image:height" content=")[^"]*(")/,
+    `$1${route.ogImageHeight}$2`
+  );
+  // og:image:alt
+  html = html.replace(
+    /(<meta property="og:image:alt" content=")[^"]*(")/,
+    `$1${route.ogImageAlt}$2`
   );
   // twitter:image
   html = html.replace(

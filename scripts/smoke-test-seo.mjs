@@ -23,6 +23,9 @@ const routes = [
     ogDescription:
       'NSF-funded toolkit for repurposing HiSeq 2500 sequencers into automation platforms for spatial biology research.',
     ogImage: 'https://regenseq.github.io/og-image.png',
+    ogImageWidth: '1408',
+    ogImageHeight: '768',
+    ogImageAlt: 'DNA sequencing laboratory equipment showing repurposed Illumina HiSeq 2500 sequencer for spatial biology research',
   },
   {
     path: '/community-guidelines',
@@ -34,6 +37,9 @@ const routes = [
     ogDescription:
       'Shared conventions for building reliable laboratory automation software with PySeq2500.',
     ogImage: 'https://regenseq.github.io/og-image.png',
+    ogImageWidth: '1408',
+    ogImageHeight: '768',
+    ogImageAlt: 'DNA sequencing laboratory equipment showing repurposed Illumina HiSeq 2500 sequencer for spatial biology research',
   },
   {
     path: '/community/request-flowcells',
@@ -45,6 +51,9 @@ const routes = [
     ogDescription:
       'Get custom flowcells for repurposed Illumina HiSeq 2500 sequencers. Request or purchase for $50 each.',
     ogImage: 'https://regenseq.github.io/og-image.png',
+    ogImageWidth: '1408',
+    ogImageHeight: '768',
+    ogImageAlt: 'DNA sequencing laboratory equipment showing repurposed Illumina HiSeq 2500 sequencer for spatial biology research',
   },
   {
     path: '/community/find-a-sequencer',
@@ -56,6 +65,9 @@ const routes = [
     ogDescription:
       'Submit your details and let the RegenSeq community help you locate a suitable sequencer for spatial biology research.',
     ogImage: 'https://regenseq.github.io/og-image.png',
+    ogImageWidth: '1408',
+    ogImageHeight: '768',
+    ogImageAlt: 'DNA sequencing laboratory equipment showing repurposed Illumina HiSeq 2500 sequencer for spatial biology research',
   },
 ];
 
@@ -95,6 +107,24 @@ function checkHtml(html, route) {
       label: 'og:image',
       pattern: new RegExp(
         `<meta\\s+property="og:image"\\s+content="${escapeRegex(route.ogImage)}"`,
+      ),
+    },
+    {
+      label: 'og:image:width',
+      pattern: new RegExp(
+        `<meta\\s+property="og:image:width"\\s+content="${escapeRegex(route.ogImageWidth)}"`,
+      ),
+    },
+    {
+      label: 'og:image:height',
+      pattern: new RegExp(
+        `<meta\\s+property="og:image:height"\\s+content="${escapeRegex(route.ogImageHeight)}"`,
+      ),
+    },
+    {
+      label: 'og:image:alt',
+      pattern: new RegExp(
+        `<meta\\s+property="og:image:alt"\\s+content="${escapeRegex(route.ogImageAlt)}"`,
       ),
     },
     {
