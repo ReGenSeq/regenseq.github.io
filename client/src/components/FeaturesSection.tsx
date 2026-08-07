@@ -49,6 +49,12 @@ export function FeaturesSection() {
             RegenSeq provides comprehensive control of all sequencer components for 
             sophisticated automated workflows
           </p>
+          <p className="mt-4 sm:mt-6 max-w-3xl mx-auto text-sm sm:text-base text-muted-foreground px-2">
+            PySeq2500 exposes every subsystem of the HiSeq 2500 through a clean Python API, 
+            letting researchers compose complex multi-day experiments from simple, reusable 
+            building blocks. The capabilities below make the platform suitable for applications 
+            ranging from cyclic immunofluorescence to in-situ sequencing.
+          </p>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">

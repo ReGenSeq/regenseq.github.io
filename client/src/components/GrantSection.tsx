@@ -43,6 +43,21 @@ export function GrantSection() {
             Funded by the National Science Foundation to build a sustainable, community-driven 
             platform for repurposing DNA sequencers as automation platforms
           </p>
+          <div className="mt-4 sm:mt-6 max-w-3xl mx-auto text-left space-y-3 px-2">
+            <p className="text-sm sm:text-base text-muted-foreground">
+              The NSF Pathways to Enable Open-Source Ecosystems (POSE) Phase 1 award supports 
+              RegenSeq in transitioning from a single-lab research tool into a fully open, 
+              community-maintained ecosystem. The grant funds governance planning, community 
+              outreach, and the infrastructure needed to sustain the project beyond its founding 
+              institution at the New York Genome Center.
+            </p>
+            <p className="text-sm sm:text-base text-muted-foreground">
+              By making high-throughput spatial biology accessible to laboratories that cannot 
+              afford commercial platforms, RegenSeq directly addresses equity gaps in the life 
+              sciences. The broader impacts below reflect the core values guiding every design 
+              decision in the software and hardware documentation.
+            </p>
+          </div>
         </div>
         
         <div>

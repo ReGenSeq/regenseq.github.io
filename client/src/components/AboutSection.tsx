@@ -16,6 +16,22 @@ export function AboutSection() {
             An open source Python toolkit that transforms obsolete DNA sequencers 
             into powerful automation platforms for cutting-edge biological research
           </p>
+          <div className="mt-4 sm:mt-6 max-w-3xl mx-auto text-left space-y-3 px-2">
+            <p className="text-sm sm:text-base text-muted-foreground">
+              RegenSeq gives decommissioned Illumina HiSeq 2500 instruments — once costing hundreds 
+              of thousands of dollars — a second life as flexible laboratory automation platforms. 
+              By replacing proprietary sequencing chemistry with open protocols, researchers can run 
+              multiplexed immunofluorescence, spatial transcriptomics, and proteomics workflows on 
+              hardware available for a fraction of its original price on the secondary market.
+            </p>
+            <p className="text-sm sm:text-base text-muted-foreground">
+              The project is built around PySeq2500, a fully open Python library that exposes direct 
+              control over the instrument's fluidics, temperature regulation, and four-channel 
+              fluorescence imaging system. Because every protocol is an editable Python file, 
+              researchers can adapt experiments without specialized engineering knowledge, accelerating 
+              the development of novel single-cell and spatial biology assays.
+            </p>
+          </div>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
