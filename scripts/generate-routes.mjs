@@ -24,6 +24,7 @@ const routes = [
     ogTitle: 'RegenSeq | Open Source DNA Sequencer Repurposing',
     ogDescription:
       'NSF-funded toolkit for repurposing HiSeq 2500 sequencers into automation platforms for spatial biology research.',
+    ogImage: 'https://regenseq.github.io/og-image.png',
   },
   {
     path: '/community-guidelines',
@@ -34,6 +35,7 @@ const routes = [
     ogTitle: 'Community Guidelines | RegenSeq',
     ogDescription:
       'Shared conventions for building reliable laboratory automation software with PySeq2500.',
+    ogImage: 'https://regenseq.github.io/og-image.png',
   },
   {
     path: '/community/request-flowcells',
@@ -44,6 +46,7 @@ const routes = [
     ogTitle: 'Request Flowcells | RegenSeq',
     ogDescription:
       'Get custom flowcells for repurposed Illumina HiSeq 2500 sequencers. Request or purchase for $50 each.',
+    ogImage: 'https://regenseq.github.io/og-image.png',
   },
   {
     path: '/community/find-a-sequencer',
@@ -54,6 +57,7 @@ const routes = [
     ogTitle: 'Find a Sequencer | RegenSeq',
     ogDescription:
       'Submit your details and let the RegenSeq community help you locate a suitable sequencer for spatial biology research.',
+    ogImage: 'https://regenseq.github.io/og-image.png',
   },
 ];
 
@@ -94,6 +98,16 @@ function injectMeta(html, route) {
   html = html.replace(
     /(<meta name="twitter:description" content=")[^"]*(")/,
     `$1${route.ogDescription}$2`
+  );
+  // og:image
+  html = html.replace(
+    /(<meta property="og:image" content=")[^"]*(")/,
+    `$1${route.ogImage}$2`
+  );
+  // twitter:image
+  html = html.replace(
+    /(<meta name="twitter:image" content=")[^"]*(")/,
+    `$1${route.ogImage}$2`
   );
   return html;
 }

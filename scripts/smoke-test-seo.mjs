@@ -21,6 +21,7 @@ const routes = [
     ogTitle: 'RegenSeq | Open Source DNA Sequencer Repurposing',
     ogDescription:
       'NSF-funded toolkit for repurposing HiSeq 2500 sequencers into automation platforms for spatial biology research.',
+    ogImage: 'https://regenseq.github.io/og-image.png',
   },
   {
     path: '/community-guidelines',
@@ -30,6 +31,7 @@ const routes = [
     ogTitle: 'Community Guidelines | RegenSeq',
     ogDescription:
       'Shared conventions for building reliable laboratory automation software with PySeq2500.',
+    ogImage: 'https://regenseq.github.io/og-image.png',
   },
   {
     path: '/community/request-flowcells',
@@ -39,6 +41,7 @@ const routes = [
     ogTitle: 'Request Flowcells | RegenSeq',
     ogDescription:
       'Get custom flowcells for repurposed Illumina HiSeq 2500 sequencers. Request or purchase for $50 each.',
+    ogImage: 'https://regenseq.github.io/og-image.png',
   },
   {
     path: '/community/find-a-sequencer',
@@ -48,6 +51,7 @@ const routes = [
     ogTitle: 'Find a Sequencer | RegenSeq',
     ogDescription:
       'Submit your details and let the RegenSeq community help you locate a suitable sequencer for spatial biology research.',
+    ogImage: 'https://regenseq.github.io/og-image.png',
   },
 ];
 
@@ -83,6 +87,18 @@ function checkHtml(html, route) {
         `<meta\\s+property="og:description"\\s+content="${escapeRegex(route.ogDescription)}"`,
       ),
     },
+    {
+      label: 'og:image',
+      pattern: new RegExp(
+        `<meta\\s+property="og:image"\\s+content="${escapeRegex(route.ogImage)}"`,
+      ),
+    },
+    {
+      label: 'twitter:image',
+      pattern: new RegExp(
+        `<meta\\s+name="twitter:image"\\s+content="${escapeRegex(route.ogImage)}"`,
+      ),
+    },
   ];
 
   for (const { label, pattern } of checks) {
@@ -92,6 +108,27 @@ function checkHtml(html, route) {
   }
 
   return failures;
+}
+
+/**
+ * Perform a HEAD request on `url` and confirm it returns HTTP 200.
+ * Returns null on success, or an error string on failure.
+ */
+async function checkImageUrl(url, retries = 3, delayMs = 5000) {
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      const res = await fetch(url, {
+        method: 'HEAD',
+        headers: { 'User-Agent': 'RegenSeq-SEO-SmokeTest/1.0' },
+        redirect: 'follow',
+      });
+      if (res.ok) return null;
+      return `HTTP ${res.status} ${res.statusText}`;
+    } catch (err) {
+      if (attempt === retries) return err.message;
+      await new Promise((r) => setTimeout(r, delayMs));
+    }
+  }
 }
 
 async function fetchWithRetry(url, retries = 3, delayMs = 5000) {
@@ -140,7 +177,22 @@ for (const route of routes) {
   }
 }
 
-console.log('');
+// Check that each unique OG image URL is reachable (HTTP 200).
+const imageUrls = [...new Set(routes.map((r) => r.ogImage).filter(Boolean))];
+if (imageUrls.length > 0) {
+  console.log('🖼️   Checking OG image URLs…\n');
+  for (const imageUrl of imageUrls) {
+    process.stdout.write(`  ${imageUrl} … `);
+    const err = await checkImageUrl(imageUrl);
+    if (err) {
+      console.log(`FAIL (${err})`);
+      overallPassed = false;
+    } else {
+      console.log('PASS');
+    }
+  }
+  console.log('');
+}
 
 if (overallPassed) {
   console.log('✅  All SEO smoke tests passed.');
