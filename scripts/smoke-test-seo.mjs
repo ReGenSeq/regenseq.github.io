@@ -18,6 +18,7 @@ const routes = [
     title: 'RegenSeq | Repurpose DNA Sequencers for Spatial Biology',
     description:
       'Open source toolkit to repurpose Illumina HiSeq 2500 sequencers as automation platforms for spatial biology and proteomics research.',
+    canonical: 'https://regenseq.github.io/',
     ogTitle: 'RegenSeq | Open Source DNA Sequencer Repurposing',
     ogDescription:
       'NSF-funded toolkit for repurposing HiSeq 2500 sequencers into automation platforms for spatial biology research.',
@@ -28,6 +29,7 @@ const routes = [
     title: 'Community Guidelines | RegenSeq',
     description:
       'Coding conventions and contribution guidelines for the RegenSeq open source project — instruments, systems, hardware settings, recipes, and how to contribute.',
+    canonical: 'https://regenseq.github.io/community-guidelines',
     ogTitle: 'Community Guidelines | RegenSeq',
     ogDescription:
       'Shared conventions for building reliable laboratory automation software with PySeq2500.',
@@ -38,6 +40,7 @@ const routes = [
     title: 'Request Flowcells | RegenSeq',
     description:
       'Request or purchase custom HiSeq flowcells for your spatial biology research. Submit the form and the RegenSeq team will follow up on availability.',
+    canonical: 'https://regenseq.github.io/community/request-flowcells',
     ogTitle: 'Request Flowcells | RegenSeq',
     ogDescription:
       'Get custom flowcells for repurposed Illumina HiSeq 2500 sequencers. Request or purchase for $50 each.',
@@ -48,6 +51,7 @@ const routes = [
     title: 'Find a Sequencer | RegenSeq',
     description:
       "Tell us your location and research goals and we'll help match you with a nearby decommissioned Illumina HiSeq 2500 sequencer.",
+    canonical: 'https://regenseq.github.io/community/find-a-sequencer',
     ogTitle: 'Find a Sequencer | RegenSeq',
     ogDescription:
       'Submit your details and let the RegenSeq community help you locate a suitable sequencer for spatial biology research.',
@@ -97,6 +101,12 @@ function checkHtml(html, route) {
       label: 'twitter:image',
       pattern: new RegExp(
         `<meta\\s+name="twitter:image"\\s+content="${escapeRegex(route.ogImage)}"`,
+      ),
+    },
+    {
+      label: 'canonical',
+      pattern: new RegExp(
+        `<link\\s+rel="canonical"\\s+href="${escapeRegex(route.canonical)}"`,
       ),
     },
   ];
