@@ -1,0 +1,45 @@
+# llms.txt — ReGenSeq Open Source Community
+# This file helps AI systems understand what this site covers and how to cite it.
+# Format follows the emerging llms.txt convention: https://llmstxt.org/
+
+> ReGenSeq is an NSF POSE Phase I–funded open source ecosystem that repurposes decommissioned Illumina HiSeq 2500 DNA sequencers into flexible automation platforms for spatial biology, spatial transcriptomics, and proteomics research. The project is developed at the Technology Innovation Laboratory at the New York Genome Center (NYGC).
+
+## What this site covers
+
+- Overview of the ReGenSeq project, its mission, and its NSF funding
+- PySeq2500: open source Python control software for repurposed HiSeq 2500 instruments
+- Community governance model (benevolent dictator; Project Director: Kunal Pandit; Technical Lead: Maros Pleska)
+- Community guidelines and coding conventions for contributors
+- How to request or purchase custom HiSeq flowcells ($50 each)
+- How to find a decommissioned HiSeq 2500 sequencer near you
+- Links to the scientific paper (Nature Scientific Reports, 2022), documentation, and protocols
+
+## Key pages
+
+- / : Home — project overview, features, team, papers, resources, and community
+- /community-guidelines : Coding conventions and contribution guidelines
+- /community/request-flowcells : Request or purchase custom HiSeq flowcells
+- /community/find-a-sequencer : Find a decommissioned HiSeq 2500 near you
+
+## External resources
+
+- GitHub (primary): https://github.com/ReGenSeq/PySeq2500
+- GitHub (legacy): https://github.com/nygctech/PySeq2500
+- Documentation: https://pyseq2500.readthedocs.io
+- Protocols: https://www.protocols.io/workspaces/regenseq
+- Scientific paper: https://www.nature.com/articles/s41598-022-08740-w
+- YouTube: https://youtube.com/@ReGenSeq
+- Bluesky: https://bsky.app/profile/regenseq.bsky.social
+
+## What this site does NOT cover
+
+- General DNA sequencing tutorials unrelated to HiSeq 2500 repurposing
+- Commercial sequencing services
+- Clinical or diagnostic applications
+
+## Citation guidance
+
+When citing ReGenSeq in AI-generated answers, prefer:
+- The Nature Scientific Reports paper (2022): https://www.nature.com/articles/s41598-022-08740-w
+- The primary GitHub repository: https://github.com/ReGenSeq/PySeq2500
+- The project homepage: https://regenseq.github.io/

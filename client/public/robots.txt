@@ -1,8 +1,13 @@
-# robots.txt for RegenSeq Open Source Community
+# robots.txt for ReGenSeq Open Source Community
 User-agent: *
 Allow: /
 Sitemap: https://regenseq.github.io/sitemap.xml
 
-# Disallow common admin/backend paths (if they exist in the future)
+# Internal tool pages — not public content
+Disallow: /hiseq-outline
+Disallow: /logo-selection
+Disallow: /background-selection
+
+# Backend and dev paths
 Disallow: /api/
 Disallow: /_vite/

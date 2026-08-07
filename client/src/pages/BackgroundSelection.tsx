@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Check } from "lucide-react";
 import { Link, useLocation } from "wouter";
+import { Helmet } from "react-helmet-async";
 import bg1 from "@assets/generated_images/Technical_blueprint_HiSeq_2500_e13e3779.png";
 import bg2 from "@assets/generated_images/Monochrome_photo_HiSeq_2500_83e19cb6.png";
 import bg3 from "@assets/generated_images/Ink_sketch_HiSeq_2500_6e3311bb.png";
@@ -89,6 +90,7 @@ const backgrounds = [
 ];
 
 export default function BackgroundSelection() {
+  // noindex — internal design tool, not public content
   const [, setLocation] = useLocation();
   const [selectedBg, setSelectedBg] = useState<number | null>(() => {
     const saved = localStorage.getItem('selectedBackground');
@@ -97,6 +99,9 @@ export default function BackgroundSelection() {
 
   return (
     <div className="min-h-screen bg-background p-8">
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <Link href="/">

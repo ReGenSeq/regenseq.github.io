@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Check } from "lucide-react";
 import { Link } from "wouter";
+import { Helmet } from "react-helmet-async";
 import logo1 from "@assets/generated_images/Simple_curved_arrow_P_logo_6b9c102b.png";
 import logo2 from "@assets/generated_images/RS_monogram_embroidery_logo_ec5a7515.png";
 import logo3 from "@assets/generated_images/RegenSeq_bold_wordmark_embroidery_c5dd6b68.png";
@@ -49,10 +50,14 @@ const logos = [
 ];
 
 export default function LogoSelection() {
+  // noindex — internal design tool, not public content
   const [selectedLogo, setSelectedLogo] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen bg-background p-8">
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <Link href="/">

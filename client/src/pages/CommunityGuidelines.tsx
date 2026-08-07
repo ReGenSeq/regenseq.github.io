@@ -147,6 +147,30 @@ export default function CommunityGuidelines() {
             }
           ]
         })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "TechArticle",
+          "headline": "ReGenSeq Community Guidelines",
+          "description": "Coding conventions and contribution guidelines for the ReGenSeq open source project, covering instruments, systems, hardware settings, recipes, and how to contribute.",
+          "url": "https://regenseq.github.io/community-guidelines",
+          "inLanguage": "en-US",
+          "author": {
+            "@type": "Organization",
+            "name": "ReGenSeq Open Source Community",
+            "url": "https://regenseq.github.io/"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "New York Genome Center",
+            "url": "https://www.nygenome.org/"
+          },
+          "about": {
+            "@type": "SoftwareApplication",
+            "name": "PySeq2500",
+            "url": "https://github.com/ReGenSeq/PySeq2500"
+          },
+          "keywords": "PySeq2500, open source, contribution guidelines, lab automation, HiSeq 2500, spatial biology, Python conventions"
+        })}</script>
       </Helmet>
       <Navigation />
 

@@ -141,6 +141,35 @@ export default function RequestFlowcells() {
         <meta name="twitter:title" content="Request Flowcells | RegenSeq" />
         <meta name="twitter:description" content="Request or purchase custom HiSeq flowcells for your spatial biology research." />
         <meta name="twitter:image" content="https://regenseq.github.io/og-image.png" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Community", "item": "https://regenseq.github.io/#community" },
+            { "@type": "ListItem", "position": 2, "name": "Request Flowcells", "item": "https://regenseq.github.io/community/request-flowcells" }
+          ]
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Request or Purchase HiSeq Flowcells",
+          "description": "Request or purchase custom flowcells for repurposed Illumina HiSeq 2500 sequencers from the ReGenSeq community. Flowcells are available for $50 each.",
+          "url": "https://regenseq.github.io/community/request-flowcells",
+          "provider": {
+            "@type": "Organization",
+            "name": "ReGenSeq Open Source Community",
+            "url": "https://regenseq.github.io/"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "50",
+            "priceCurrency": "USD",
+            "description": "Custom HiSeq 2500 flowcell",
+            "availability": "https://schema.org/InStock"
+          },
+          "areaServed": "Worldwide",
+          "serviceType": "Laboratory Equipment Supply"
+        })}</script>
       </Helmet>
       <Navigation />
 

@@ -3,10 +3,14 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "wouter";
+import { Helmet } from "react-helmet-async";
 
 export default function HiSeqOutline() {
   return (
     <div className="min-h-screen bg-background p-8">
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <Link href="/">

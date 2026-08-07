@@ -130,6 +130,34 @@ export default function FindSequencer() {
         <meta name="twitter:title" content="Find a Sequencer | RegenSeq" />
         <meta name="twitter:description" content="Tell us your location and research goals and we'll help match you with a nearby decommissioned Illumina HiSeq 2500 sequencer." />
         <meta name="twitter:image" content="https://regenseq.github.io/og-image.png" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Community", "item": "https://regenseq.github.io/#community" },
+            { "@type": "ListItem", "position": 2, "name": "Find a Sequencer", "item": "https://regenseq.github.io/community/find-a-sequencer" }
+          ]
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Find a Decommissioned HiSeq 2500 Sequencer",
+          "description": "Submit your location and research goals and the ReGenSeq community will help match you with a nearby decommissioned Illumina HiSeq 2500 sequencer available for repurposing.",
+          "url": "https://regenseq.github.io/community/find-a-sequencer",
+          "provider": {
+            "@type": "Organization",
+            "name": "ReGenSeq Open Source Community",
+            "url": "https://regenseq.github.io/"
+          },
+          "areaServed": "Worldwide",
+          "serviceType": "Laboratory Equipment Matching",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "description": "Free community matching service for decommissioned HiSeq 2500 sequencers"
+          }
+        })}</script>
       </Helmet>
       <Navigation />
 
