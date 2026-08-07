@@ -72,4 +72,46 @@ jobs:
         run: sleep 30
 
       - name: Run SEO smoke tests
-        run: node scripts/smoke-test-seo.mjs https://regenseq.github.io
+        run: |
+          node scripts/smoke-test-seo.mjs https://regenseq.github.io \
+            2>&1 | tee /tmp/smoke-test-output.txt
+          exit ${PIPESTATUS[0]}
+
+      - name: Notify team on failure
+        if: failure()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          OUTPUT=$(cat /tmp/smoke-test-output.txt 2>/dev/null || echo "(no output captured)")
+          # Truncate to stay within Slack's block text limit (3000 chars)
+          OUTPUT="${OUTPUT:0:2800}"
+          RUN_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          PAYLOAD=$(jq -n \
+            --arg text "❌ *SEO smoke tests failed* on \`${{ github.ref_name }}\`" \
+            --arg output "$OUTPUT" \
+            --arg run_url "$RUN_URL" \
+            '{
+              blocks: [
+                {
+                  type: "section",
+                  text: { type: "mrkdwn", text: $text }
+                },
+                {
+                  type: "section",
+                  text: { type: "mrkdwn", text: ("*Test output:*\n```" + $output + "```") }
+                },
+                {
+                  type: "actions",
+                  elements: [
+                    {
+                      type: "button",
+                      text: { type: "plain_text", text: "View run" },
+                      url: $run_url
+                    }
+                  ]
+                }
+              ]
+            }')
+          curl -s -X POST "$SLACK_WEBHOOK_URL" \
+            -H 'Content-Type: application/json' \
+            --data "$PAYLOAD"
