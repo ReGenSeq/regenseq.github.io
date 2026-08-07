@@ -88,6 +88,10 @@ export default function FindSequencer() {
   if (submitted) {
     return (
       <div className="min-h-screen bg-background text-foreground">
+        <Helmet>
+          <title>Request Submitted — RegenSeq</title>
+          <meta name="robots" content="noindex, nofollow" />
+        </Helmet>
         <Navigation />
         <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-24 pb-8">
           <div className="text-center py-16">
