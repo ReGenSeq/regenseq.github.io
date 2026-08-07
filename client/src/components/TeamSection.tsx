@@ -11,7 +11,7 @@ const team = [
     initials: "KP",
     org: "New York Genome Center",
     email: "kpandit@nygenome.org",
-    description: "Senior Research Engineer and author of RegenSeq open-source control software for Illumina HiSeq 2500 systems.",
+    description: "Senior Research Engineer at the New York Genome Center and principal author of RegenSeq's open-source PySeq2500 control software. Dr. Pandit leads hardware integration and instrument control development, enabling researchers to run custom spatial biology protocols on repurposed Illumina HiSeq 2500 sequencers.",
     image: "https://images.squarespace-cdn.com/content/v1/627e96178e8a965a2a04b415/1654954748529-MO49MWUTEGCT6O7ZEJ48/20201026_153623.jpg",
   },
   {
@@ -20,7 +20,7 @@ const team = [
     initials: "MP",
     org: "New York Genome Center",
     email: "mpleska@nygenome.org",
-    description: "Research Scientist applying RegenSeq to spatial transcriptomics and proteomics with expertise in image processing.",
+    description: "Research Scientist at the New York Genome Center specializing in spatial transcriptomics and proteomics. Dr. Pleska applies RegenSeq workflows to multiplexed imaging experiments and contributes expertise in image processing and single-cell data analysis to the project.",
     image: "https://images.squarespace-cdn.com/content/v1/627e96178e8a965a2a04b415/73655136-cdf7-4826-a2fb-3780555fefd2/Maros+Pleska.jpg",
   },
   {
@@ -29,7 +29,7 @@ const team = [
     initials: "DD",
     org: "New York Genome Center",
     email: "ddomovic@nygenome.org",
-    description: "Scientific Program Manager with computer science background and expertise in project management and stakeholder coordination.",
+    description: "Scientific Program Manager at the New York Genome Center with a computer science background. Dr. Domovic drives community outreach, partnership development, and stakeholder coordination, helping transition RegenSeq from a single-lab tool into a sustainable open-source ecosystem.",
     image: danielImage,
   },
   {
@@ -38,7 +38,7 @@ const team = [
     initials: "KB",
     org: "Kitspace",
     email: "kaspar@kitspace.org",
-    description: "Electronic engineer and software developer running Kitspace open source platform with major contributions to OpenFlexure.",
+    description: "Electronic engineer and software developer at Kitspace, an open-source platform for sharing electronics designs. Kaspar brings deep expertise in open hardware community building and has made major contributions to the OpenFlexure microscope project, advising RegenSeq on ecosystem governance and open-source best practices.",
     image: kasparImage,
   },
 ];
