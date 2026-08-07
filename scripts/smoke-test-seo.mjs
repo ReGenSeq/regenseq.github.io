@@ -26,6 +26,10 @@ const routes = [
     ogImageWidth: '1408',
     ogImageHeight: '768',
     ogImageAlt: 'DNA sequencing laboratory equipment showing repurposed Illumina HiSeq 2500 sequencer for spatial biology research',
+    // JSON-LD @type values that must appear somewhere in this page's HTML
+    expectedSchemas: ['FAQPage'],
+    // JSON-LD @type values that must appear in the global document (index.html)
+    expectedGlobalSchemas: ['Organization', 'Person'],
   },
   {
     path: '/community-guidelines',
@@ -40,6 +44,7 @@ const routes = [
     ogImageWidth: '1408',
     ogImageHeight: '768',
     ogImageAlt: 'DNA sequencing laboratory equipment showing repurposed Illumina HiSeq 2500 sequencer for spatial biology research',
+    expectedSchemas: ['TechArticle', 'BreadcrumbList'],
   },
   {
     path: '/community/request-flowcells',
@@ -54,6 +59,7 @@ const routes = [
     ogImageWidth: '1408',
     ogImageHeight: '768',
     ogImageAlt: 'DNA sequencing laboratory equipment showing repurposed Illumina HiSeq 2500 sequencer for spatial biology research',
+    expectedSchemas: ['Service', 'BreadcrumbList'],
   },
   {
     path: '/community/find-a-sequencer',
@@ -68,12 +74,98 @@ const routes = [
     ogImageWidth: '1408',
     ogImageHeight: '768',
     ogImageAlt: 'DNA sequencing laboratory equipment showing repurposed Illumina HiSeq 2500 sequencer for spatial biology research',
+    expectedSchemas: ['Service', 'BreadcrumbList'],
   },
 ];
 
 /** Escape a string for use inside a regex. */
 function escapeRegex(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
+ * Extract and JSON-parse every <script type="application/ld+json"> block in `html`.
+ * Returns { schemas, parseErrors } where:
+ *   schemas     — array of parsed objects (may be plain objects or @graph arrays)
+ *   parseErrors — array of human-readable error strings for blocks that failed to parse
+ */
+function extractJsonLd(html) {
+  const schemas = [];
+  const parseErrors = [];
+  // Match <script> tags that carry type="application/ld+json" (or single-quoted),
+  // regardless of attribute ordering or extra attributes on the tag.
+  const re = /<script\b[^>]*\btype\s*=\s*["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
+  let match;
+  let index = 0;
+  while ((match = re.exec(html)) !== null) {
+    index++;
+    const raw = match[1].trim();
+    try {
+      const parsed = JSON.parse(raw);
+      // A block may be a single object or a { @graph: [...] } wrapper
+      if (Array.isArray(parsed)) {
+        schemas.push(...parsed);
+      } else if (parsed['@graph'] && Array.isArray(parsed['@graph'])) {
+        schemas.push(parsed, ...parsed['@graph']);
+      } else {
+        schemas.push(parsed);
+      }
+    } catch (err) {
+      parseErrors.push(`  ✗ JSON-LD block #${index} failed to parse: ${err.message}`);
+    }
+  }
+  return { schemas, parseErrors };
+}
+
+/**
+ * Collect every @type value (including from nested objects) present in `schemas`.
+ * Returns a Set<string>.
+ */
+function collectTypes(schemas) {
+  const types = new Set();
+  function walk(obj) {
+    if (!obj || typeof obj !== 'object') return;
+    if (Array.isArray(obj)) { obj.forEach(walk); return; }
+    if (obj['@type']) {
+      const t = obj['@type'];
+      if (Array.isArray(t)) t.forEach((v) => types.add(v));
+      else types.add(t);
+    }
+    for (const val of Object.values(obj)) walk(val);
+  }
+  schemas.forEach(walk);
+  return types;
+}
+
+/**
+ * Validate JSON-LD blocks in `html` against `route.expectedSchemas` (and optionally
+ * `route.expectedGlobalSchemas`). Returns a list of failure strings.
+ */
+function checkJsonLd(html, route) {
+  const failures = [];
+
+  const { schemas, parseErrors } = extractJsonLd(html);
+  failures.push(...parseErrors);
+
+  if (!route.expectedSchemas && !route.expectedGlobalSchemas) return failures;
+
+  const types = collectTypes(schemas);
+
+  for (const expected of (route.expectedSchemas ?? [])) {
+    if (!types.has(expected)) {
+      failures.push(`  ✗ JSON-LD @type "${expected}" not found`);
+    }
+  }
+
+  // expectedGlobalSchemas must also be satisfied by the same HTML
+  // (Organization + Person are injected into every page via index.html)
+  for (const expected of (route.expectedGlobalSchemas ?? [])) {
+    if (!types.has(expected)) {
+      failures.push(`  ✗ JSON-LD global @type "${expected}" not found`);
+    }
+  }
+
+  return failures;
 }
 
 /** Check that `html` contains each expected tag value; return a list of failures. */
@@ -207,7 +299,10 @@ for (const route of routes) {
     continue;
   }
 
-  const failures = checkHtml(html, route);
+  const failures = [
+    ...checkHtml(html, route),
+    ...checkJsonLd(html, route),
+  ];
   if (failures.length === 0) {
     console.log('PASS');
   } else {
