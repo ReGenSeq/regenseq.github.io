@@ -80,10 +80,14 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">About</h3>
             <p className="text-sm text-muted-foreground mb-2 sm:mb-3">
-              Developed at the Technology Innovation Laboratory, New York Genome Center (NYGC)
+              ReGenSeq is developed at the Technology Innovation Laboratory at the New York Genome Center (NYGC) and supported by an NSF POSE Phase I award.
+            </p>
+            <p className="text-sm text-muted-foreground mb-2 sm:mb-3">
+              The project follows a benevolent dictator governance model designed to combine open community participation with clear technical and strategic leadership. Community members are encouraged to propose ideas, contribute code and documentation, and participate in discussions that shape the direction of the project. Final decisions are made by the project director after consultation with the community, with the goal of maintaining technical consistency, long-term sustainability, and alignment with ReGenSeq's mission.
             </p>
             <p className="text-sm text-muted-foreground">
-              Funded by NSF POSE Phase 1 Award
+              Project Director: Kunal Pandit<br />
+              Technical Lead: Maros Pleska
             </p>
           </div>
         </div>
