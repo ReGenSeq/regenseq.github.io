@@ -19,23 +19,31 @@ export function Navigation() {
   const [, navigate] = useLocation();
 
   useEffect(() => {
-    const handleScroll = (e?: Event) => {
-      const scrollContainer = document.querySelector('[class*="overflow-y-scroll"]') as HTMLElement;
+    const scrollContainer = document.querySelector('[class*="overflow-y-scroll"]') as HTMLElement | null;
+    let animationFrame: number | null = null;
+
+    const updateScrolledState = () => {
       const scrollY = scrollContainer?.scrollTop || window.scrollY;
       setIsScrolled(scrollY > 20);
+      animationFrame = null;
     };
-    
+
+    const handleScroll = () => {
+      if (animationFrame === null) {
+        animationFrame = window.requestAnimationFrame(updateScrolledState);
+      }
+    };
+
     // Listen to both window and container scroll events
-    const scrollContainer = document.querySelector('[class*="overflow-y-scroll"]');
-    window.addEventListener("scroll", handleScroll);
-    scrollContainer?.addEventListener("scroll", handleScroll);
-    
-    // Initial check
-    handleScroll();
-    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    scrollContainer?.addEventListener("scroll", handleScroll, { passive: true });
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
       scrollContainer?.removeEventListener("scroll", handleScroll);
+      if (animationFrame !== null) {
+        window.cancelAnimationFrame(animationFrame);
+      }
     };
   }, []);
 

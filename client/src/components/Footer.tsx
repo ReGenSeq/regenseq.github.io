@@ -2,23 +2,48 @@ import { Github, ExternalLink, Linkedin, MessageSquare, Star, GitFork, Facebook,
 import { SiX, SiBluesky } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function Footer() {
+  const footerRef = useRef<HTMLElement>(null);
   const [githubStats, setGithubStats] = useState<{ stars: number; forks: number } | null>(null);
 
   useEffect(() => {
-    fetch('https://api.github.com/repos/nygctech/PySeq2500')
-      .then(res => res.json())
-      .then(data => {
-        setGithubStats({
-          stars: data.stargazers_count || 0,
-          forks: data.forks_count || 0
-        });
-      })
-      .catch(() => {
-        setGithubStats(null);
-      });
+    const footer = footerRef.current;
+    if (!footer) return;
+
+    const controller = new AbortController();
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+
+        observer.disconnect();
+        fetch("https://api.github.com/repos/nygctech/PySeq2500", {
+          signal: controller.signal,
+        })
+          .then((res) => {
+            if (!res.ok) throw new Error(`GitHub API returned ${res.status}`);
+            return res.json();
+          })
+          .then((data) => {
+            setGithubStats({
+              stars: data.stargazers_count || 0,
+              forks: data.forks_count || 0,
+            });
+          })
+          .catch((error) => {
+            if (error.name !== "AbortError") setGithubStats(null);
+          });
+      },
+      { rootMargin: "300px 0px" },
+    );
+
+    observer.observe(footer);
+
+    return () => {
+      observer.disconnect();
+      controller.abort();
+    };
   }, []);
 
   const shareUrl = 'https://regenseq.github.io/';
@@ -27,6 +52,7 @@ export function Footer() {
 
   return (
     <footer 
+      ref={footerRef}
       className="border-t border-border min-h-screen md:h-screen flex items-center overflow-y-auto md:overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-12 w-full">
