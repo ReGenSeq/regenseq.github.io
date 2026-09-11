@@ -93,7 +93,7 @@ export default function FindSequencer() {
           <meta name="robots" content="noindex, nofollow" />
         </Helmet>
         <Navigation />
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-24 pb-8">
+        <main className="max-w-2xl mx-auto px-4 sm:px-6 pt-24 pb-8">
           <div className="text-center py-16">
             <CheckCircle2 className="h-14 w-14 text-primary mx-auto mb-5" />
             <h1 className="text-2xl font-bold mb-3">Request Submitted</h1>
@@ -109,7 +109,7 @@ export default function FindSequencer() {
               </Link>
             </div>
           </div>
-        </div>
+        </main>
         <Footer />
       </div>
     );
@@ -165,7 +165,7 @@ export default function FindSequencer() {
       </Helmet>
       <Navigation />
 
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-24 pb-8">
+      <main className="max-w-2xl mx-auto px-4 sm:px-6 pt-24 pb-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-3">
@@ -321,7 +321,7 @@ export default function FindSequencer() {
             <Button variant="ghost" size="sm" data-testid="link-back-community">← Join the Community</Button>
           </a>
         </div>
-      </div>
+      </main>
 
       <Footer />
     </div>

@@ -116,15 +116,22 @@ export function Navigation() {
               size="icon"
               className="md:hidden"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation-menu"
               data-testid="button-mobile-menu"
             >
-              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMobileMenuOpen ? (
+                <X className="h-5 w-5" aria-hidden="true" />
+              ) : (
+                <Menu className="h-5 w-5" aria-hidden="true" />
+              )}
             </Button>
           </div>
         </div>
         
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border bg-background">
+          <div id="mobile-navigation-menu" className="md:hidden py-4 border-t border-border bg-background">
             <div className="flex flex-col gap-4">
               {navItems.map((item) => (
                 <a

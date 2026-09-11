@@ -29,12 +29,16 @@ function Routes() {
 }
 
 function App() {
+  // Wouter appends the router base to link paths. Remove the trailing slash
+  // so the root deployment does not produce malformed URLs such as "//".
+  const routerBase = import.meta.env.BASE_URL.replace(/\/$/, "");
+
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <Toaster />
-          <Router base={import.meta.env.BASE_URL}>
+          <Router base={routerBase}>
             <Routes />
           </Router>
         </TooltipProvider>

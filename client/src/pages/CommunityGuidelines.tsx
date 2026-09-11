@@ -174,7 +174,7 @@ export default function CommunityGuidelines() {
       </Helmet>
       <Navigation />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 pt-24 pb-20">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 pt-24 pb-20">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-sm text-muted-foreground mb-6" aria-label="Breadcrumb">
           <Link href="/#community" className="hover:text-foreground transition-colors">Community</Link>
@@ -658,7 +658,7 @@ uv run pre-commit install`}</CodeBlock>
             </nav>
           </aside>
         </div>
-      </div>
+      </main>
 
       <Footer />
     </div>

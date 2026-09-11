@@ -143,14 +143,16 @@ export default function Home() {
       <BackgroundLayer sectionIndex={activeSectionIndex} />
       <Navigation />
       <ScrollIndicator />
-      <ExplosionHero />
-      <AboutSection />
-      <FeaturesSection />
-      <GrantSection />
-      <TeamSection />
-      <ResourcesSection />
-      <PapersSection />
-      <CommunitySection />
+      <main>
+        <ExplosionHero />
+        <AboutSection />
+        <FeaturesSection />
+        <GrantSection />
+        <TeamSection />
+        <ResourcesSection />
+        <PapersSection />
+        <CommunitySection />
+      </main>
       <Footer />
     </div>
   );
