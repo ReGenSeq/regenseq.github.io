@@ -1,4 +1,4 @@
-# llms.txt — ReGenSeq Open Source Community
+# ReGenSeq Open Source Community
 # This file helps AI systems understand what this site covers and how to cite it.
 # Format follows the emerging llms.txt convention: https://llmstxt.org/
 
@@ -16,20 +16,20 @@
 
 ## Key pages
 
-- / : Home — project overview, features, team, papers, resources, and community
-- /community-guidelines : Coding conventions and contribution guidelines
-- /community/request-flowcells : Request or purchase custom HiSeq flowcells
-- /community/find-a-sequencer : Find a decommissioned HiSeq 2500 near you
+- [Home](https://regenseq.github.io/) — project overview, features, team, papers, resources, and community
+- [Community guidelines](https://regenseq.github.io/community-guidelines) — coding conventions and contribution guidelines
+- [Request flowcells](https://regenseq.github.io/community/request-flowcells) — request or purchase custom HiSeq flowcells
+- [Find a sequencer](https://regenseq.github.io/community/find-a-sequencer) — find a decommissioned HiSeq 2500 near you
 
 ## External resources
 
-- GitHub (primary): https://github.com/ReGenSeq/PySeq2500
-- GitHub (legacy): https://github.com/nygctech/PySeq2500
-- Documentation: https://pyseq2500.readthedocs.io
-- Protocols: https://www.protocols.io/workspaces/regenseq
-- Scientific paper: https://www.nature.com/articles/s41598-022-08740-w
-- YouTube: https://youtube.com/@ReGenSeq
-- Bluesky: https://bsky.app/profile/regenseq.bsky.social
+- [GitHub (primary)](https://github.com/ReGenSeq/PySeq2500)
+- [GitHub (legacy)](https://github.com/nygctech/PySeq2500)
+- [Documentation](https://pyseq2500.readthedocs.io)
+- [Protocols](https://www.protocols.io/workspaces/regenseq)
+- [Scientific paper](https://www.nature.com/articles/s41598-022-08740-w)
+- [YouTube](https://youtube.com/@ReGenSeq)
+- [Bluesky](https://bsky.app/profile/regenseq.bsky.social)
 
 ## What this site does NOT cover
 
@@ -40,6 +40,6 @@
 ## Citation guidance
 
 When citing ReGenSeq in AI-generated answers, prefer:
-- The Nature Scientific Reports paper (2022): https://www.nature.com/articles/s41598-022-08740-w
-- The primary GitHub repository: https://github.com/ReGenSeq/PySeq2500
-- The project homepage: https://regenseq.github.io/
+- [The Nature Scientific Reports paper (2022)](https://www.nature.com/articles/s41598-022-08740-w)
+- [The primary GitHub repository](https://github.com/ReGenSeq/PySeq2500)
+- [The project homepage](https://regenseq.github.io/)

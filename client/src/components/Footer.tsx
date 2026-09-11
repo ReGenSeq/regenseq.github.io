@@ -131,9 +131,10 @@ export function Footer() {
               variant="outline"
               className="gap-1 sm:gap-2"
               onClick={() => window.open(`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrlEncoded}`, '_blank')}
+              aria-label="Share on X"
               data-testid="button-share-x"
             >
-              <SiX className="h-4 w-4" />
+              <SiX className="h-4 w-4" aria-hidden="true" />
               <span className="hidden sm:inline">X</span>
             </Button>
             <Button
@@ -141,9 +142,10 @@ export function Footer() {
               variant="outline"
               className="gap-1 sm:gap-2"
               onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrlEncoded}`, '_blank')}
+              aria-label="Share on LinkedIn"
               data-testid="button-share-linkedin"
             >
-              <Linkedin className="h-4 w-4" />
+              <Linkedin className="h-4 w-4" aria-hidden="true" />
               <span className="hidden sm:inline">LinkedIn</span>
             </Button>
             <Button
@@ -151,9 +153,10 @@ export function Footer() {
               variant="outline"
               className="gap-1 sm:gap-2"
               onClick={() => window.open(`https://www.facebook.com/sharer/sharer.php?u=${shareUrlEncoded}`, '_blank')}
+              aria-label="Share on Facebook"
               data-testid="button-share-facebook"
             >
-              <Facebook className="h-4 w-4" />
+              <Facebook className="h-4 w-4" aria-hidden="true" />
               <span className="hidden sm:inline">Facebook</span>
             </Button>
             <Button
@@ -161,9 +164,10 @@ export function Footer() {
               variant="outline"
               className="gap-1 sm:gap-2"
               onClick={() => window.open(`https://reddit.com/r/bioinformatics/submit?url=${shareUrlEncoded}&title=${shareText}`, '_blank')}
+              aria-label="Share on Reddit"
               data-testid="button-share-reddit"
             >
-              <MessageSquare className="h-4 w-4" />
+              <MessageSquare className="h-4 w-4" aria-hidden="true" />
               <span className="hidden sm:inline">Reddit</span>
             </Button>
           </div>
@@ -178,27 +182,30 @@ export function Footer() {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="ReGenSeq on GitHub"
                 data-testid="link-footer-github-icon"
               >
-                <Github className="h-5 w-5" />
+                <Github className="h-5 w-5" aria-hidden="true" />
               </a>
               <a 
                 href="https://bsky.app/profile/regenseq.bsky.social" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="ReGenSeq on Bluesky"
                 data-testid="link-footer-bluesky"
               >
-                <SiBluesky className="h-5 w-5" />
+                <SiBluesky className="h-5 w-5" aria-hidden="true" />
               </a>
               <a 
                 href="https://youtube.com/@ReGenSeq" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="ReGenSeq on YouTube"
                 data-testid="link-footer-youtube"
               >
-                <Youtube className="h-5 w-5" />
+                <Youtube className="h-5 w-5" aria-hidden="true" />
               </a>
             </div>
           </div>
