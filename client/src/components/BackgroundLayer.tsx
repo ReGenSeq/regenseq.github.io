@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { HiSeq2500Outline } from "./HiSeq2500Outline";
+import { lazy, Suspense, useEffect, useState } from "react";
 import bg1 from "@assets/generated_images/Technical_blueprint_HiSeq_2500_e13e3779.png";
 import bg2 from "@assets/generated_images/Monochrome_photo_HiSeq_2500_83e19cb6.png";
 import bg3 from "@assets/generated_images/Ink_sketch_HiSeq_2500_6e3311bb.png";
@@ -10,6 +9,12 @@ import bg7 from "@assets/generated_images/Architectural_elevation_HiSeq_2500_44f
 import bg8 from "@assets/generated_images/Stippled_illustration_HiSeq_2500_b2cb1e01.png";
 import bg9 from "@assets/generated_images/Isometric_drawing_HiSeq_2500_b3bef357.png";
 import bg10 from "@assets/generated_images/Close-up_detail_HiSeq_2500_67107863.png";
+
+const HiSeq2500Outline = lazy(() =>
+  import("./HiSeq2500Outline").then((module) => ({
+    default: module.HiSeq2500Outline,
+  })),
+);
 
 const backgroundImages: Record<number, string> = {
   1: bg1,
@@ -71,7 +76,9 @@ export function BackgroundLayer({ sectionIndex }: BackgroundLayerProps) {
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center text-foreground/10">
-            <HiSeq2500Outline />
+            <Suspense fallback={null}>
+              <HiSeq2500Outline />
+            </Suspense>
           </div>
         )}
       </div>
