@@ -1,66 +1,51 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { ArrowDown, Printer } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 
+type AgendaCategory = "talks" | "sessions" | "breaks" | "networking" | "sponsor";
+
 type AgendaItem = {
   time: string;
+  title?: string;
   talkTitle?: string;
   speaker?: string;
   affiliation?: string;
-  duration?: string;
+  duration: string;
   note?: string;
-};
-
-type AgendaGroup = {
-  time: string;
-  title: string;
   subtitle?: string;
-  duration?: string;
   kind?: "session" | "break" | "opening" | "closing";
-  items?: AgendaItem[];
+  categories: AgendaCategory[];
 };
 
-const agenda: AgendaGroup[] = [
-  { time: "11:30 – 11:45 AM", title: "WELCOME & OPENING REMARKS", duration: "15 min", kind: "opening" },
-  {
-    time: "11:45 AM – 12:35 PM",
-    title: "SESSION 1",
-    subtitle: "Multiplexed Immunofluorescence",
-    kind: "session",
-    items: [
-      { time: "11:45 – 12:10 PM", speaker: "Kunal Pandit", affiliation: "RegenSeq", duration: "25 min" },
-      { time: "12:10 – 12:35 PM", speaker: "Kyle Brandon & Maya Xia", affiliation: "Phatnani Lab, New York Genome Center", duration: "25 min", note: "Co-presenting" },
-    ],
-  },
-  { time: "12:35 – 1:25 PM", title: "PIZZA LUNCH & NETWORKING", duration: "50 min", kind: "break" },
-  {
-    time: "1:25 – 2:40 PM",
-    title: "SESSION 2",
-    subtitle: "Spatial Transcriptomics",
-    kind: "session",
-    items: [
-      { time: "1:25 – 1:50 PM", speaker: "Silas Maniatis", affiliation: "New York Genome Center", duration: "25 min" },
-      { time: "1:50 – 2:15 PM", speaker: "Jiwoon Park", affiliation: "Mason Lab, Weill Cornell Medicine", duration: "25 min" },
-      { time: "2:15 – 2:40 PM", talkTitle: "Sponsor Presentation", speaker: "Speaker to be announced", duration: "25 min" },
-    ],
-  },
-  { time: "2:40 – 3:00 PM", title: "COFFEE BREAK & NETWORKING", duration: "20 min", kind: "break" },
-  {
-    time: "3:00 – 4:15 PM",
-    title: "SESSION 3",
-    subtitle: "Optical Pooled Screens",
-    kind: "session",
-    items: [
-      { time: "3:00 – 3:25 PM", speaker: "Kaden / Deirdre", affiliation: "Norman Lab, Memorial Sloan Kettering Cancer Center", duration: "25 min" },
-      { time: "3:25 – 3:50 PM", speaker: "Speaker to be announced", duration: "25 min" },
-      { time: "3:50 – 4:15 PM", talkTitle: "Sponsor Presentation", speaker: "Speaker to be announced", affiliation: "Genovis", duration: "25 min" },
-    ],
-  },
-  { time: "4:15 – 4:30 PM", title: "CLOSING REMARKS", duration: "15 min", kind: "closing" },
-  { time: "4:30 – 5:45 PM", title: "HAPPY HOUR & NETWORKING", duration: "75 min", kind: "break" },
+const agenda: AgendaItem[] = [
+  { time: "11:30 – 11:45 AM", title: "WELCOME & OPENING REMARKS", duration: "15 min", kind: "opening", categories: ["sessions"] },
+  { time: "11:45 AM – 12:35 PM", title: "SESSION 1", subtitle: "Multiplexed Immunofluorescence", duration: "50 min", kind: "session", categories: ["sessions"] },
+  { time: "11:45 – 12:10 PM", speaker: "Kunal Pandit", affiliation: "RegenSeq", duration: "25 min", categories: ["talks"] },
+  { time: "12:10 – 12:35 PM", speaker: "Kyle Brandon & Maya Xia", affiliation: "Phatnani Lab, New York Genome Center", duration: "25 min", note: "Co-presenting", categories: ["talks"] },
+  { time: "12:35 – 1:25 PM", title: "PIZZA LUNCH & NETWORKING", duration: "50 min", kind: "break", categories: ["breaks", "networking"] },
+  { time: "1:25 – 2:40 PM", title: "SESSION 2", subtitle: "Spatial Transcriptomics", duration: "75 min", kind: "session", categories: ["sessions"] },
+  { time: "1:25 – 1:50 PM", speaker: "Silas Maniatis", affiliation: "New York Genome Center", duration: "25 min", categories: ["talks"] },
+  { time: "1:50 – 2:15 PM", speaker: "Jiwoon Park", affiliation: "Mason Lab, Weill Cornell Medicine", duration: "25 min", categories: ["talks"] },
+  { time: "2:15 – 2:40 PM", talkTitle: "Sponsor Presentation", speaker: "Speaker to be announced", duration: "25 min", categories: ["sponsor"] },
+  { time: "2:40 – 3:00 PM", title: "COFFEE BREAK & NETWORKING", duration: "20 min", kind: "break", categories: ["breaks", "networking"] },
+  { time: "3:00 – 4:15 PM", title: "SESSION 3", subtitle: "Optical Pooled Screens", duration: "75 min", kind: "session", categories: ["sessions"] },
+  { time: "3:00 – 3:25 PM", speaker: "Kaden / Deirdre", affiliation: "Norman Lab, Memorial Sloan Kettering Cancer Center", duration: "25 min", categories: ["talks"] },
+  { time: "3:25 – 3:50 PM", speaker: "Speaker to be announced", duration: "25 min", categories: ["talks"] },
+  { time: "3:50 – 4:15 PM", talkTitle: "Sponsor Presentation", speaker: "Speaker to be announced", affiliation: "Genovis", duration: "25 min", categories: ["sponsor"] },
+  { time: "4:15 – 4:30 PM", title: "CLOSING REMARKS", duration: "15 min", kind: "closing", categories: ["sessions"] },
+  { time: "4:30 – 5:45 PM", title: "HAPPY HOUR & NETWORKING", duration: "75 min", kind: "break", categories: ["networking"] },
+];
+
+const filters: { label: string; value: "all" | AgendaCategory }[] = [
+  { label: "All", value: "all" },
+  { label: "Talks", value: "talks" },
+  { label: "Sessions", value: "sessions" },
+  { label: "Breaks", value: "breaks" },
+  { label: "Networking", value: "networking" },
+  { label: "Sponsor", value: "sponsor" },
 ];
 
 const scrollToAgenda = () => {
@@ -68,23 +53,27 @@ const scrollToAgenda = () => {
   document.getElementById("agenda")?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
 };
 
-function AgendaRow({ item }: { item: AgendaItem }) {
+function AgendaRow({ item, isVisible }: { item: AgendaItem; isVisible: boolean }) {
   return (
-    <li className="meeting-agenda-row grid gap-2 border-t border-border py-4 sm:grid-cols-[10rem_1fr_auto] sm:items-start sm:gap-6">
+    <li className={`meeting-agenda-row grid gap-2 border-b border-border py-4 last:border-b-0 sm:grid-cols-[10rem_minmax(0,1fr)_4.5rem] sm:items-start sm:gap-6 ${item.kind === "break" ? "meeting-break" : ""} ${item.kind === "session" ? "meeting-session" : ""} ${isVisible ? "" : "is-filtered-out"}`}>
       <time className="text-sm font-medium tabular-nums text-muted-foreground">{item.time}</time>
       <div className="min-w-0">
+        {item.title && <h3 className={`text-sm font-semibold tracking-[0.08em] ${item.kind === "session" ? "text-primary" : "text-foreground"}`}>{item.title}</h3>}
+        {item.subtitle && <p className="mt-1 text-base font-medium">{item.subtitle}</p>}
         {item.talkTitle && <p className="mb-1 text-sm text-primary">{item.talkTitle}</p>}
-        <p className="font-medium text-foreground">{item.speaker}</p>
+        {item.speaker && <p className="font-medium text-foreground">{item.speaker}</p>}
         {item.affiliation && <p className="mt-1 text-sm text-muted-foreground">{item.affiliation}</p>}
         {item.note && <p className="mt-1 text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">{item.note}</p>}
       </div>
-      {item.duration && <span className="text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground sm:pt-1">{item.duration}</span>}
+      <span className="text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground sm:pt-1 sm:text-right">{item.duration}</span>
     </li>
   );
 }
 
 export default function Meeting() {
+  const [activeFilter, setActiveFilter] = useState<"all" | AgendaCategory>("all");
   const handlePrint = useCallback(() => window.print(), []);
+  const visibleCount = agenda.filter((item) => activeFilter === "all" || item.categories.includes(activeFilter)).length;
 
   return (
     <div className="meeting-page min-h-screen bg-background text-foreground">
@@ -140,20 +129,32 @@ export default function Meeting() {
             <div><p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">PROGRAM</p><h2 id="agenda-heading" className="mt-2 text-2xl font-semibold sm:text-3xl">Agenda</h2></div>
             <p className="meeting-agenda-description max-w-md text-sm leading-relaxed text-muted-foreground">Talks, community discussions, and networking around emerging RegenSeq applications.</p>
           </div>
+          <div className="meeting-agenda-filters mb-5" role="group" aria-label="Filter agenda">
+            <div className="flex flex-wrap gap-2">
+              {filters.map((filter) => (
+                <button
+                  key={filter.value}
+                  type="button"
+                  aria-pressed={activeFilter === filter.value}
+                  onClick={() => setActiveFilter(filter.value)}
+                  className={`min-h-10 rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${activeFilter === filter.value ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background text-muted-foreground hover:border-primary/50 hover:text-foreground"}`}
+                >
+                  {filter.label}
+                </button>
+              ))}
+            </div>
+            <p className="sr-only" aria-live="polite">{visibleCount} agenda items shown.</p>
+          </div>
           <div className="meeting-agenda border-y border-border">
-            {agenda.map((group) => (
-              <article key={`${group.time}-${group.title}`} className={`meeting-agenda-group ${group.kind === "break" ? "meeting-break" : ""} ${group.kind === "session" ? "meeting-session" : ""}`}>
-                <div className="grid gap-2 py-5 sm:grid-cols-[10rem_1fr_auto] sm:gap-6">
-                  <time className="text-sm font-medium tabular-nums text-muted-foreground">{group.time}</time>
-                  <div>
-                    <h3 className={`text-sm font-semibold tracking-[0.08em] ${group.kind === "session" ? "text-primary" : "text-foreground"}`}>{group.title}</h3>
-                    {group.subtitle && <p className="mt-2 text-lg font-medium">{group.subtitle}</p>}
-                    {group.items && <ul className="mt-3"><>{group.items.map((item) => <AgendaRow key={`${item.time}-${item.speaker}`} item={item} />)}</></ul>}
-                  </div>
-                  {group.duration && <span className="text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground sm:pt-1">{group.duration}</span>}
-                </div>
-              </article>
-            ))}
+            <ol>
+              {agenda.map((item) => (
+                <AgendaRow
+                  key={`${item.time}-${item.title ?? item.speaker}`}
+                  item={item}
+                  isVisible={activeFilter === "all" || item.categories.includes(activeFilter)}
+                />
+              ))}
+            </ol>
           </div>
         </section>
 

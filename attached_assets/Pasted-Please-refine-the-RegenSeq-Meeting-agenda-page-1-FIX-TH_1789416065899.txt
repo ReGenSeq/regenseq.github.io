@@ -1,0 +1,168 @@
+Please refine the RegenSeq Meeting agenda page.
+
+## 1. FIX THE AGENDA ROW STRUCTURE
+
+The agenda currently places times/durations inconsistently depending on whether an item is a talk, session, or break.
+
+Change this so EVERY agenda item follows the same horizontal alignment system.
+
+On desktop, each row should have three consistent columns:
+
+TIME | EVENT CONTENT | DURATION
+
+For example:
+
+11:45 AM – 12:10 PM | Kunal Pandit / RegenSeq | 25 MIN
+
+12:35 – 1:25 PM | Pizza Lunch & Networking | 50 MIN
+
+3:00 – 4:15 PM | Session 3: Optical Pooled Screens | 75 MIN
+
+Requirements:
+
+* All start/end times must appear in the same left-hand column.
+* All durations must appear in the same right-hand column.
+* The center content column contains the session/talk/break information.
+* Do not move the time or duration to another line simply because the event is a different category.
+* Keep column widths consistent across the entire agenda.
+* Align all rows to the same grid.
+* Session rows may have a different background or typographic hierarchy, but they must still use the same three-column layout.
+* Breaks/networking rows may have different styling, but must still use the same three-column layout.
+* Individual talks should follow exactly the same grid.
+
+On mobile, collapse gracefully, but preserve a consistent order:
+TIME
+EVENT
+DURATION
+
+Do not let category styling change the basic information layout.
+
+## 2. ADD FILTER PILLS ABOVE THE AGENDA
+
+Directly above the agenda list, below the Agenda heading and introductory text, add interactive filter pills.
+
+Use these filters:
+
+All
+Talks
+Sessions
+Breaks
+Networking
+Sponsor
+
+"All" should be selected by default.
+
+The pills should use the existing RegenSeq site's visual language:
+
+* rounded pill shape
+* subtle border
+* restrained styling
+* active state should clearly use the site's existing brand/accent color
+* accessible contrast
+* horizontal layout on desktop
+* wrap naturally on mobile
+
+Do not introduce a new visual style.
+
+## 3. FILTER BEHAVIOR
+
+Each agenda item should have a category and filtering should happen instantly on the client side without navigating or reloading the page.
+
+Suggested categorization:
+
+Welcome & Opening Remarks
+→ Session or General
+
+Session 1: Multiplexed Immunofluorescence
+→ Sessions
+
+Kunal Pandit
+→ Talks
+
+Kyle Brandon & Maya Xia
+→ Talks
+
+Pizza Lunch & Networking
+→ Breaks + Networking
+
+Session 2: Spatial Transcriptomics
+→ Sessions
+
+Silas Maniatis
+→ Talks
+
+Jiwoon Park
+→ Talks
+
+Sponsor Presentation
+→ Sponsor
+
+Coffee Break & Networking
+→ Breaks + Networking
+
+Session 3: Optical Pooled Screens
+→ Sessions
+
+Kaden / Deirdre
+→ Talks
+
+Speaker to be announced
+→ Talks
+
+Genovis Sponsor Presentation
+→ Sponsor
+
+Closing Remarks
+→ Session or General
+
+Happy Hour & Networking
+→ Networking
+
+An item may belong to more than one category where appropriate.
+
+For example:
+Pizza Lunch & Networking should appear under both Breaks and Networking.
+
+Coffee Break & Networking should appear under both Breaks and Networking.
+
+## 4. FILTER UX
+
+When a filter is selected:
+
+* show only matching rows
+* keep their original chronological order
+* do not collapse or break the agenda layout
+* update the selected pill state
+* provide a smooth subtle transition if easy to implement
+* do not animate excessively
+
+Clicking "All" restores the entire agenda.
+
+Only one filter needs to be actively selected at a time.
+
+## 5. IMPORTANT VISUAL CORRECTION
+
+The screenshot shows large blank blocks where category-specific layouts appear to be reserving different amounts of space.
+
+Remove that behavior.
+
+Agenda rows should size naturally based on their content.
+
+There should not be large empty areas simply because a session or category uses a different layout.
+
+Keep vertical spacing deliberate and compact enough that the full agenda is reasonably scannable.
+
+## 6. KEEP THE EXISTING DESIGN
+
+Do not redesign the page.
+
+Preserve:
+
+* current hero
+* RegenSeq typography
+* page width
+* colors
+* header/navigation
+* overall page structure
+
+This is a refinement of the agenda component only.
