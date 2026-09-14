@@ -86,14 +86,14 @@ export default function Meeting() {
         <meta property="og:url" content="https://regenseq.github.io/meeting" />
         <meta property="og:type" content="event" />
         <meta property="og:site_name" content="RegenSeq" />
-        <meta property="og:image" content="https://regenseq.github.io/og-image.png" />
-        <meta property="og:image:width" content="1408" />
-        <meta property="og:image:height" content="768" />
-        <meta property="og:image:alt" content="RegenSeq Community Meeting 2026" />
+        <meta property="og:image" content="https://regenseq.github.io/meeting-2026-preview.png" />
+        <meta property="og:image:width" content="2266" />
+        <meta property="og:image:height" content="1183" />
+        <meta property="og:image:alt" content="Fluorescence microscopy image for the RegenSeq Community Meeting 2026" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="RegenSeq Community Meeting 2026" />
         <meta name="twitter:description" content="Agenda for the RegenSeq Community Meeting 2026." />
-        <meta name="twitter:image" content="https://regenseq.github.io/og-image.png" />
+        <meta name="twitter:image" content="https://regenseq.github.io/meeting-2026-preview.png" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Event",

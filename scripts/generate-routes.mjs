@@ -233,10 +233,10 @@ const routes = [
     ogTitle: 'RegenSeq Community Meeting 2026',
     ogDescription:
       'Bringing together the RegenSeq community across multiplexed imaging, spatial transcriptomics, and optical pooled screening.',
-    ogImage: 'https://regenseq.github.io/og-image.png',
-    ogImageWidth: '1408',
-    ogImageHeight: '768',
-    ogImageAlt: 'RegenSeq Community Meeting 2026',
+    ogImage: 'https://regenseq.github.io/meeting-2026-preview.png',
+    ogImageWidth: '2266',
+    ogImageHeight: '1183',
+    ogImageAlt: 'Fluorescence microscopy image for the RegenSeq Community Meeting 2026',
     jsonLdBlocks: [
       {
         "@context": "https://schema.org",
