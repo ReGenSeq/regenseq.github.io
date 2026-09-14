@@ -196,28 +196,36 @@ export default function Meeting() {
           </div>
         </header>
 
-        <section className="meeting-registration mt-8 max-w-4xl rounded-lg border border-border bg-card p-5 sm:p-6" aria-labelledby="registration-heading">
-          <h2 id="registration-heading" className="text-xl font-semibold">Save your spot</h2>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Please register so we can plan food and seating — it takes about 30 seconds.</p>
-          <Button asChild size="lg" className="mt-5">
-            <a href={registrationUrl} target="_blank" rel="noopener noreferrer">
-              Register <ExternalLink aria-hidden="true" />
-            </a>
-          </Button>
-          <div className="my-5 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground" aria-hidden="true">
-            <span className="h-px flex-1 bg-border" />
-            <span>Already registered?</span>
-            <span className="h-px flex-1 bg-border" />
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Button asChild variant="outline" size="sm">
-              <a href={googleCalendarUrl} target="_blank" rel="noopener noreferrer">
-                <CalendarPlus aria-hidden="true" /> Add to Google Calendar
+        <section className="meeting-registration mt-8 max-w-4xl overflow-hidden rounded-xl border border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/10" aria-labelledby="registration-heading">
+          <div className="p-6 sm:flex sm:items-center sm:justify-between sm:gap-8 sm:p-8">
+            <div className="max-w-xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground/70">Registration open</p>
+              <h2 id="registration-heading" className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">Register for the RegenSeq Community Meeting</h2>
+              <p className="mt-3 text-sm leading-relaxed text-primary-foreground/80 sm:text-base">Save your spot and help us plan food and seating. Registration takes about 30 seconds.</p>
+            </div>
+            <Button asChild size="lg" className="mt-6 w-full shrink-0 border-white bg-white px-7 text-primary shadow-md hover:bg-white sm:mt-0 sm:w-auto">
+              <a href={registrationUrl} target="_blank" rel="noopener noreferrer">
+                Register now <ExternalLink aria-hidden="true" />
+                <span className="sr-only">(opens Google Form in a new tab)</span>
               </a>
             </Button>
-            <Button type="button" variant="outline" size="sm" onClick={downloadCalendarEvent}>
-              <CalendarPlus aria-hidden="true" /> Add to Apple / Outlook Calendar
-            </Button>
+          </div>
+          <div className="border-t border-primary-foreground/20 bg-black/10 px-6 py-5 sm:flex sm:items-center sm:justify-between sm:gap-6 sm:px-8">
+            <div>
+              <p className="font-medium">Already registered?</p>
+              <p className="mt-1 text-sm text-primary-foreground/70">Add the event to your calendar so you don’t miss it.</p>
+            </div>
+            <div className="mt-4 flex flex-col gap-3 sm:mt-0 sm:flex-row">
+              <Button asChild variant="outline" size="sm" className="border-primary-foreground/35 text-primary-foreground [--button-outline:hsl(var(--primary-foreground)/0.35)] hover:border-primary-foreground/60">
+                <a href={googleCalendarUrl} target="_blank" rel="noopener noreferrer">
+                  <CalendarPlus aria-hidden="true" /> Google Calendar
+                  <span className="sr-only">(opens in a new tab)</span>
+                </a>
+              </Button>
+              <Button type="button" variant="outline" size="sm" onClick={downloadCalendarEvent} className="border-primary-foreground/35 text-primary-foreground [--button-outline:hsl(var(--primary-foreground)/0.35)] hover:border-primary-foreground/60">
+                <CalendarPlus aria-hidden="true" /> Apple / Outlook
+              </Button>
+            </div>
           </div>
         </section>
 
