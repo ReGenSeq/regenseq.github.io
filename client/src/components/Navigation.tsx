@@ -11,7 +11,7 @@ const navItems = [
   { label: "Resources", href: "/#resources" },
   { label: "Papers", href: "/#papers" },
   { label: "Community", href: "/#community" },
-  { label: "Meeting 2026", href: "/meeting" },
+  { label: "Community Meeting 2026", href: "/meeting" },
 ];
 
 export function Navigation() {
