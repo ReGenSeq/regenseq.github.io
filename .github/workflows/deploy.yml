@@ -20,10 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '20'
           cache: 'npm'
@@ -53,6 +53,10 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
+          if [[ -z "$SLACK_WEBHOOK_URL" ]]; then
+            echo "::notice::SLACK_WEBHOOK_URL is not configured; skipping failure notification."
+            exit 0
+          fi
           RUN_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           PAYLOAD=$(jq -n \
             --arg text "❌ *Build job failed* on \`${{ github.ref_name }}\`" \
@@ -95,6 +99,10 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
+          if [[ -z "$SLACK_WEBHOOK_URL" ]]; then
+            echo "::notice::SLACK_WEBHOOK_URL is not configured; skipping failure notification."
+            exit 0
+          fi
           RUN_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           PAYLOAD=$(jq -n \
             --arg text "❌ *Deploy job failed* on \`${{ github.ref_name }}\`" \
@@ -126,10 +134,10 @@ jobs:
     needs: deploy
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '20'
 
@@ -147,6 +155,10 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
+          if [[ -z "$SLACK_WEBHOOK_URL" ]]; then
+            echo "::notice::SLACK_WEBHOOK_URL is not configured; skipping failure notification."
+            exit 0
+          fi
           OUTPUT=$(cat /tmp/smoke-test-output.txt 2>/dev/null || echo "(no output captured)")
           # Truncate to stay within Slack's block text limit (3000 chars)
           OUTPUT="${OUTPUT:0:2800}"

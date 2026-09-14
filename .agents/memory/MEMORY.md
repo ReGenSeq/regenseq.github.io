@@ -1,0 +1,1 @@
+- [Portable npm lockfile](portable-npm-lockfile.md) — GitHub Pages installs must not depend on Replit-internal package registry URLs.
