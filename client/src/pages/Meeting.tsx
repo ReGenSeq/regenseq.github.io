@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { ArrowDown, Printer } from "lucide-react";
+import { ArrowDown, CalendarPlus, ExternalLink, MapPin, Printer } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -48,9 +48,54 @@ const filters: { label: string; value: "all" | AgendaCategory }[] = [
   { label: "Sponsor", value: "sponsor" },
 ];
 
+const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeNf6wEDJiQIxeC5YHyYY34IOkrSxRlvBZg3yXYP3qR1r4NZw/viewform";
+const eventLocation = "New York Genome Center, 101 Avenue of the Americas, New York, NY 10013";
+const eventDetails = `Talks in the Auditorium. Lunch, coffee, and happy hour in the Atrium.\n\nRegister: ${registrationUrl}`;
+const googleCalendarUrl = `https://calendar.google.com/calendar/render?${new URLSearchParams({
+  action: "TEMPLATE",
+  text: "RegenSeq Community Meeting 2026",
+  dates: "20261013T153000Z/20261013T214500Z",
+  details: eventDetails,
+  location: eventLocation,
+}).toString()}`;
+
 const scrollToAgenda = () => {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   document.getElementById("agenda")?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+};
+
+const downloadCalendarEvent = () => {
+  const escapeIcsText = (value: string) => value
+    .replace(/\\/g, "\\\\")
+    .replace(/\n/g, "\\n")
+    .replace(/,/g, "\\,")
+    .replace(/;/g, "\\;");
+  const calendar = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//RegenSeq//Community Meeting 2026//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    "BEGIN:VEVENT",
+    "UID:regenseq-community-meeting-2026@regenseq.github.io",
+    "DTSTAMP:20260914T000000Z",
+    "DTSTART:20261013T153000Z",
+    "DTEND:20261013T214500Z",
+    `SUMMARY:${escapeIcsText("RegenSeq Community Meeting 2026")}`,
+    `DESCRIPTION:${escapeIcsText(eventDetails)}`,
+    `LOCATION:${escapeIcsText(eventLocation)}`,
+    "URL:https://regenseq.github.io/meeting",
+    "END:VEVENT",
+    "END:VCALENDAR",
+  ].join("\r\n");
+  const url = URL.createObjectURL(new Blob([calendar], { type: "text/calendar;charset=utf-8" }));
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "regenseq-community-meeting-2026.ics";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
 };
 
 function AgendaRow({ item, isVisible }: { item: AgendaItem; isVisible: boolean }) {
@@ -100,7 +145,20 @@ export default function Meeting() {
           name: "RegenSeq Community Meeting 2026",
           description: "A RegenSeq community meeting sharing emerging applications, workflows, and ideas across multiplexed imaging, spatial transcriptomics, and optical pooled screening.",
           url: "https://regenseq.github.io/meeting",
-          location: { "@type": "Place", name: "New York Genome Center", address: { "@type": "PostalAddress", addressLocality: "New York City" } },
+          startDate: "2026-10-13T11:30:00-04:00",
+          endDate: "2026-10-13T17:45:00-04:00",
+          location: {
+            "@type": "Place",
+            name: "New York Genome Center",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "101 Avenue of the Americas",
+              addressLocality: "New York",
+              addressRegion: "NY",
+              postalCode: "10013",
+              addressCountry: "US",
+            },
+          },
           organizer: { "@type": "Organization", name: "RegenSeq Open Source Community", url: "https://regenseq.github.io/" },
           eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
           eventStatus: "https://schema.org/EventScheduled",
@@ -112,8 +170,22 @@ export default function Meeting() {
         <header className="meeting-hero max-w-4xl border-b border-border pb-10">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary">REGENSeq COMMUNITY MEETING</p>
           <h1 className="max-w-3xl text-3xl font-bold tracking-tight text-foreground sm:text-5xl">RegenSeq Community Meeting 2026</h1>
-          <div className="mt-6 flex flex-wrap gap-x-8 gap-y-2 text-sm text-muted-foreground">
-            <span>[DATE TO BE CONFIRMED]</span><span>New York Genome Center</span><span>New York City</span>
+          <div className="mt-6 grid max-w-3xl gap-4 text-sm text-muted-foreground sm:grid-cols-2">
+            <div className="flex items-start gap-2">
+              <CalendarPlus className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
+              <div>
+                <time dateTime="2026-10-13">Tuesday, October 13, 2026</time>
+                <p className="mt-1">11:30 AM – 5:45 PM ET</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-2">
+              <MapPin className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
+              <div>
+                <p>New York Genome Center</p>
+                <p className="mt-1">101 Avenue of the Americas, New York, NY 10013</p>
+                <p className="mt-1 text-xs">Talks in the Auditorium · Lunch, coffee &amp; happy hour in the Atrium</p>
+              </div>
+            </div>
           </div>
           <p className="meeting-hero-description mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
             Bringing together the RegenSeq community to share emerging applications, workflows, and ideas across multiplexed imaging, spatial transcriptomics, and optical pooled screening.
@@ -123,6 +195,31 @@ export default function Meeting() {
             <Button variant="outline" onClick={handlePrint} className="gap-2"><Printer aria-hidden="true" /> Print / Save Agenda</Button>
           </div>
         </header>
+
+        <section className="meeting-registration mt-8 max-w-4xl rounded-lg border border-border bg-card p-5 sm:p-6" aria-labelledby="registration-heading">
+          <h2 id="registration-heading" className="text-xl font-semibold">Save your spot</h2>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Please register so we can plan food and seating — it takes about 30 seconds.</p>
+          <Button asChild size="lg" className="mt-5">
+            <a href={registrationUrl} target="_blank" rel="noopener noreferrer">
+              Register <ExternalLink aria-hidden="true" />
+            </a>
+          </Button>
+          <div className="my-5 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground" aria-hidden="true">
+            <span className="h-px flex-1 bg-border" />
+            <span>Already registered?</span>
+            <span className="h-px flex-1 bg-border" />
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Button asChild variant="outline" size="sm">
+              <a href={googleCalendarUrl} target="_blank" rel="noopener noreferrer">
+                <CalendarPlus aria-hidden="true" /> Add to Google Calendar
+              </a>
+            </Button>
+            <Button type="button" variant="outline" size="sm" onClick={downloadCalendarEvent}>
+              <CalendarPlus aria-hidden="true" /> Add to Apple / Outlook Calendar
+            </Button>
+          </div>
+        </section>
 
         <section id="agenda" className="scroll-mt-24 pt-12" aria-labelledby="agenda-heading">
           <div className="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">

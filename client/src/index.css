@@ -390,6 +390,7 @@
   .meeting-page { background: white; color: #111827; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .meeting-page .meeting-site-chrome,
   .meeting-page .meeting-actions,
+  .meeting-page .meeting-registration,
   .meeting-page .meeting-agenda-filters,
   .meeting-page .meeting-support,
   .meeting-page .meeting-hero-description,

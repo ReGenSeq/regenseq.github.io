@@ -244,12 +244,18 @@ const routes = [
         "name": "RegenSeq Community Meeting 2026",
         "description": "A RegenSeq community meeting sharing emerging applications, workflows, and ideas across multiplexed imaging, spatial transcriptomics, and optical pooled screening.",
         "url": "https://regenseq.github.io/meeting",
+        "startDate": "2026-10-13T11:30:00-04:00",
+        "endDate": "2026-10-13T17:45:00-04:00",
         "location": {
           "@type": "Place",
           "name": "New York Genome Center",
           "address": {
             "@type": "PostalAddress",
-            "addressLocality": "New York City"
+            "streetAddress": "101 Avenue of the Americas",
+            "addressLocality": "New York",
+            "addressRegion": "NY",
+            "postalCode": "10013",
+            "addressCountry": "US"
           }
         },
         "organizer": {
