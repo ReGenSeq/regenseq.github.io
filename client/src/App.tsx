@@ -13,6 +13,7 @@ const FindSequencer = lazy(() => import("@/pages/FindSequencer"));
 const HiSeqOutline = lazy(() => import("@/pages/HiSeqOutline"));
 const LogoSelection = lazy(() => import("@/pages/LogoSelection"));
 const BackgroundSelection = lazy(() => import("@/pages/BackgroundSelection"));
+const Meeting = lazy(() => import("@/pages/Meeting"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 function Routes() {
@@ -32,6 +33,7 @@ function Routes() {
         <Route path="/hiseq-outline" component={HiSeqOutline} />
         <Route path="/logo-selection" component={LogoSelection} />
         <Route path="/background-selection" component={BackgroundSelection} />
+        <Route path="/meeting" component={Meeting} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>

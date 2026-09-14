@@ -377,3 +377,32 @@
     font-size: var(--text-subtitle);
   }
 }
+
+/* Meeting poster / print treatment. Scoped so the shared site remains unchanged. */
+.meeting-page .meeting-break { background: hsl(var(--muted) / 0.28); }
+.meeting-page .meeting-session { background: hsl(var(--primary) / 0.035); }
+@media (prefers-reduced-motion: reduce) {
+  .meeting-page, .meeting-page * { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+}
+@media print {
+  .meeting-page { background: white; color: #111827; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .meeting-page .meeting-site-chrome,
+  .meeting-page .meeting-actions,
+  .meeting-page .meeting-support,
+  .meeting-page .meeting-hero-description,
+  .meeting-page .meeting-agenda-description { display: none !important; }
+  .meeting-page main { max-width: none !important; width: 111.11%; padding: 0 !important; zoom: 0.9; }
+  .meeting-page .meeting-hero { max-width: none; padding: 0 0 0.75rem; }
+  .meeting-page .meeting-agenda { border-color: hsl(var(--foreground) / 0.35); }
+  .meeting-page .meeting-agenda-row { break-inside: avoid; page-break-inside: avoid; }
+  .meeting-page .meeting-agenda-group { break-inside: auto; page-break-inside: auto; }
+  .meeting-page .meeting-agenda-group { border-bottom: 1px solid hsl(var(--border)); }
+  .meeting-page .meeting-agenda-group:last-child { border-bottom: 0; }
+  .meeting-page .meeting-session { background: transparent; }
+  .meeting-page .meeting-break { background: #f3f4f6; }
+  .meeting-page h1 { font-size: 2rem; }
+  .meeting-page #agenda { padding-top: 0.75rem; }
+  .meeting-page #agenda > div:first-child { margin-bottom: 0.5rem; }
+  .meeting-page .meeting-agenda-group > div { padding-top: 0.3rem; padding-bottom: 0.3rem; }
+  .meeting-page .meeting-agenda-row { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+}

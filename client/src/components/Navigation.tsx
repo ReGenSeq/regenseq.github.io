@@ -11,6 +11,7 @@ const navItems = [
   { label: "Resources", href: "/#resources" },
   { label: "Papers", href: "/#papers" },
   { label: "Community", href: "/#community" },
+  { label: "Meeting 2026", href: "/meeting" },
 ];
 
 export function Navigation() {
@@ -59,8 +60,15 @@ export function Navigation() {
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
+
+    if (!href.includes("#")) {
+      navigate(href);
+      window.scrollTo({ top: 0, behavior: "auto" });
+      return;
+    }
+
     // Extract the hash portion (e.g. "/#about" → "#about")
-    const hash = href.includes("#") ? "#" + href.split("#")[1] : href;
+    const hash = "#" + href.split("#")[1];
     const sectionId = hash.slice(1); // strip leading #
 
     const scrollToSection = () => {
@@ -103,7 +111,7 @@ export function Navigation() {
             </Link>
           </div>
           
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-6 xl:gap-8">
             {navItems.map((item) => (
               <a
                 key={item.href}
@@ -122,7 +130,7 @@ export function Navigation() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="lg:hidden"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={isMobileMenuOpen}
@@ -139,7 +147,7 @@ export function Navigation() {
         </div>
         
         {isMobileMenuOpen && (
-          <div id="mobile-navigation-menu" className="md:hidden py-4 border-t border-border bg-background">
+          <div id="mobile-navigation-menu" className="lg:hidden py-4 border-t border-border bg-background">
             <div className="flex flex-col gap-4">
               {navItems.map((item) => (
                 <a

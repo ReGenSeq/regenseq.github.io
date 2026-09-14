@@ -1,0 +1,263 @@
+Please update the existing RegenSeq website at https://regenseq.github.io/ by adding a new public event page for the RegenSeq Community Meeting.
+
+IMPORTANT:
+
+* Work within the EXISTING website and codebase.
+* Do not redesign the RegenSeq website globally.
+* Reuse the site's existing typography, colors, spacing, buttons, navigation behavior, card styles, width constraints, header, and footer.
+* The new page should feel as though it has always been part of the RegenSeq website.
+* First inspect the existing components and styles and reuse them wherever possible rather than creating duplicate styling.
+* Preserve all existing pages and functionality.
+
+## NAVIGATION
+
+Add a new navigation item immediately to the RIGHT of "Community":
+
+Meeting 2026
+
+Link it to:
+
+/meeting
+
+The navigation must remain responsive and work correctly on mobile.
+
+## PAGE
+
+Create a new route/page:
+
+/meeting
+
+Page title:
+
+RegenSeq Community Meeting 2026
+
+This is a scientific/community event page, not a generic conference template. Keep it clean, technical, modern, and consistent with RegenSeq's existing open-source/spatial-biology identity.
+
+Do NOT introduce an unrelated design system, new brand colors, gradients, or decorative conference graphics that conflict with the existing site.
+
+### 1. HERO
+
+Create a compact event hero using the styling language of the existing RegenSeq website.
+
+Include:
+
+REGENSeq COMMUNITY MEETING
+
+[DATE TO BE CONFIRMED]
+
+New York Genome Center
+New York City
+
+Supporting text:
+
+Bringing together the RegenSeq community to share emerging applications, workflows, and ideas across multiplexed imaging, spatial transcriptomics, and optical pooled screening.
+
+Add a primary button:
+
+View Agenda
+
+This should smoothly scroll to the agenda.
+
+Do not make the hero excessively tall. The agenda is the most important content on this page and should be visible quickly.
+
+### 2. AGENDA
+
+Add the heading:
+
+Agenda
+
+Optional small supporting text:
+
+Talks, community discussions, and networking around emerging RegenSeq applications.
+
+Create an elegant vertical agenda rather than a dense HTML spreadsheet.
+
+Each major session should be visually grouped.
+
+The LEFT side should emphasize the time.
+
+The RIGHT side should contain:
+
+* session title
+* speaker
+* institution
+* duration where appropriate
+
+Use subtle borders, spacing, cards, timeline treatment, or other visual conventions already compatible with the website.
+
+Scientific sessions should be more prominent than individual talks.
+
+Breaks/networking blocks should be visually differentiated but should NOT dominate the page.
+
+Do not use pizza, coffee, or beer emoji. If an icon system already exists in the project, subtle icons may be used. Otherwise use typography only.
+
+Use this agenda:
+
+11:30 – 11:45 AM
+WELCOME & OPENING REMARKS
+15 min
+
+11:45 AM – 12:35 PM
+SESSION 1
+Multiplexed Immunofluorescence
+
+11:45 AM – 12:10 PM
+Kunal Pandit
+RegenSeq
+25 min
+
+12:10 – 12:35 PM
+Kyle Brandon & Maya Xia
+Phatnani Lab, New York Genome Center
+Co-presenting
+25 min
+
+12:35 – 1:25 PM
+PIZZA LUNCH & NETWORKING
+50 min
+
+1:25 – 2:40 PM
+SESSION 2
+Spatial Transcriptomics
+
+1:25 – 1:50 PM
+Silas Maniatis
+New York Genome Center
+25 min
+
+1:50 – 2:15 PM
+Jiwoon Park
+Mason Lab, Weill Cornell Medicine
+25 min
+
+2:15 – 2:40 PM
+Sponsor Presentation
+Speaker to be announced
+25 min
+
+2:40 – 3:00 PM
+COFFEE BREAK & NETWORKING
+20 min
+
+3:00 – 4:15 PM
+SESSION 3
+Optical Pooled Screens
+
+3:00 – 3:25 PM
+Kaden / Deirdre
+Norman Lab, Memorial Sloan Kettering Cancer Center
+25 min
+
+3:25 – 3:50 PM
+Speaker to be announced
+25 min
+
+3:50 – 4:15 PM
+Sponsor Presentation
+Genovis
+Speaker to be announced
+25 min
+
+4:15 – 4:30 PM
+CLOSING REMARKS
+15 min
+
+4:30 – 5:45 PM
+HAPPY HOUR & NETWORKING
+75 min
+
+IMPORTANT CONTENT RULES:
+
+* Do not identify Illumina as a sponsor yet because sponsorship is still pending.
+* Do not mention "hopefully Jellert's lab."
+* Use "Speaker to be announced" for the unconfirmed speaker.
+* Do not invent talk titles.
+* Do not invent affiliations or speaker details beyond those listed above.
+* Structure the content so speaker names, talk titles, affiliations, and sponsors can be updated easily later.
+
+### 3. OPTIONAL TALK TITLES
+
+Because presentation titles are still being confirmed, design each talk component so a talk title can later be inserted between the speaker name and affiliation without requiring redesign.
+
+For now, do NOT create fake titles or display "TBD" repeatedly.
+
+### 4. SPONSORS / SUPPORT
+
+Below the agenda, create a small restrained area that can later hold sponsor logos.
+
+Heading:
+
+Event Support
+
+Do not display Illumina at this stage.
+
+If Genovis sponsorship is confirmed elsewhere in the existing content/data, it can be shown. Otherwise leave the sponsor component ready but do not falsely present any organization as confirmed.
+
+The layout should support adding sponsor logos later without redesigning the page.
+
+### 5. PRINT / POSTER VERSION
+
+The organizers also need a poster containing the agenda.
+
+Please make the event page print-friendly using CSS print styles.
+
+When printed or saved as PDF:
+
+* hide the main site navigation and footer
+* remove unnecessary buttons
+* format the event title, date/location and agenda as a clean poster
+* use the RegenSeq visual identity
+* preserve clear session hierarchy
+* ensure the full agenda remains legible
+* avoid content being awkwardly split between pages
+
+If feasible within the existing framework, add a subtle button near the agenda:
+
+Print / Save Agenda
+
+This should simply trigger the browser's print dialog. Do not introduce a PDF-generation dependency unless the project already uses one.
+
+### 6. RESPONSIVE DESIGN
+
+Desktop:
+Use the available page width intelligently. The agenda can use a timeline or time/content two-column structure.
+
+Mobile:
+Collapse naturally into a single column while keeping times easy to scan.
+Do not allow horizontal scrolling.
+Do not use a conventional wide table that becomes unreadable on phones.
+
+### 7. ACCESSIBILITY
+
+Maintain good text contrast.
+Use semantic headings.
+Ensure links and buttons have accessible labels.
+Do not communicate session differences through color alone.
+
+### 8. CONSISTENCY
+
+Before finalizing, compare the new page against the existing:
+
+* header/navigation
+* homepage
+* Community section/page
+* buttons
+* typography
+* cards
+* section widths
+* footer
+
+The new page should look like a native extension of the current RegenSeq website, not a microsite embedded inside it.
+
+Do not modify unrelated text or pages.
+
+After implementing, verify:
+
+1. Existing navigation still works.
+2. "Meeting 2026" appears immediately to the right of "Community."
+3. /meeting loads directly.
+4. The page works on desktop and mobile.
+5. All agenda times and durations match the supplied agenda.
+6. No unconfirmed Illumina sponsorship appears anywhere.
+7. No speaker or talk information has been invented.
+8. Print preview produces a clean agenda/poster layout.

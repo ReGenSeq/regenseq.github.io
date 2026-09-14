@@ -224,6 +224,44 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/meeting',
+    title: 'RegenSeq Community Meeting 2026 | RegenSeq',
+    description:
+      'Agenda for the RegenSeq Community Meeting 2026 at the New York Genome Center in New York City.',
+    canonical: 'https://regenseq.github.io/meeting',
+    ogTitle: 'RegenSeq Community Meeting 2026',
+    ogDescription:
+      'Bringing together the RegenSeq community across multiplexed imaging, spatial transcriptomics, and optical pooled screening.',
+    ogImage: 'https://regenseq.github.io/og-image.png',
+    ogImageWidth: '1408',
+    ogImageHeight: '768',
+    ogImageAlt: 'RegenSeq Community Meeting 2026',
+    jsonLdBlocks: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "name": "RegenSeq Community Meeting 2026",
+        "description": "A RegenSeq community meeting sharing emerging applications, workflows, and ideas across multiplexed imaging, spatial transcriptomics, and optical pooled screening.",
+        "url": "https://regenseq.github.io/meeting",
+        "location": {
+          "@type": "Place",
+          "name": "New York Genome Center",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "New York City"
+          }
+        },
+        "organizer": {
+          "@type": "Organization",
+          "name": "RegenSeq Open Source Community",
+          "url": "https://regenseq.github.io/"
+        },
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled"
+      },
+    ],
+  },
 ];
 
 function injectMeta(html, route) {
