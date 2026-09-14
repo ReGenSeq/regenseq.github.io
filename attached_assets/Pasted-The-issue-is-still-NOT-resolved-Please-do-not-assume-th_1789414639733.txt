@@ -1,0 +1,48 @@
+The issue is still NOT resolved.
+
+Please do not assume this is a local DNS/cache problem on my computer just because the hostname resolves from inside the Replit container or through Google DNS.
+
+The URL you gave me:
+
+`https://56af4c08-1727-44f5-b7a1-f592332bc358-00-2ehwy3fw5i37i.kirk.replit.dev/`
+
+does not load from my browser and returns:
+
+“server IP address could not be found.”
+
+I also still cannot use the embedded Preview pane.
+
+I need you to troubleshoot this from the REPLIT SIDE rather than giving me browser/DNS workarounds.
+
+Please do the following:
+
+1. Check the current Preview configuration for this project and determine which running process and port the Preview pane is actually attached to.
+
+2. Inspect the current `.replit` networking/port configuration and verify that port 5000 is correctly exposed as the web/preview port.
+
+3. Verify whether the current `kirk.replit.dev` hostname shown by Replit is actually the active development hostname for THIS running workspace, rather than an old/stale hostname from a previous compute session.
+
+4. Restart the development server and force Replit to regenerate/rebind the Preview URL if necessary.
+
+5. After restarting, obtain the development URL directly from the active Replit Preview/Networking configuration. Do not reuse the previous hostname.
+
+6. Test the NEW URL as an external/public request, not only from localhost or from inside the Replit container.
+
+7. Inspect the Replit Preview/webview configuration itself. Since both the embedded Preview and external development URL are failing for me, investigate whether the workspace's preview proxy/domain association is broken.
+
+8. If port 5000 is not the best configuration for Replit Preview, change the app/network configuration to whatever Replit currently expects and verify that the application still runs correctly.
+
+9. Do not modify the website design or application functionality while troubleshooting this. The goal is only to restore a working Preview.
+
+10. If the Replit development Preview infrastructure cannot be repaired, create a temporary Replit deployment or another Replit-hosted preview URL so I have a reliable browser-accessible preview while we continue development.
+
+At the end, give me:
+
+* the exact active port
+* the exact active Replit development URL
+* whether you regenerated the URL
+* whether it was tested externally
+* what you changed
+* whether the embedded Preview pane is now working
+
+Do not conclude that this is my local DNS unless you can demonstrate that the exact newly generated URL works from an external network outside the Replit environment.
