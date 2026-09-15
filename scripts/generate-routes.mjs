@@ -7,7 +7,7 @@
  * Run automatically via: npm run build
  */
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -362,16 +362,6 @@ for (const route of routes) {
     writeFileSync(join(dir, 'index.html'), html);
     console.log(`✅  ${route.path}  →  dist/public/${segments}/index.html`);
   }
-}
-
-// Update sitemap lastmod dates to today's date
-const today = new Date().toISOString().split('T')[0];
-const sitemapPath = join(distPath, 'sitemap.xml');
-if (existsSync(sitemapPath)) {
-  let sitemap = readFileSync(sitemapPath, 'utf-8');
-  sitemap = sitemap.replace(/<lastmod>[^<]*<\/lastmod>/g, `<lastmod>${today}</lastmod>`);
-  writeFileSync(sitemapPath, sitemap);
-  console.log(`✅  sitemap.xml lastmod → ${today}`);
 }
 
 console.log('\n🎉  Route generation complete.');
