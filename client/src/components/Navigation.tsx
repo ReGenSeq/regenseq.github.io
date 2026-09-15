@@ -11,13 +11,13 @@ const navItems = [
   { label: "Resources", href: "/#resources" },
   { label: "Papers", href: "/#papers" },
   { label: "Community", href: "/#community" },
-  { label: "Community Meeting 2026", href: "/meeting" },
+  { label: "Community Meeting 2026", href: "/meeting", featured: true },
 ];
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [, navigate] = useLocation();
+  const [location, navigate] = useLocation();
 
   useEffect(() => {
     const scrollContainer = document.querySelector('[class*="overflow-y-scroll"]') as HTMLElement | null;
@@ -117,7 +117,12 @@ export function Navigation() {
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleSmoothScroll(e, item.href)}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                className={
+                  item.featured
+                    ? "rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    : "text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                }
+                aria-current={location === item.href ? "page" : undefined}
                 data-testid={`link-nav-${item.label.toLowerCase()}`}
               >
                 {item.label}
@@ -154,7 +159,12 @@ export function Navigation() {
                   key={item.href}
                   href={item.href}
                   onClick={(e) => handleSmoothScroll(e, item.href)}
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors text-left"
+                  className={
+                    item.featured
+                      ? "rounded-lg bg-primary px-4 py-3 text-left text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                      : "text-left text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  }
+                  aria-current={location === item.href ? "page" : undefined}
                   data-testid={`link-mobile-nav-${item.label.toLowerCase()}`}
                 >
                   {item.label}
