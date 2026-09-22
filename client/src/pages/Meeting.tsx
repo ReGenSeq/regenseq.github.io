@@ -270,22 +270,34 @@ export default function Meeting() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">COMMUNITY PARTNERS</p>
           <h2 id="support-heading" className="mt-2 text-xl font-semibold">Event Sponsors</h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
-            <div className="flex min-h-32 items-center justify-center rounded-lg border border-border bg-white px-8 py-6 shadow-sm">
+            <a
+              href="https://www.illumina.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visit the Illumina website"
+              className="flex min-h-32 items-center justify-center rounded-lg border border-border bg-white px-8 py-6 shadow-sm transition hover:border-primary/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            >
               <img
                 src="/illumina-logo.png"
                 alt="Illumina"
                 className="h-auto max-h-16 w-full max-w-72 object-contain"
                 loading="lazy"
               />
-            </div>
-            <div className="flex min-h-32 items-center justify-center rounded-lg border border-border bg-white px-8 py-6 shadow-sm">
+            </a>
+            <a
+              href="https://www.genovis.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visit the Genovis website"
+              className="flex min-h-32 items-center justify-center rounded-lg border border-border bg-white px-8 py-6 shadow-sm transition hover:border-primary/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            >
               <img
                 src="/genovis-logo.png"
                 alt="Genovis"
                 className="h-auto max-h-16 w-full max-w-72 object-contain"
                 loading="lazy"
               />
-            </div>
+            </a>
           </div>
         </section>
       </main>
