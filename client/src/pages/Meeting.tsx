@@ -34,7 +34,7 @@ const agenda: AgendaItem[] = [
   { time: "3:00 – 4:15 PM", title: "SESSION 3", subtitle: "Optical Pooled Screens", duration: "75 min", kind: "session", categories: ["sessions"] },
   { time: "3:00 – 3:25 PM", speaker: "Kaden Southard & Deirdre O'Sullivan", affiliation: "Norman Lab, Memorial Sloan Kettering Cancer Center", duration: "25 min", categories: ["talks"] },
   { time: "3:25 – 3:50 PM", speaker: "Joyce Noble", affiliation: "Genovis*", duration: "25 min", categories: ["sponsor"] },
-  { time: "3:50 – 4:15 PM", speaker: "Jellert Gaublomme", affiliation: "Gaublomme Lab, Biological Sciences, Columbia University", duration: "25 min", categories: ["talks"] },
+  { time: "3:50 – 4:15 PM", speaker: "Jellert Gaublomme", affiliation: "Columbia University", duration: "25 min", categories: ["talks"] },
   { time: "4:15 – 4:30 PM", title: "CLOSING REMARKS", duration: "15 min", kind: "closing", categories: ["sessions"] },
   { time: "4:30 – 5:45 PM", title: "HAPPY HOUR & NETWORKING", duration: "75 min", kind: "break", categories: ["networking"] },
 ];
