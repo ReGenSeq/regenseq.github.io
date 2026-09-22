@@ -268,8 +268,25 @@ export default function Meeting() {
 
         <section className="meeting-support mt-14 border-t border-border pt-8" aria-labelledby="support-heading">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">COMMUNITY PARTNERS</p>
-          <h2 id="support-heading" className="mt-2 text-xl font-semibold">Event Support</h2>
-          <div className="mt-5 flex min-h-20 items-center rounded-md border border-dashed border-border px-5 text-sm text-muted-foreground">Event supporters will be announced as details are confirmed.</div>
+          <h2 id="support-heading" className="mt-2 text-xl font-semibold">Event Sponsors</h2>
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <div className="flex min-h-32 items-center justify-center rounded-lg border border-border bg-white px-8 py-6 shadow-sm">
+              <img
+                src="/illumina-logo.png"
+                alt="Illumina"
+                className="h-auto max-h-16 w-full max-w-72 object-contain"
+                loading="lazy"
+              />
+            </div>
+            <div className="flex min-h-32 items-center justify-center rounded-lg border border-border bg-white px-8 py-6 shadow-sm">
+              <img
+                src="/genovis-logo.png"
+                alt="Genovis"
+                className="h-auto max-h-16 w-full max-w-72 object-contain"
+                loading="lazy"
+              />
+            </div>
+          </div>
         </section>
       </main>
       <div className="meeting-site-chrome"><Footer /></div>
