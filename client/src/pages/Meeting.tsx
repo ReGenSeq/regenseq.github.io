@@ -32,7 +32,7 @@ const agenda: AgendaItem[] = [
   { time: "2:15 – 2:40 PM", speaker: "Jiwoon Park", affiliation: "Mason Lab, Weill Cornell Medicine", duration: "25 min", categories: ["talks"] },
   { time: "2:40 – 3:00 PM", title: "COFFEE BREAK & NETWORKING", duration: "20 min", kind: "break", categories: ["breaks", "networking"] },
   { time: "3:00 – 4:15 PM", title: "SESSION 3", subtitle: "Optical Pooled Screens", duration: "75 min", kind: "session", categories: ["sessions"] },
-  { time: "3:00 – 3:25 PM", speaker: "Kaden Southard & Deirdre O'Sullivan", affiliation: "Norman Lab, Memorial Sloan Kettering Cancer Center", duration: "25 min", categories: ["talks"] },
+  { time: "3:00 – 3:25 PM", speaker: "Deirdre O’Sullivan & Kaden Southard", affiliation: "Norman Lab, Memorial Sloan Kettering Cancer Center", duration: "25 min", categories: ["talks"] },
   { time: "3:25 – 3:50 PM", speaker: "Joyce Noble", affiliation: "Genovis*", duration: "25 min", categories: ["sponsor"] },
   { time: "3:50 – 4:15 PM", speaker: "Jellert Gaublomme", affiliation: "Columbia University", duration: "25 min", categories: ["talks"] },
   { time: "4:15 – 4:30 PM", title: "CLOSING REMARKS", duration: "15 min", kind: "closing", categories: ["sessions"] },
