@@ -4,7 +4,7 @@ import { ThemeToggle } from "./ThemeToggle";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "wouter";
 
-const navItems = [
+const navItems: { label: string; href: string; featured?: boolean; external?: boolean }[] = [
   { label: "About", href: "/#about" },
   { label: "Features", href: "/#features" },
   { label: "Team", href: "/#team" },
@@ -12,6 +12,7 @@ const navItems = [
   { label: "Papers", href: "/#papers" },
   { label: "Community", href: "/#community" },
   { label: "Community Meeting 2026", href: "/meeting", featured: true },
+  { label: "Join on Zoom", href: "https://nygenome.zoom.us/j/88906394644", featured: true, external: true },
 ];
 
 export function Navigation() {
@@ -111,12 +112,15 @@ export function Navigation() {
             </Link>
           </div>
           
-          <div className="hidden lg:flex items-center gap-6 xl:gap-8">
+          <div className="hidden lg:flex items-center gap-3 xl:gap-5">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                onClick={(e) => handleSmoothScroll(e, item.href)}
+                onClick={(e) => item.external ? setIsMobileMenuOpen(false) : handleSmoothScroll(e, item.href)}
+                target={item.external ? "_blank" : undefined}
+                rel={item.external ? "noopener noreferrer" : undefined}
+                aria-label={item.external ? `${item.label} (opens in a new tab)` : undefined}
                 className={
                   item.featured
                     ? "rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
@@ -158,7 +162,10 @@ export function Navigation() {
                 <a
                   key={item.href}
                   href={item.href}
-                  onClick={(e) => handleSmoothScroll(e, item.href)}
+                  onClick={(e) => item.external ? setIsMobileMenuOpen(false) : handleSmoothScroll(e, item.href)}
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noopener noreferrer" : undefined}
+                  aria-label={item.external ? `${item.label} (opens in a new tab)` : undefined}
                   className={
                     item.featured
                       ? "rounded-lg bg-primary px-4 py-3 text-left text-sm font-semibold text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
