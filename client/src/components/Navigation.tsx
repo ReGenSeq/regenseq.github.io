@@ -12,7 +12,6 @@ const navItems: { label: string; href: string; featured?: boolean; external?: bo
   { label: "Papers", href: "/#papers" },
   { label: "Community", href: "/#community" },
   { label: "Community Meeting 2026", href: "/meeting", featured: true },
-  { label: "Join on Zoom", href: "https://nygenome.zoom.us/j/88906394644", featured: true, external: true },
 ];
 
 export function Navigation() {

@@ -191,11 +191,6 @@ export default function Meeting() {
             Bringing together the RegenSeq community to share emerging applications, workflows, and ideas across multiplexed imaging, spatial transcriptomics, and optical pooled screening.
           </p>
           <div className="meeting-actions mt-7 flex flex-wrap gap-3">
-            <Button asChild className="gap-2">
-              <a href="https://nygenome.zoom.us/j/88906394644" target="_blank" rel="noopener noreferrer" aria-label="Join on Zoom (opens in a new tab)">
-                Join on Zoom <ExternalLink aria-hidden="true" />
-              </a>
-            </Button>
             <Button onClick={scrollToAgenda} className="gap-2">View Agenda <ArrowDown aria-hidden="true" /></Button>
             <Button variant="outline" onClick={handlePrint} className="gap-2"><Printer aria-hidden="true" /> Print / Save Agenda</Button>
           </div>
