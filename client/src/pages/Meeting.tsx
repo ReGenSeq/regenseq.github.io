@@ -151,6 +151,20 @@ export default function Meeting() {
           </div>
         </header>
 
+        <figure className="mt-8 max-w-4xl print:hidden">
+          <img
+            src="/community-meeting-2026.jpg"
+            alt="A presenter sharing the RegenSeq ecosystem's origins with attendees at the New York Genome Center."
+            width={1600}
+            height={1200}
+            loading="lazy"
+            className="h-auto w-full rounded-xl border border-border"
+          />
+          <figcaption className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            RegenSeq Community Meeting 2026 at the New York Genome Center.
+          </figcaption>
+        </figure>
+
         <section id="agenda" className="scroll-mt-24 pt-12" aria-labelledby="agenda-heading">
           <div className="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
             <div><p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">PROGRAM</p><h2 id="agenda-heading" className="mt-2 text-2xl font-semibold sm:text-3xl">Agenda</h2></div>
