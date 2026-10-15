@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Github, Book, ExternalLink, FlaskConical, Search, PlayCircle } from "lucide-react";
+import { Github, Book, ExternalLink, FlaskConical, Search, PlayCircle, Presentation, Download } from "lucide-react";
 import { Link } from "wouter";
 
 type ExternalButton = { text: string; link: string };
@@ -13,6 +13,7 @@ type CardDef = {
   externalButtons?: ExternalButton[];
   internalHref?: string;
   buttonText?: string;
+  downloadHref?: string;
 };
 
 const allCards: CardDef[] = [
@@ -63,6 +64,14 @@ const allCards: CardDef[] = [
       { text: "Watch on YouTube", link: "https://youtube.com/@ReGenSeq" },
     ],
   },
+  {
+    icon: Presentation,
+    title: "RegenSeq Open Source Ecosystem",
+    description:
+      "An overview of repurposed sequencers, control software, flow cells, protocols, and image processing. Presentation slides (PDF).",
+    downloadHref: "/RegenSeq_Open_Source_Ecosystem.pdf",
+    buttonText: "Download presentation (PDF)",
+  },
 ];
 
 export function ResourcesSection() {
@@ -99,7 +108,14 @@ export function ResourcesSection() {
                 <h3 className="text-base sm:text-lg font-semibold mb-2">{card.title}</h3>
                 <p className="text-sm text-muted-foreground mb-4 sm:mb-6 flex-grow">{card.description}</p>
 
-                {card.externalButtons ? (
+                {card.downloadHref ? (
+                  <Button asChild variant="outline" className="w-full gap-2 text-sm">
+                    <a href={card.downloadHref} download data-testid={`button-resource-${index}`}>
+                      {card.buttonText}
+                      <Download className="h-4 w-4 shrink-0" aria-hidden="true" />
+                    </a>
+                  </Button>
+                ) : card.externalButtons ? (
                   <div className="flex flex-col gap-2">
                     {card.externalButtons.map((btn, btnIndex) => (
                       <Button
