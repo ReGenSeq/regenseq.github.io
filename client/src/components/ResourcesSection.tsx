@@ -1,149 +1,200 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Github, Book, ExternalLink, FlaskConical, Search, PlayCircle, Presentation, Download } from "lucide-react";
+import {
+  Book,
+  Download,
+  ExternalLink,
+  FlaskConical,
+  Github,
+  PlayCircle,
+  Presentation,
+  Search,
+} from "lucide-react";
 import { Link } from "wouter";
 
-type ExternalButton = { text: string; link: string };
+type ResourceLink = { text: string; href: string };
 
-type CardDef = {
+type ReferenceCard = {
   icon: React.ElementType;
   title: string;
   description: string;
-  highlight?: boolean;
-  externalButtons?: ExternalButton[];
-  internalHref?: string;
-  buttonText?: string;
+  links?: ResourceLink[];
   downloadHref?: string;
 };
 
-const allCards: CardDef[] = [
+const referenceCards: ReferenceCard[] = [
   {
-    icon: Github,
-    title: "GitHub Repository",
-    description: "RegenSeq control software and documentation",
-    highlight: true,
-    externalButtons: [
-      { text: "Legacy PySeq2500", link: "https://github.com/nygctech/PySeq2500" },
-      { text: "ReGenSeq PySeq2500", link: "https://github.com/ReGenSeq/PySeq2500" },
-    ],
+    icon: Presentation,
+    title: "Ecosystem Overview",
+    description:
+      "An overview of repurposed sequencers, control software, flow cells, protocols, and image processing.",
+    downloadHref: "/RegenSeq_Open_Source_Ecosystem.pdf",
   },
   {
     icon: Book,
     title: "Documentation",
-    description: "Repurpose an Illumina HiSeq 2500 system to function as an automated fluorescence microscope",
-    externalButtons: [{ text: "Read the Docs", link: "https://pyseq2500.readthedocs.io" }],
+    description:
+      "Repurpose an Illumina HiSeq 2500 system to function as an automated fluorescence microscope.",
+    links: [{ text: "Read the Docs", href: "https://pyseq2500.readthedocs.io" }],
   },
   {
     icon: Book,
-    title: "RegenSeq Protocols",
-    description: "Step-by-step protocols and methods for RegenSeq workflows",
-    externalButtons: [{ text: "View Protocols", link: "https://www.protocols.io/workspaces/regenseq" }],
-  },
-  {
-    icon: FlaskConical,
-    title: "Request or Purchase Flowcells",
-    description:
-      "Request flowcells for your project or purchase additional flowcells for $50 each. Tell us how many you need and how you plan to use them.",
-    internalHref: "/community/request-flowcells",
-    buttonText: "Request Flowcells",
-  },
-  {
-    icon: Search,
-    title: "Find a Sequencer",
-    description:
-      "Looking for access to a sequencer? Tell us who you are, where you are located, and what you want to accomplish.",
-    internalHref: "/community/find-a-sequencer",
-    buttonText: "Find a Sequencer",
+    title: "Protocols",
+    description: "Step-by-step protocols and methods for RegenSeq workflows.",
+    links: [
+      {
+        text: "View Protocols",
+        href: "https://www.protocols.io/workspaces/regenseq",
+      },
+    ],
   },
   {
     icon: PlayCircle,
     title: "Video Tutorials",
-    description:
-      "Watch ReGenSeq demonstrations, tutorials, and project videos on YouTube.",
-    externalButtons: [
-      { text: "Watch on YouTube", link: "https://youtube.com/@ReGenSeq" },
-    ],
+    description: "RegenSeq demonstrations, tutorials, and project videos.",
+    links: [{ text: "Watch on YouTube", href: "https://youtube.com/@ReGenSeq" }],
   },
   {
-    icon: Presentation,
-    title: "RegenSeq Open Source Ecosystem",
-    description:
-      "An overview of repurposed sequencers, control software, flow cells, protocols, and image processing. Presentation slides (PDF).",
-    downloadHref: "/RegenSeq_Open_Source_Ecosystem.pdf",
-    buttonText: "Download presentation (PDF)",
+    icon: Github,
+    title: "GitHub Repository",
+    description: "RegenSeq control software and documentation.",
+    links: [
+      { text: "Legacy PySeq2500", href: "https://github.com/nygctech/PySeq2500" },
+      { text: "ReGenSeq PySeq2500", href: "https://github.com/ReGenSeq/PySeq2500" },
+    ],
   },
 ];
 
 export function ResourcesSection() {
   return (
-    <section
-      id="resources"
-      className="min-h-screen flex items-start overflow-y-auto"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 w-full py-20 md:pt-28 lg:pt-32 md:pb-[15vh]">
-        <div className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12">
-          <h2 className="text-heading-main font-bold text-foreground mb-3 sm:mb-4 md:mb-6 px-2">
+    <section id="resources" className="min-h-screen flex items-start overflow-y-auto">
+      <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 md:px-8 md:pt-28 md:pb-[15vh] lg:pt-32">
+        <div className="mb-8 text-center sm:mb-10 md:mb-12">
+          <h2 className="text-heading-main mb-3 px-2 font-bold text-foreground sm:mb-4 md:mb-6">
             Resources
           </h2>
-          <p className="text-subtitle text-muted-foreground max-w-3xl mx-auto px-2">
+          <p className="text-subtitle mx-auto max-w-3xl px-2 text-muted-foreground">
             Everything you need to get started with RegenSeq
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 md:gap-6 max-w-6xl mx-auto">
-          {allCards.map((card, index) => (
+        <div className="mx-auto max-w-6xl">
+          <h3 className="mb-4 text-lg font-semibold text-foreground sm:mb-5">
+            Get started with RegenSeq
+          </h3>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
             <Card
-              key={index}
-              className={`p-5 sm:p-6 hover-elevate w-full ${card.highlight ? "border-primary/50" : ""}`}
-              data-testid={`card-resource-${index}`}
+              className="w-full border-primary/35 bg-primary/[0.045] p-5 hover-elevate sm:p-6"
+              data-testid="card-resource-find-sequencer"
             >
-              <div className="flex flex-col h-full">
-                <div
-                  className={`rounded-lg ${card.highlight ? "bg-primary/10" : "bg-muted/50"} w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center mb-3 sm:mb-4`}
-                >
-                  <card.icon
-                    className={`h-5 w-5 sm:h-6 sm:w-6 ${card.highlight ? "text-primary" : "text-foreground"}`}
-                  />
+              <div className="flex h-full flex-col">
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary">
+                  <Search className="h-5 w-5" aria-hidden="true" />
                 </div>
-                <h3 className="text-base sm:text-lg font-semibold mb-2">{card.title}</h3>
-                <p className="text-sm text-muted-foreground mb-4 sm:mb-6 flex-grow">{card.description}</p>
+                <h4 className="mb-2 text-base font-semibold sm:text-lg">Find a Sequencer</h4>
+                <p className="mb-5 flex-grow text-sm leading-relaxed text-muted-foreground sm:mb-6">
+                  Get help finding a compatible instrument for your lab.
+                </p>
+                <Button
+                  asChild
+                  className="h-auto min-h-10 w-full whitespace-normal px-3 py-2 text-center text-sm leading-snug"
+                  data-testid="button-resource-find-sequencer"
+                >
+                  <Link href="/community/find-a-sequencer">Find a Sequencer</Link>
+                </Button>
+              </div>
+            </Card>
+
+            <Card
+              className="w-full border-primary/35 bg-primary/[0.045] p-5 hover-elevate sm:p-6"
+              data-testid="card-resource-flowcells"
+            >
+              <div className="flex h-full flex-col">
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary">
+                  <FlaskConical className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <h4 className="mb-2 text-base font-semibold sm:text-lg">Get Flowcells</h4>
+                <p className="mb-5 flex-grow text-sm leading-relaxed text-muted-foreground sm:mb-6">
+                  Request starter flowcells or purchase additional flowcells.
+                </p>
+                <Button
+                  asChild
+                  className="h-auto min-h-10 w-full whitespace-normal px-3 py-2 text-center text-sm leading-snug"
+                  data-testid="button-resource-flowcells"
+                >
+                  <Link href="/community/request-flowcells">
+                    Request or Purchase Flowcells
+                  </Link>
+                </Button>
+              </div>
+            </Card>
+          </div>
+
+          <div className="mb-4 mt-10 sm:mb-5 sm:mt-12">
+            <h3 className="text-lg font-semibold text-foreground">Explore the ecosystem</h3>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Reference material, methods, and the open-source codebase.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {referenceCards.map((card, index) => (
+              <Card
+                key={card.title}
+                className="flex w-full flex-col border-border/70 bg-card/80 p-4 sm:p-5"
+                data-testid={`card-resource-${index}`}
+              >
+                <div className="flex items-start gap-3">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-muted/70 text-muted-foreground">
+                    <card.icon className="h-4 w-4" aria-hidden="true" />
+                  </div>
+                  <div className="min-w-0">
+                    <h4 className="text-sm font-semibold leading-snug">{card.title}</h4>
+                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                      {card.description}
+                    </p>
+                  </div>
+                </div>
 
                 {card.downloadHref ? (
-                  <Button asChild variant="outline" className="w-full gap-2 text-sm">
-                    <a href={card.downloadHref} download data-testid={`button-resource-${index}`}>
-                      {card.buttonText}
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="mt-4 h-auto min-h-9 w-full whitespace-normal px-3 py-2 text-center text-xs leading-snug"
+                  >
+                    <a
+                      href={card.downloadHref}
+                      download
+                      data-testid={`button-resource-${index}`}
+                    >
+                      Download presentation (PDF)
                       <Download className="h-4 w-4 shrink-0" aria-hidden="true" />
                     </a>
                   </Button>
-                ) : card.externalButtons ? (
-                  <div className="flex flex-col gap-2">
-                    {card.externalButtons.map((btn, btnIndex) => (
+                ) : (
+                  <div className="mt-4 flex flex-col gap-2">
+                    {card.links?.map((resourceLink, linkIndex) => (
                       <Button
-                        key={btnIndex}
-                        variant={btnIndex === 0 ? "outline" : "default"}
-                        className="w-full gap-2 text-sm"
-                        data-testid={`button-resource-${index}-${btnIndex}`}
-                        onClick={() => window.open(btn.link, "_blank")}
+                        key={resourceLink.href}
+                        asChild
+                        variant="outline"
+                        className="h-auto min-h-9 w-full justify-between whitespace-normal px-3 py-2 text-left text-xs leading-snug"
                       >
-                        {btn.text}
-                        <ExternalLink className="h-4 w-4" />
+                        <a
+                          href={resourceLink.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          data-testid={`button-resource-${index}-${linkIndex}`}
+                        >
+                          <span>{resourceLink.text}</span>
+                          <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                        </a>
                       </Button>
                     ))}
                   </div>
-                ) : (
-                  <Link href={card.internalHref!}>
-                    <Button
-                      variant="outline"
-                      className="w-full gap-2 text-sm"
-                      data-testid={`button-resource-${index}`}
-                    >
-                      {card.buttonText}
-                    </Button>
-                  </Link>
                 )}
-              </div>
-            </Card>
-          ))}
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
     </section>
