@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { ArrowDown, CalendarPlus, ExternalLink, MapPin, Printer } from "lucide-react";
+import { ArrowDown, CalendarPlus, MapPin, Printer } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -48,54 +48,9 @@ const filters: { label: string; value: "all" | AgendaCategory }[] = [
   { label: "Sponsor", value: "sponsor" },
 ];
 
-const registrationUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeNf6wEDJiQIxeC5YHyYY34IOkrSxRlvBZg3yXYP3qR1r4NZw/viewform";
-const eventLocation = "New York Genome Center, 101 Avenue of the Americas, New York, NY 10013";
-const eventDetails = `Talks in the Auditorium. Lunch, coffee, and happy hour in the Atrium.\n\nRegister: ${registrationUrl}`;
-const googleCalendarUrl = `https://calendar.google.com/calendar/render?${new URLSearchParams({
-  action: "TEMPLATE",
-  text: "RegenSeq Community Meeting 2026",
-  dates: "20261013T153000Z/20261013T214500Z",
-  details: eventDetails,
-  location: eventLocation,
-}).toString()}`;
-
 const scrollToAgenda = () => {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   document.getElementById("agenda")?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-};
-
-const downloadCalendarEvent = () => {
-  const escapeIcsText = (value: string) => value
-    .replace(/\\/g, "\\\\")
-    .replace(/\n/g, "\\n")
-    .replace(/,/g, "\\,")
-    .replace(/;/g, "\\;");
-  const calendar = [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//RegenSeq//Community Meeting 2026//EN",
-    "CALSCALE:GREGORIAN",
-    "METHOD:PUBLISH",
-    "BEGIN:VEVENT",
-    "UID:regenseq-community-meeting-2026@regenseq.github.io",
-    "DTSTAMP:20260914T000000Z",
-    "DTSTART:20261013T153000Z",
-    "DTEND:20261013T214500Z",
-    `SUMMARY:${escapeIcsText("RegenSeq Community Meeting 2026")}`,
-    `DESCRIPTION:${escapeIcsText(eventDetails)}`,
-    `LOCATION:${escapeIcsText(eventLocation)}`,
-    "URL:https://regenseq.github.io/meeting",
-    "END:VEVENT",
-    "END:VCALENDAR",
-  ].join("\r\n");
-  const url = URL.createObjectURL(new Blob([calendar], { type: "text/calendar;charset=utf-8" }));
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "regenseq-community-meeting-2026.ics";
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  URL.revokeObjectURL(url);
 };
 
 function AgendaRow({ item, isVisible }: { item: AgendaItem; isVisible: boolean }) {
@@ -195,39 +150,6 @@ export default function Meeting() {
             <Button variant="outline" onClick={handlePrint} className="gap-2"><Printer aria-hidden="true" /> Print / Save Agenda</Button>
           </div>
         </header>
-
-        <section className="meeting-registration mt-8 max-w-4xl overflow-hidden rounded-xl border border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/10" aria-labelledby="registration-heading">
-          <div className="p-6 sm:flex sm:items-center sm:justify-between sm:gap-8 sm:p-8">
-            <div className="max-w-xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground/70">Registration open</p>
-              <h2 id="registration-heading" className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">Register for the RegenSeq Community Meeting</h2>
-              <p className="mt-3 text-sm leading-relaxed text-primary-foreground/80 sm:text-base">Save your spot and help us plan food and seating. Registration takes about 30 seconds.</p>
-            </div>
-            <Button asChild size="lg" className="mt-6 w-full shrink-0 border-white bg-white px-7 text-primary shadow-md hover:bg-white sm:mt-0 sm:w-auto">
-              <a href={registrationUrl} target="_blank" rel="noopener noreferrer">
-                Register now <ExternalLink aria-hidden="true" />
-                <span className="sr-only">(opens Google Form in a new tab)</span>
-              </a>
-            </Button>
-          </div>
-          <div className="border-t border-primary-foreground/20 bg-black/10 px-6 py-5 sm:flex sm:items-center sm:justify-between sm:gap-6 sm:px-8">
-            <div>
-              <p className="font-medium">Already registered?</p>
-              <p className="mt-1 text-sm text-primary-foreground/70">Add the event to your calendar so you don’t miss it.</p>
-            </div>
-            <div className="mt-4 flex flex-col gap-3 sm:mt-0 sm:flex-row">
-              <Button asChild variant="outline" size="sm" className="border-primary-foreground/35 text-primary-foreground [--button-outline:hsl(var(--primary-foreground)/0.35)] hover:border-primary-foreground/60">
-                <a href={googleCalendarUrl} target="_blank" rel="noopener noreferrer">
-                  <CalendarPlus aria-hidden="true" /> Google Calendar
-                  <span className="sr-only">(opens in a new tab)</span>
-                </a>
-              </Button>
-              <Button type="button" variant="outline" size="sm" onClick={downloadCalendarEvent} className="border-primary-foreground/35 text-primary-foreground [--button-outline:hsl(var(--primary-foreground)/0.35)] hover:border-primary-foreground/60">
-                <CalendarPlus aria-hidden="true" /> Apple / Outlook
-              </Button>
-            </div>
-          </div>
-        </section>
 
         <section id="agenda" className="scroll-mt-24 pt-12" aria-labelledby="agenda-heading">
           <div className="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
