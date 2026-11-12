@@ -1,2 +1,3 @@
 - [Portable npm lockfile](portable-npm-lockfile.md) — GitHub Pages installs must not depend on Replit-internal package registry URLs.
 - [Resources priorities](resources-priorities.md) — equipment and flowcell requests are primary actions; learning and code links are secondary.
+- [Git authentication](git-authentication.md) — keep origin credential-free; remote reads do not verify push access.
