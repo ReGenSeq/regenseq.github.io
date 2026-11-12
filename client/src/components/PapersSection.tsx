@@ -4,6 +4,15 @@ import { FileText, ExternalLink } from "lucide-react";
 
 const papers = [
   {
+    type: "Preprint",
+    venue: "bioRxiv · 2026",
+    title: "Spatial proteomics on repurposed sequencers reveals early astrocytic remodeling in an ALS mouse model",
+    description: "A spatial proteomics workflow using repurposed sequencers to profile spinal-cord tissue and study early changes around motor neurons in an ALS mouse model. This preprint has not been peer reviewed.",
+    link: "https://www.biorxiv.org/content/10.64898/2026.11.08.765207v1",
+    buttonText: "Read Preprint",
+    highlight: true,
+  },
+  {
     type: "Journal Article",
     venue: "Nature Scientific Reports · 2022",
     title: "Repurposing an Illumina HiSeq 2500 sequencer as a high-throughput spatial biology platform",
@@ -60,13 +69,16 @@ export function PapersSection() {
               <h3 className="text-base sm:text-lg font-semibold mb-3 leading-snug">{paper.title}</h3>
               <p className="text-sm text-muted-foreground mb-6 flex-grow leading-relaxed">{paper.description}</p>
               <Button
+                 asChild
                 variant={paper.highlight ? "default" : "outline"}
                 className="w-full gap-2 text-sm"
                 data-testid={`button-paper-${index}`}
-                onClick={() => window.open(paper.link, '_blank')}
               >
-                {paper.buttonText}
-                <ExternalLink className="h-4 w-4" />
+                 <a href={paper.link} target="_blank" rel="noopener noreferrer">
+                   {paper.buttonText}
+                   <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                   <span className="sr-only">: {paper.title} (opens in a new tab)</span>
+                 </a>
               </Button>
             </Card>
           ))}
