@@ -38,14 +38,31 @@ export function ExplosionHero() {
           </Button>
           
           <Button 
+            asChild
             size="lg" 
             variant="outline"
             className="gap-2 w-full sm:w-auto"
             data-testid="button-paper"
-            onClick={() => window.open('https://www.nature.com/articles/s41598-022-08740-w', '_blank')}
           >
-            <FileText className="h-5 w-5" />
-            Read the Paper
+            <a href="https://www.nature.com/articles/s41598-022-08740-w" target="_blank" rel="noopener noreferrer">
+              <FileText className="h-5 w-5" aria-hidden="true" />
+              Read the 4i Paper
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+          </Button>
+
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="gap-2 w-full sm:w-auto"
+            data-testid="button-immunosaber-paper"
+          >
+            <a href="https://www.biorxiv.org/content/10.64898/2026.11.08.765207v1" target="_blank" rel="noopener noreferrer">
+              <FileText className="h-5 w-5" aria-hidden="true" />
+              Read the Immunosaber paper
+              <span className="sr-only">(preprint; opens in a new tab)</span>
+            </a>
           </Button>
         </div>
       </div>
